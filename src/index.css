@@ -39,3 +39,16 @@ body {
   user-select: text;
   -webkit-user-select: text;
 }
+
+/* Custom button styles */
+.btn-primary {
+  @apply px-6 py-2 bg-indo-red text-white font-medium rounded-lg hover:bg-red-700 transition-colors;
+}
+
+.btn-secondary {
+  @apply px-6 py-2 bg-oz-gold text-white font-medium rounded-lg hover:bg-yellow-600 transition-colors;
+}
+
+.btn-outline {
+  @apply px-6 py-2 border-2 border-indo-red text-indo-red font-medium rounded-lg hover:bg-indo-red hover:text-white transition-colors;
+}
