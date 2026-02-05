@@ -1,5 +1,7 @@
 import React from 'react';
+import { MessageCircle } from 'lucide-react';
 import { cn } from '../../../utils/cn';
+import { useChat } from '../../../context/ChatContext';
 
 const GuideCard = ({
     icon,
@@ -46,12 +48,48 @@ const GuideCard = ({
         'oz-gold': 'bg-oz-gold',
     };
 
+    const { openChatWithContext } = useChat();
+
+    const handleAskOllie = (e) => {
+        e.stopPropagation();
+
+        let contentForAI = items;
+        if (Array.isArray(items) && items.length > 0) {
+            contentForAI = items.map(item => {
+                if (typeof item === 'string') return item;
+                // Simple attempt to extract text from React elements
+                if (item?.props?.children) {
+                    return Array.isArray(item.props.children)
+                        ? item.props.children.map(c => typeof c === 'string' ? c : '').join(' ')
+                        : item.props.children.toString();
+                }
+                return "";
+            }).filter(Boolean).join('; ');
+        } else if (children) {
+             contentForAI = "Check guide card content";
+        }
+
+        openChatWithContext({
+            title: title || 'Panduan',
+            content: contentForAI,
+        });
+    };
+
     return (
         <div className={cn(
-            "h-full flex flex-col bg-white rounded-xl border-2 p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-1",
+            "group relative h-full flex flex-col bg-white rounded-xl border-2 p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-1",
             colorClasses[color] || colorClasses.info,
             className
         )}>
+            {/* Ask Ollie Button */}
+            <button
+                onClick={handleAskOllie}
+                className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 bg-white/90 hover:bg-white text-indo-red border border-indo-red/20 shadow-sm px-2.5 py-1.5 rounded-full flex items-center gap-1.5 z-10 hover:scale-105"
+            >
+                <MessageCircle size={14} />
+                <span className="text-[10px] font-bold uppercase tracking-wider">Tanya Ollie</span>
+            </button>
+
             {/* Header */}
             {(icon || title) && (
                 <div className="flex items-center gap-3 mb-4">
