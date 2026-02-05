@@ -14,7 +14,7 @@ import ChatHistory from './ChatHistory';
 import { cn } from '../../utils/cn';
 import TopBar from '../layout/TopBar';
 
-const AIChatContainer = () => {
+const AIChatContainer = ({ embedded = false }) => {
   // Initial static AI message
   const initialAI = {
     role: 'assistant',
@@ -78,8 +78,6 @@ const AIChatContainer = () => {
     });
   };
 
-  // Refactored handleSuggestionClick to reuse logic if possible, but inline is fine for now.
-
   const handleClearChat = () => {
     setMessages([]);
   };
@@ -99,13 +97,21 @@ const AIChatContainer = () => {
   ];
 
   return (
-    <div className="h-screen flex flex-col bg-gray-50 text-gray-900 font-sans overflow-hidden pt-16">
-      {/* TopBar */}
-      <TopBar />
+    <div className={cn(
+      "flex flex-col text-gray-900 font-sans overflow-hidden",
+      embedded ? "h-[80vh] rounded-xl border border-gray-200" : "h-screen bg-gray-50 pt-16"
+    )}>
+      {!embedded && <TopBar />}
 
       {/* Main Content */}
-      <div className="flex flex-1 overflow-hidden w-full justify-center bg-gray-50 relative">
-        <main className="w-full max-w-5xl h-full flex flex-col bg-white shadow-xl shadow-gray-200/60 border-x border-gray-200">
+      <div className={cn(
+        "flex flex-1 overflow-hidden w-full justify-center relative",
+        !embedded && "bg-gray-50"
+      )}>
+        <main className={cn(
+          "w-full h-full flex flex-col bg-white",
+          !embedded ? "max-w-5xl shadow-xl shadow-gray-200/60 border-x border-gray-200" : "rounded-xl"
+        )}>
 
           {/* Ollie Header */}
           <div className="shrink-0 px-6 py-4 flex items-center justify-between bg-white border-b border-gray-100 z-10 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.05)]">
