@@ -1,6 +1,6 @@
 import React from 'react';
 import { Check } from 'lucide-react';
-import InlineTooltip from './InlineTooltip';
+import GlossaryTooltip from '../../common/GlossaryTooltip';
 
 const VisaSelector = ({ selected, onChange }) => {
   return (
@@ -20,7 +20,7 @@ const VisaSelector = ({ selected, onChange }) => {
             {selected === '189' && <Check size={20} className="text-indo-red" />}
           </div>
           <div className="text-sm text-gray-600">
-             <InlineTooltip term="Skilled Independent" definition="Visa permanen tanpa butuh sponsor state/family. Bebas tinggal di mana saja di Australia." />
+             <GlossaryTooltip term="Skilled Independent" definition="Visa permanen tanpa butuh sponsor state/family. Bebas tinggal di mana saja di Australia." />
           </div>
         </button>
 
@@ -37,7 +37,7 @@ const VisaSelector = ({ selected, onChange }) => {
             {selected === '190' && <Check size={20} className="text-indo-red" />}
           </div>
           <div className="text-sm text-gray-600">
-            <InlineTooltip term="Skilled Nominated" definition="Visa permanen dengan nominasi state. Biasanya wajib tinggal di state tersebut selama 2 tahun pertama." />
+            <GlossaryTooltip term="Skilled Nominated" definition="Visa permanen dengan nominasi state. Biasanya wajib tinggal di state tersebut selama 2 tahun pertama." />
           </div>
         </button>
       </div>

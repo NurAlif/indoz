@@ -70,7 +70,7 @@ const renderBiaya = () => (
         title="💳 Visa Application"
         color="info"
         items={[
-          "Biaya aplikasi WHV: AUD 510",
+          <span>Biaya aplikasi <GlossaryTooltip term="WHV" />: AUD 510</span>,
           "Asuransi wajib: AUD 300-500/tahun"
         ]}
       />
@@ -246,7 +246,7 @@ const renderImigrasi = () => (
         color="warning"
         items={[
           "Jawab pertanyaan petugas dengan jujur",
-          "Sebutkan datang dengan WHV untuk holiday & work",
+          <span>Sebutkan datang dengan <GlossaryTooltip term="WHV" /> untuk holiday & work</span>,
           "Tidak perlu menyebutkan rencana kerja spesifik"
         ]}
       />
@@ -268,7 +268,7 @@ const renderImigrasi = () => (
         <span>PENTING: Jangan bawa makanan/obat tanpa declare - dendanya sangat besar!</span>
       </p>
     </div>
-  </div>
+  </div >
 );
 
 const renderAkomodasi = () => (
@@ -281,7 +281,7 @@ const renderAkomodasi = () => (
         className="from-blue-50 to-indigo-50 bg-gradient-to-br"
         footer={<p className="text-xs font-bold text-blue-700">Rp 300rb - 600rb / malam</p>}
         items={[
-          "Paling populer untuk pemegang WHV",
+          <span>Paling populer untuk pemegang <GlossaryTooltip term="WHV" /></span>,
           "Mudah bertemu orang lain & cari info",
           "Kontrak fleksibel (bisa per minggu)"
         ]}
@@ -333,7 +333,7 @@ const renderAkomodasi = () => (
         ))}
       </div>
     </div>
-  </div>
+  </div >
 );
 
 const renderTFNSuper = () => (
@@ -524,7 +524,7 @@ const renderMencariKerja = () => (
     <div className="space-y-4">
       <h4 className="font-bold text-gray-900 flex items-center gap-2">
         <span className="w-10 h-10 bg-oz-gold/20 text-oz-gold rounded-xl flex items-center justify-center">💼</span>
-        Jenis Pekerjaan Populer (WHV)
+        Jenis Pekerjaan Populer (<GlossaryTooltip term="WHV" />)
       </h4>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <GuideCard
@@ -542,7 +542,7 @@ const renderMencariKerja = () => (
           title="🌾 Farm Work"
           color="success"
           className="from-green-50 to-emerald-50 bg-gradient-to-br"
-          footer={<p className="text-[10px] text-green-700 font-bold italic">Eligible for 88 Days ✓</p>}
+          footer={<p className="text-[10px] text-green-700 font-bold italic">Eligible for <GlossaryTooltip term="88 Days" /> ✓</p>}
           items={[
             "Fruit Picking, Packing, Farm Hand",
             "Gaji: Rp 280rb - 400rb/jam",
@@ -581,7 +581,7 @@ const renderExtensionWHV = () => (
     >
       <ul className="divide-y divide-green-100">
         <ChecklistItem checked text={<span>Selesaikan <GlossaryTooltip term="88 Days" /> regional work</span>} />
-        <ChecklistItem checked text="Apply sebelum WHV pertama expired" />
+        <ChecklistItem checked text={<span>Apply sebelum <GlossaryTooltip term="WHV" /> pertama expired</span>} />
         <ChecklistItem checked text="Usia masih di bawah 31 tahun (saat apply)" />
         <ChecklistItem checked text="Memiliki paspor Indonesia yang valid" />
       </ul>
@@ -590,7 +590,7 @@ const renderExtensionWHV = () => (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       <GuideCard
         icon="📅"
-        title="Apa itu 88 Days?"
+        title={<span>Apa itu <GlossaryTooltip term="88 Days" />?</span>}
         color="info"
         items={[
           "Total 3 bulan (88 hari) kerja di regional",
@@ -610,14 +610,14 @@ const renderExtensionWHV = () => (
           "Seluruh WA, SA, TAS, NT adalah regional"
         ]}
       />
-    </div>
+    </div >
 
     <div className="bg-warning/10 border-l-4 border-warning p-4 rounded-r-lg shadow-sm animate-in fade-in slide-in-from-bottom-4">
       <p className="text-sm text-gray-700">
         <strong>📎 Bukti Dokumen:</strong> Simpan semua slip gaji (payslips), kontrak kerja, dan reference letter sebagai bukti kuat untuk imigrasi!
       </p>
     </div>
-  </div>
+  </div >
 );
 
 const renderPathwayPR = () => (
@@ -658,7 +658,7 @@ const renderPathwayPR = () => (
         title="491 - Skilled Work Regional"
         color="purple"
         className="from-purple-50 to-pink-50 bg-gradient-to-br shadow-sm"
-        footer={<p className="text-[10px] text-purple-700 font-bold">Visa 5 thn → Jalur ke PR (191)</p>}
+        footer={<p className="text-[10px] text-purple-700 font-bold">Visa 5 thn → Jalur ke <GlossaryTooltip term="PR" /> (191)</p>}
       >
         <ul className="space-y-2 text-sm text-gray-700">
           <li>• Khusus untuk bekerja di area Regional</li>
@@ -684,7 +684,7 @@ const renderPathwayPR = () => (
     </div>
 
     <div className="bg-info/10 border-l-4 border-info p-4 rounded-r-lg text-sm text-gray-700 shadow-sm">
-      <strong>💡 Premium Info:</strong> Kalkulator poin <GlossaryTooltip term="PR" /> lengkap tersedia di fitur Premium IndOz.
+      <strong>💡 Tip:</strong> Kalkulator poin <GlossaryTooltip term="PR" /> lengkap tersedia di fitur Premium IndOz.
     </div>
   </div>
 );

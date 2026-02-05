@@ -11,9 +11,9 @@ const GLOSSARY_TERMS = {
   'IELTS': 'International English Language Testing System - Tes bahasa Inggris yang disyaratkan untuk visa dan PR',
 };
 
-const GlossaryTooltip = ({ term, className = '' }) => {
+const GlossaryTooltip = ({ term, definition: customDefinition, className = '' }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const definition = GLOSSARY_TERMS[term];
+  const definition = customDefinition || GLOSSARY_TERMS[term];
 
   if (!definition) {
     return <span>{term}</span>;

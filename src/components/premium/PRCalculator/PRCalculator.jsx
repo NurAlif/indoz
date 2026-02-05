@@ -4,7 +4,7 @@ import VisaSelector from './VisaSelector';
 import CriteriaForm from './CriteriaForm';
 import ResultsCard from './ResultsCard';
 import StrategyCard from './StrategyCard';
-import InlineTooltip from './InlineTooltip';
+import GlossaryTooltip from '../../common/GlossaryTooltip';
 
 const PRCalculator = ({ onBack }) => {
   const [visaSubclass, setVisaSubclass] = useState('189');
@@ -144,7 +144,7 @@ const PRCalculator = ({ onBack }) => {
         <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
           PR Points Calculator
         </h1>
-        <InlineTooltip
+        <GlossaryTooltip
             term="PR"
             definition="Permanent Residency (Izin Tinggal Tetap). Status yang memungkinkan Anda tinggal, kerja, dan belajar di Australia tanpa batas waktu."
         />

@@ -27,6 +27,16 @@
   --gray-700: #374151;
   --gray-800: #1F2937;
   --gray-900: #111827;
+
+  /* High-contrast variants */
+  --text-on-white: #111827;
+  --text-on-light: #374151;
+}
+
+/* Focus indicators for accessibility */
+:focus-visible {
+  outline: 2px solid var(--indo-red);
+  outline-offset: 2px;
 }
 
 body {
