@@ -3,9 +3,10 @@ import { MessageCircle, X, Send, Loader2 } from 'lucide-react';
 import { generateAIResponse } from '../../services/googleAI';
 import ChatHistory from '../ai-chat/ChatHistory';
 import { cn } from '../../utils/cn';
+import { useChat } from '../../context/ChatContext';
 
 const FloatingChatWidget = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, setIsOpen, contextData, clearContext } = useChat();
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
@@ -47,12 +48,22 @@ const FloatingChatWidget = () => {
     setIsGenerating(true);
 
     try {
+      // If context exists, prepend it to the prompt sent to AI (but not shown in chat history as user message)
+      let promptToSend = userText;
+      if (contextData) {
+        const contextContent = typeof contextData.content === 'string'
+          ? contextData.content
+          : JSON.stringify(contextData.content); // Fallback for objects/arrays
+
+        promptToSend = `Context: ${contextData.title}\nDetail: ${contextContent}\n\nUser Question: ${userText}`;
+      }
+
       // We pass the full history including initial message context if needed,
       // but generateAIResponse usually takes just the user input and history array.
       // Let's pass the current messages + the new user message context.
       const historyForAI = [...messages, userMessage];
 
-      const response = await generateAIResponse(userText, historyForAI);
+      const response = await generateAIResponse(promptToSend, historyForAI);
       const assistantMessage = { role: 'assistant', content: response };
       setMessages((prev) => [...prev, assistantMessage]);
     } catch (error) {
@@ -114,6 +125,22 @@ const FloatingChatWidget = () => {
            <div ref={chatEndRef} />
         </div>
 
+        {/* Context Banner */}
+        {contextData && (
+          <div className="bg-blue-50 px-4 py-2 border-t border-blue-100 flex items-center justify-between shrink-0">
+            <div className="flex items-center gap-2 overflow-hidden">
+              <span className="text-blue-500 text-xs font-bold uppercase tracking-wider shrink-0">Topic:</span>
+              <span className="text-sm text-blue-800 font-medium truncate">{contextData.title}</span>
+            </div>
+            <button
+              onClick={clearContext}
+              className="p-1 hover:bg-blue-100 rounded-full text-blue-400 hover:text-blue-600 transition-colors"
+            >
+              <X size={14} />
+            </button>
+          </div>
+        )}
+
         {/* Input Area */}
         <div className="p-3 bg-white border-t border-gray-100 shrink-0">
           <div className="relative flex items-center gap-2">
@@ -123,7 +150,7 @@ const FloatingChatWidget = () => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder="Tanya Ollie..."
+              placeholder={contextData ? `Tanyakan tentang ${contextData.title}...` : "Tanya Ollie..."}
               className="flex-1 bg-gray-100 text-gray-900 placeholder:text-gray-500 rounded-full px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indo-red/20 transition-all"
               disabled={isGenerating}
             />

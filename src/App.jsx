@@ -6,6 +6,7 @@ import OnboardingModal from './components/onboarding/OnboardingModal';
 import AIChatContainer from './components/ai-chat/AIChatContainer';
 import PremiumRoute from './components/premium/PremiumRoute';
 import FloatingChatWidget from './components/common/FloatingChatWidget';
+import { ChatProvider } from './context/ChatContext';
 
 // Placeholder pages - other agents will build these
 const AIChat = () => <AIChatContainer />;
@@ -55,9 +56,11 @@ function AppContent() {
 function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-gray-50 flex flex-col">
-        <AppContent />
-      </div>
+      <ChatProvider>
+        <div className="min-h-screen bg-gray-50 flex flex-col">
+          <AppContent />
+        </div>
+      </ChatProvider>
     </BrowserRouter>
   );
 }
