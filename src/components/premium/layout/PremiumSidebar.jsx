@@ -5,29 +5,53 @@ import {
   Scroll,
   Calculator,
   Briefcase,
-  Settings,
   LogOut,
   Star,
   MessageSquare,
   FileSearch,
-  BookOpen
+  BookOpen,
+  Crown
 } from 'lucide-react';
 import { cn } from '../../../utils/cn';
 
 const PremiumSidebar = ({ activeTab, onTabChange, onLogout, className }) => {
   const navItems = [
-    { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
-    { id: 'aichat', label: 'AI Chat', icon: MessageSquare },
-    { id: 'jobs', label: 'Job Matches', icon: Briefcase },
-    { id: 'resume', label: 'Cek Resume', icon: FileSearch },
-    { id: 'guides', label: 'Panduan', icon: BookOpen },
-    { id: 'documents', label: 'Document Vault', icon: FileText },
-    { id: 'logbook', label: '88-Day Logbook', icon: Scroll },
-    { id: 'pr-calc', label: 'PR Points Simulator', icon: Calculator },
+    { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, isPremium: false },
+    { id: 'aichat', label: 'AI Chat Pro', icon: MessageSquare, isPremium: true },
+    { id: 'documents', label: 'Document Vault', icon: FileText, isPremium: true },
+    { id: 'logbook', label: '88-Day Logbook', icon: Scroll, isPremium: true },
+    { id: 'pr-calc', label: 'PR Points Simulator', icon: Calculator, isPremium: true },
+    { id: 'jobs', label: 'Job Matches', icon: Briefcase, isPremium: false },
+    { id: 'resume', label: 'Cek Resume', icon: FileSearch, isPremium: false },
+    { id: 'guides', label: 'Panduan', icon: BookOpen, isPremium: false },
   ];
 
+  const renderNavItem = (item) => {
+    const Icon = item.icon;
+    const isActive = activeTab === item.id;
+
+    return (
+      <button
+        key={item.id}
+        onClick={() => onTabChange(item.id)}
+        className={cn(
+          "flex items-center gap-3 px-4 py-3 rounded-lg transition-all w-full text-left",
+          isActive
+            ? "bg-gray-100 text-indo-red"
+            : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 hover:shadow-sm group"
+        )}
+      >
+        <Icon size={20} className={cn(isActive ? "text-indo-red" : "group-hover:text-indo-red transition-colors")} />
+        <p className="text-sm font-semibold">{item.label}</p>
+        {item.isPremium && (
+          <Crown size={14} className="ml-auto text-oz-gold" fill="currentColor" />
+        )}
+      </button>
+    );
+  };
+
   return (
-    <aside className={cn("hidden w-72 flex-col border-r border-gray-200 bg-white lg:flex h-full", className)}>
+    <aside className={cn("hidden w-80 flex-col border-r border-gray-200 bg-white lg:flex h-full", className)}>
       <div className="flex h-full flex-col justify-between p-6">
         <div className="flex flex-col gap-8">
           {/* User Profile */}
@@ -49,35 +73,12 @@ const PremiumSidebar = ({ activeTab, onTabChange, onLogout, className }) => {
 
           {/* Nav Links */}
           <nav className="flex flex-col gap-2">
-            {navItems.map((item) => {
-              const Icon = item.icon;
-              const isActive = activeTab === item.id;
-
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => onTabChange(item.id)}
-                  className={cn(
-                    "flex items-center gap-3 px-4 py-3 rounded-lg transition-all w-full text-left",
-                    isActive
-                      ? "bg-gray-100 text-indo-red"
-                      : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 hover:shadow-sm group"
-                  )}
-                >
-                  <Icon size={20} className={cn(isActive ? "text-indo-red" : "group-hover:text-indo-red transition-colors")} />
-                  <p className="text-sm font-semibold">{item.label}</p>
-                </button>
-              );
-            })}
+            {navItems.map(renderNavItem)}
           </nav>
         </div>
 
         {/* Bottom Actions */}
         <div className="flex flex-col gap-4 border-t border-gray-200 pt-6">
-          <button className="flex items-center gap-3 px-4 py-2 text-gray-600 hover:text-indo-red transition-colors w-full text-left">
-            <Settings size={20} />
-            <p className="text-sm font-medium">Settings</p>
-          </button>
           <button
             onClick={onLogout}
             className="flex items-center gap-3 px-4 py-2 text-gray-600 hover:text-indo-red transition-colors w-full text-left"

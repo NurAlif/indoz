@@ -28,7 +28,7 @@ const JobSearchContainer = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto py-8 px-4">
+    <div className="w-full max-w-full mx-auto py-8 px-4">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>

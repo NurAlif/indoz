@@ -48,7 +48,7 @@ function AppContent() {
       {!isPremium && !isChat && <Footer />}
 
       {!isPremium && <OnboardingModal isOpen={isOpen} onClose={handleClose} />}
-      {!isChat && <FloatingChatWidget />}
+      {!isChat && !isPremium && <FloatingChatWidget />}
     </>
   );
 }

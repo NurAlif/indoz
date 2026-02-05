@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, Search, Bell, HelpCircle } from 'lucide-react';
+import { Menu, Bell, HelpCircle } from 'lucide-react';
 
 const PremiumHeader = ({ toggleSidebar }) => {
   return (
@@ -16,16 +16,6 @@ const PremiumHeader = ({ toggleSidebar }) => {
       </div>
 
       <div className="flex items-center gap-6">
-        {/* Search */}
-        <div className="hidden md:flex items-center rounded-full bg-white border border-gray-200 px-4 py-2 shadow-sm focus-within:ring-2 focus-within:ring-indo-red/20">
-          <Search className="text-gray-400" size={20} />
-          <input
-            className="bg-transparent border-none text-sm text-gray-900 placeholder-gray-400 focus:ring-0 w-64 ml-2 outline-none"
-            placeholder="Search resources..."
-            type="text"
-          />
-        </div>
-
         {/* Notifications */}
         <button className="relative rounded-full p-2 hover:bg-gray-100 transition-colors text-gray-900">
           <Bell size={24} />

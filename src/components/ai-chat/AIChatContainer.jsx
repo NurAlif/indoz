@@ -11,10 +11,13 @@ import {
 } from 'lucide-react';
 import { generateAIResponse } from '../../services/googleAI';
 import ChatHistory from './ChatHistory';
+import ChatTabMenu from './ChatTabMenu';
 import { cn } from '../../utils/cn';
 import TopBar from '../layout/TopBar';
 
 const AIChatContainer = ({ embedded = false }) => {
+  // Check if user is premium
+  const isPremium = localStorage.getItem('indoz_premium_code')?.length > 0;
   // Initial static AI message
   const initialAI = {
     role: 'assistant',
@@ -70,11 +73,11 @@ const AIChatContainer = ({ embedded = false }) => {
 
     // We need to call API effectively
     generateAIResponse(text, messages).then(response => {
-       setMessages(prev => [...prev, { role: 'assistant', content: response }]);
-       setIsGenerating(false);
+      setMessages(prev => [...prev, { role: 'assistant', content: response }]);
+      setIsGenerating(false);
     }).catch(() => {
-       setMessages(prev => [...prev, { role: 'assistant', content: 'Error.' }]);
-       setIsGenerating(false);
+      setMessages(prev => [...prev, { role: 'assistant', content: 'Error.' }]);
+      setIsGenerating(false);
     });
   };
 
@@ -126,7 +129,9 @@ const AIChatContainer = ({ embedded = false }) => {
               <div className="flex flex-col">
                 <div className="flex items-center gap-2">
                   <h1 className="text-lg font-bold text-gray-900">Ollie 2.0</h1>
-                  <span className="px-2 py-0.5 rounded text-[10px] bg-amber-50 text-amber-600 font-bold uppercase tracking-wider border border-amber-200">PRO</span>
+                  {isPremium && (
+                    <span className="px-2 py-0.5 rounded text-[10px] bg-amber-50 text-amber-600 font-bold uppercase tracking-wider border border-amber-200">PRO</span>
+                  )}
                 </div>
                 <div className="flex items-center gap-1.5">
                   <span className="relative flex h-2 w-2">
@@ -156,6 +161,14 @@ const AIChatContainer = ({ embedded = false }) => {
             </div>
 
             <ChatHistory messages={displayMessages} isTyping={isGenerating} />
+
+            {/* Show Tab Menu only when there are no messages (just initial AI greeting) */}
+            {messages.length === 0 && (
+              <div className="mt-2 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                <ChatTabMenu onSuggestionClick={handleSuggestionClick} disabled={isGenerating} />
+              </div>
+            )}
+
             <div ref={chatEndRef} />
           </div>
 

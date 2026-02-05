@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Download, Plus } from 'lucide-react';
+import { Download } from 'lucide-react';
 import PremiumLayout from './layout/PremiumLayout';
 import StatsOverview from './dashboard/StatsOverview';
 import RecentActivity from './dashboard/RecentActivity';
@@ -37,10 +37,6 @@ const PremiumDashboard = ({ onLogout }) => {
                 <button className="flex items-center gap-2 rounded-lg bg-white px-5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm border border-gray-200 hover:bg-gray-50">
                   <Download size={16} />
                   Export Report
-                </button>
-                <button className="flex items-center gap-2 rounded-lg bg-indo-red px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-indo-red/20 hover:bg-red-700">
-                  <Plus size={16} />
-                  New Entry
                 </button>
               </div>
             </div>
