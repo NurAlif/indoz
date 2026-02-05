@@ -5,7 +5,7 @@ import { useLocalStorage } from '../../hooks/useLocalStorage';
 // Import premium feature components
 import DocumentsVault from './DocumentsVault';
 import Logbook from './Logbook';
-import PRCalculator from './PRCalculator';
+import PRCalculator from './PRCalculator/PRCalculator';
 import FutureStrategy from './FutureStrategy';
 
 const PremiumDashboard = ({ onLogout = () => {} }) => {
