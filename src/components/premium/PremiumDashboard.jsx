@@ -46,7 +46,7 @@ const PremiumDashboard = ({ onLogout }) => {
             </div>
 
             {/* Stats Overview Cards */}
-            <StatsOverview />
+            <StatsOverview onNavigate={setActiveTab} />
 
             {/* Main Content Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -69,11 +69,11 @@ const PremiumDashboard = ({ onLogout }) => {
       case 'guides':
         return <GuidesContainer />;
       case 'documents':
-        return <DocumentsVault />;
+        return <DocumentsVault onBack={() => setActiveTab('dashboard')} />;
       case 'logbook':
-        return <Logbook />;
+        return <Logbook onBack={() => setActiveTab('dashboard')} />;
       case 'pr-calc':
-        return <PRCalculator />;
+        return <PRCalculator onBack={() => setActiveTab('dashboard')} />;
       case 'jobs':
         return <JobSearchContainer />;
       default:
