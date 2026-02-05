@@ -17,7 +17,7 @@ const JobMatchesWidget = () => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Job Card 1 */}
-        <div className="flex flex-col gap-3 rounded-xl border border-gray-200 bg-white p-5 transition-all hover:border-indo-red/30 hover:shadow-md cursor-pointer group">
+        <div className="flex flex-col gap-3 rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition-all duration-200 hover:border-indo-red/30 hover:shadow-md cursor-pointer group">
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-3">
               <div
@@ -39,7 +39,7 @@ const JobMatchesWidget = () => {
         </div>
 
         {/* Job Card 2 */}
-        <div className="flex flex-col gap-3 rounded-xl border border-gray-200 bg-white p-5 transition-all hover:border-indo-red/30 hover:shadow-md cursor-pointer group">
+        <div className="flex flex-col gap-3 rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition-all duration-200 hover:border-indo-red/30 hover:shadow-md cursor-pointer group">
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-3">
               <div

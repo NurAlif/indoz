@@ -6,7 +6,7 @@ const PremiumLayout = ({ children, activeTab, onTabChange, onLogout }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="flex h-screen w-full bg-gray-50 overflow-hidden font-sans text-gray-900">
+    <div className="flex h-[calc(100vh-4rem)] w-full bg-gray-50 overflow-hidden font-sans text-gray-900 mt-16">
       {/* Sidebar - Desktop */}
       <PremiumSidebar
         activeTab={activeTab}
@@ -30,7 +30,7 @@ const PremiumLayout = ({ children, activeTab, onTabChange, onLogout }) => {
       )}
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col h-screen overflow-hidden relative">
+      <main className="flex-1 flex flex-col h-full overflow-hidden relative">
         <PremiumHeader toggleSidebar={() => setSidebarOpen(true)} />
 
         {/* Scrollable Content */}

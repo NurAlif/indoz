@@ -18,11 +18,11 @@ const RecentActivity = () => {
           <table className="w-full text-left text-sm">
             <thead className="bg-gray-50 text-gray-900 border-b border-gray-200">
               <tr>
-                <th className="px-6 py-3 font-semibold">Employer</th>
-                <th className="px-6 py-3 font-semibold">Location</th>
-                <th className="px-6 py-3 font-semibold">Date</th>
-                <th className="px-6 py-3 font-semibold text-right">Hours</th>
-                <th className="px-6 py-3 font-semibold text-center">Status</th>
+                <th className="px-6 py-3 font-semibold uppercase tracking-wider text-xs">Employer</th>
+                <th className="px-6 py-3 font-semibold uppercase tracking-wider text-xs">Location</th>
+                <th className="px-6 py-3 font-semibold uppercase tracking-wider text-xs">Date</th>
+                <th className="px-6 py-3 font-semibold uppercase tracking-wider text-xs text-right">Hours</th>
+                <th className="px-6 py-3 font-semibold uppercase tracking-wider text-xs text-center">Status</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">

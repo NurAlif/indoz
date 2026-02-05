@@ -23,7 +23,7 @@ function AppContent() {
 
   return (
     <>
-      {!isPremium && !isChat && <TopBar />}
+      {!isChat && <TopBar />}
 
       <main className={!isPremium ? "flex-grow" : "flex-grow min-h-screen bg-gray-50"}>
         <Routes>
