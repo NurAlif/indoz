@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
-  Users,
   RotateCcw,
   ShieldCheck,
   GraduationCap,
@@ -13,6 +12,7 @@ import {
 import { generateAIResponse } from '../../services/googleAI';
 import ChatHistory from './ChatHistory';
 import { cn } from '../../utils/cn';
+import TopBar from '../layout/TopBar';
 
 const AIChatContainer = () => {
   // Initial static AI message
@@ -99,28 +99,9 @@ const AIChatContainer = () => {
   ];
 
   return (
-    <div className="h-screen flex flex-col overflow-hidden bg-gray-50 text-gray-900 font-sans">
-      {/* Header */}
-      <header className="flex shrink-0 items-center justify-between whitespace-nowrap border-b border-gray-200 bg-white px-6 py-3 z-20 shadow-sm relative">
-        <div className="flex items-center gap-4 text-gray-900">
-          <div className="w-8 h-8 text-indo-red flex items-center justify-center">
-            <Users size={32} />
-          </div>
-          <h2 className="text-gray-900 text-xl font-bold leading-tight tracking-tight">IndOz.work</h2>
-        </div>
-        <div className="flex flex-1 justify-end gap-6 items-center">
-          <button onClick={() => window.location.href='/'} className="hidden md:flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 px-4 bg-indo-red text-white text-sm font-bold leading-normal hover:bg-red-700 transition-colors shadow-sm">
-            <span className="truncate">Back to Home</span>
-          </button>
-          <div className="flex items-center gap-3">
-            <span className="text-sm font-medium hidden sm:block">Dian S.</span>
-            <div
-              className="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-10 h-10 border-2 border-indo-red/20"
-              style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuDOzNwu3U-JF-Is5iYg_QQSwe9Ko1bN0iNUdansVIl0OCFwp_LY8d8DThiKlOBLIvoqvcHOHa9swMZhTdnSV1r2a9pN5ALNr8ZhfI4qIbEEB7fJ5VbGl_MjvsZKzLRYYJaIdPpTxOoMBszhJlLD8FNY7McLLaY2M1cMhkFMNIkJpiVx5KOY0zNRRrcwEDTc4yGV5V21I1MiWVJJZeR21unsCG4wlfF8pqBIHe_tLdOGN6FkviUlgf9eskLKrAH98WqZIZsbfdhMqZzv")' }}
-            ></div>
-          </div>
-        </div>
-      </header>
+    <div className="min-h-screen flex flex-col bg-gray-50 text-gray-900 font-sans pt-16">
+      {/* TopBar */}
+      <TopBar />
 
       {/* Main Content */}
       <div className="flex flex-1 overflow-hidden w-full justify-center bg-gray-50 relative">

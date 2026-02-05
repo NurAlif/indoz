@@ -1,71 +1,14 @@
 import React, { useEffect } from 'react';
 import Markdown from 'react-markdown';
 import { cn } from '../../utils/cn';
-
-// Card components for visual layouts
-const RequirementCard = ({ icon, title, items, color = 'info' }) => {
-  const colorClasses = {
-    info: 'bg-info/10 border-info/30 text-info',
-    success: 'bg-success/10 border-success/30 text-success',
-    warning: 'bg-warning/10 border-warning/30 text-warning',
-    danger: 'bg-danger/10 border-danger/30 text-danger',
-    purple: 'bg-purple-100 border-purple-300 text-purple-700',
-    blue: 'bg-blue-100 border-blue-300 text-blue-700',
-  };
-
-  return (
-    <div className={cn(
-      "bg-white rounded-xl p-6 border-2 shadow-sm hover:shadow-md transition-shadow",
-      colorClasses[color]
-    )}>
-      <div className="flex items-center gap-3 mb-4">
-        <span className="text-3xl">{icon}</span>
-        <h3 className="text-xl font-bold">{title}</h3>
-      </div>
-      <ul className="space-y-2">
-        {items.map((item, idx) => (
-          <li key={idx} className="flex items-start gap-2">
-            <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-current flex-shrink-0" />
-            <span className="text-sm leading-relaxed">{item}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-};
-
-const CostCard = ({ category, items, total, color = 'info' }) => {
-  const bgColors = {
-    info: 'bg-info/5',
-    success: 'bg-success/5',
-    warning: 'bg-warning/5',
-    purple: 'bg-purple-50',
-  };
-
-  return (
-    <div className={cn("bg-white rounded-xl p-5 border border-gray-200", bgColors[color])}>
-      <h4 className="font-semibold text-gray-900 mb-3">{category}</h4>
-      <ul className="space-y-1.5 text-sm">
-        {items.map((item, idx) => (
-          <li key={idx} className="text-gray-700">
-            {item}
-          </li>
-        ))}
-      </ul>
-      {total && (
-        <div className="mt-3 pt-3 border-t border-gray-300 font-semibold text-gray-900">
-          {total}
-        </div>
-      )}
-    </div>
-  );
-};
+import { GuideCard, GuideTimeline } from './shared';
+import GlossaryTooltip from '../common/GlossaryTooltip';
 
 const ChecklistItem = ({ checked, text }) => (
   <li className="flex items-start gap-3 py-2">
     <span className={cn(
-      "flex-shrink-0 w-6 h-6 rounded flex items-center justify-center text-sm",
-      checked ? "bg-success text-white" : "bg-gray-200 text-gray-500"
+      "flex-shrink-0 w-6 h-6 rounded flex items-center justify-center text-sm transition-colors duration-300",
+      checked ? "bg-success text-white shadow-sm" : "bg-gray-200 text-gray-500"
     )}>
       {checked ? "✓" : ""}
     </span>
@@ -73,31 +16,14 @@ const ChecklistItem = ({ checked, text }) => (
   </li>
 );
 
-const TimelineCard = ({ period, items, icon }) => (
-  <div className="relative pl-8 pb-6 border-l-2 border-info/30">
-    <div className="absolute left-0 top-0 w-8 h-8 -translate-x-1/2 bg-info text-white rounded-full flex items-center justify-center text-sm font-bold">
-      {icon}
-    </div>
-    <h4 className="font-semibold text-gray-900 mb-2">{period}</h4>
-    <ul className="space-y-1">
-      {items.map((item, idx) => (
-        <li key={idx} className="text-gray-700 text-sm flex items-start gap-2">
-          <span className="text-info mt-0.5">▸</span>
-          <span>{item}</span>
-        </li>
-      ))}
-    </ul>
-  </div>
-);
-
 // Visual section renders
 const renderSyaratWHV = () => (
   <div className="space-y-6">
     <p className="text-gray-700 leading-relaxed">
-      Untuk mendapatkan visa WHV Subclass 417, Anda harus memenuhi syarat-syarat berikut:
+      Untuk mendapatkan visa <GlossaryTooltip term="WHV" /> Subclass 417, Anda harus memenuhi syarat-syarat berikut:
     </p>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-      <RequirementCard
+      <GuideCard
         icon="👤"
         title="Usia"
         color="info"
@@ -106,7 +32,7 @@ const renderSyaratWHV = () => (
           "Warga negara Indonesia"
         ]}
       />
-      <RequirementCard
+      <GuideCard
         icon="🏥"
         title="Kesehatan"
         color="success"
@@ -115,7 +41,7 @@ const renderSyaratWHV = () => (
           "Dapat diminta melakukan pemeriksaan medis"
         ]}
       />
-      <RequirementCard
+      <GuideCard
         icon="🛡️"
         title="Karakter"
         color="warning"
@@ -124,7 +50,7 @@ const renderSyaratWHV = () => (
           "Bersedia menjalani pemeriksaan background"
         ]}
       />
-      <RequirementCard
+      <GuideCard
         icon="💰"
         title="Dana"
         color="purple"
@@ -139,17 +65,17 @@ const renderSyaratWHV = () => (
 
 const renderBiaya = () => (
   <div className="space-y-6">
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <CostCard
-        category="💳 Visa Application"
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <GuideCard
+        title="💳 Visa Application"
         color="info"
         items={[
           "Biaya aplikasi WHV: AUD 510",
           "Asuransi wajib: AUD 300-500/tahun"
         ]}
       />
-      <CostCard
-        category="📄 Persiapan Dokumen"
+      <GuideCard
+        title="📄 Persiapan Dokumen"
         color="success"
         items={[
           "IELTS: Rp 3,000,000",
@@ -157,14 +83,19 @@ const renderBiaya = () => (
           "Surat Keterangan Sehat: Rp 500,000 - Rp 1,000,000"
         ]}
       />
-      <CostCard
-        category="✈️ Biaya Lain"
+      <GuideCard
+        title="✈️ Biaya Lain"
         color="warning"
         items={[
           "Tiket pesawat: Rp 10,000,000 - Rp 15,000,000",
           "Perlengkapan awal: Rp 2,000,000 - Rp 5,000,000"
         ]}
-        total="Total: Rp 20,000,000 - Rp 30,000,000"
+        footer={
+          <div className="font-bold text-gray-900 flex justify-between">
+            <span>Estimasi Total:</span>
+            <span className="text-indo-red">Rp 20 - 30jt</span>
+          </div>
+        }
       />
     </div>
   </div>
@@ -173,11 +104,11 @@ const renderBiaya = () => (
 const renderDokumen = () => (
   <div className="space-y-6">
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div className="bg-white rounded-xl p-6 border border-gray-200">
+      <div className="bg-white rounded-xl p-6 border-2 border-gray-100 shadow-sm">
         <h4 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-          <span className="text-success">✓</span> Dokumen Wajib
+          <span className="text-success text-xl">✓</span> Dokumen Wajib
         </h4>
-        <ul>
+        <ul className="divide-y divide-gray-100">
           <ChecklistItem checked text="Paspor (valid minimal 6 bulan)" />
           <ChecklistItem checked text="IELTS Certificate (Overall 4.5+)" />
           <ChecklistItem checked text="SKCK dari Polda" />
@@ -185,11 +116,11 @@ const renderDokumen = () => (
           <ChecklistItem checked text="Bukti dana cukup (bank statement)" />
         </ul>
       </div>
-      <div className="bg-white rounded-xl p-6 border border-gray-200">
+      <div className="bg-white rounded-xl p-6 border-2 border-gray-100 shadow-sm">
         <h4 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-          <span className="text-gray-400">○</span> Dokumen Disarankan
+          <span className="text-gray-400 text-xl">○</span> Dokumen Disarankan
         </h4>
-        <ul>
+        <ul className="divide-y divide-gray-100">
           <ChecklistItem checked={false} text="CV/Resume dalam bahasa Inggris" />
           <ChecklistItem checked={false} text="Referensi kerja (jika ada)" />
           <ChecklistItem checked={false} text="Sertifikasi skill tambahan" />
@@ -197,158 +128,144 @@ const renderDokumen = () => (
         </ul>
       </div>
     </div>
-    <div className="bg-info/10 border-l-4 border-info p-4 rounded-r-lg text-sm text-gray-700">
-      <strong>Tip:</strong> Scan semua dokumen dan simpan di cloud/email sebagai backup.
+    <div className="bg-info/10 border-l-4 border-info p-4 rounded-r-lg text-sm text-gray-700 shadow-sm animate-in fade-in slide-in-from-bottom-4">
+      <strong>💡 Tip:</strong> Scan semua dokumen dan simpan di cloud/email sebagai backup untuk keamanan.
     </div>
   </div>
 );
 
 const renderTimeline = () => (
   <div className="space-y-6">
-    <div className="bg-white rounded-xl p-6 border border-gray-200">
-      <TimelineCard
-        icon="1"
-        period="3-6 Bulan Sebelumnya"
-        items={[
-          "Persiapkan dokumen (IELTS, SKCK, dll)",
-          "Simpan dana untuk biaya aplikasi",
-          "Riset tentang tempat tujuan"
-        ]}
-      />
-      <TimelineCard
-        icon="2"
-        period="1-2 Bulan Sebelumnya"
-        items={[
-          "Submit aplikasi visa online",
-          "Bayar biaya visa",
-          "Tunggu proses (biasanya 2-6 minggu)"
-        ]}
-      />
-      <TimelineCard
-        icon="3"
-        period="1 Bulan Sebelumnya"
-        items={[
-          "Booking tiket pesawat",
-          "Cari akomodasi sementara (hostel)",
-          "Packing barang bawaan"
-        ]}
-      />
-      <TimelineCard
-        icon="4"
-        period="1 Minggu Sebelumnya"
-        items={[
-          "Konfirmasi semua reservasi",
-          "Siapkan dokumen fisik",
-          "Informasikan bank & operator seluler"
-        ]}
-      />
-    </div>
+    <GuideTimeline
+      steps={[
+        {
+          icon: "1",
+          title: "3-6 Bulan Sebelumnya",
+          items: [
+            "Persiapkan dokumen (IELTS, SKCK, dll)",
+            "Simpan dana untuk biaya aplikasi",
+            "Riset tentang tempat tujuan"
+          ]
+        },
+        {
+          icon: "2",
+          title: "1-2 Bulan Sebelumnya",
+          items: [
+            "Submit aplikasi visa online",
+            "Bayar biaya visa",
+            "Tunggu proses (biasanya 2-6 minggu)"
+          ]
+        },
+        {
+          icon: "3",
+          title: "1 Bulan Sebelumnya",
+          items: [
+            "Booking tiket pesawat",
+            "Cari akomodasi sementara (hostel)",
+            "Packing barang bawaan"
+          ]
+        },
+        {
+          icon: "4",
+          title: "1 Minggu Sebelumnya",
+          items: [
+            "Konfirmasi semua reservasi",
+            "Siapkan dokumen fisik",
+            "Informasikan bank & operator seluler"
+          ]
+        }
+      ]}
+    />
   </div>
 );
 
 const renderBiayaHidup = () => (
   <div className="space-y-6">
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div className="bg-gradient-to-br from-red-50 to-orange-50 rounded-xl p-6 border border-red-200">
-        <h4 className="font-bold text-red-800 mb-4">🏙️ Sydney/Melbourne (Mahal)</h4>
-        <ul className="space-y-2 text-sm">
-          <li className="flex justify-between"><span>Share room:</span><span>Rp 4-6jt</span></li>
-          <li className="flex justify-between"><span>Makan:</span><span>Rp 3-4jt</span></li>
-          <li className="flex justify-between"><span>Transport:</span><span>Rp 1-1.5jt</span></li>
-          <li className="flex justify-between"><span>Internet/Phone:</span><span>Rp 500-800rb</span></li>
-          <li className="flex justify-between"><span>Lain-lain:</span><span>Rp 1-2jt</span></li>
+      <GuideCard
+        title="🏙️ Sydney/Melbourne (Mahal)"
+        color="danger"
+        className="from-red-50 to-orange-50 bg-gradient-to-br"
+        footer={
+          <div className="font-bold text-error flex justify-between">
+            <span>Total Estimasi:</span>
+            <span>Rp 9.5 - 14.3jt/bln</span>
+          </div>
+        }
+      >
+        <ul className="space-y-2 text-sm text-gray-700">
+          <li className="flex justify-between"><span>Share room:</span><span className="font-medium">Rp 4-6jt</span></li>
+          <li className="flex justify-between"><span>Makan:</span><span className="font-medium">Rp 3-4jt</span></li>
+          <li className="flex justify-between"><span>Transport:</span><span className="font-medium">Rp 1-1.5jt</span></li>
+          <li className="flex justify-between"><span>Internet/Phone:</span><span className="font-medium">Rp 500-800rb</span></li>
+          <li className="flex justify-between"><span>Lain-lain:</span><span className="font-medium">Rp 1-2jt</span></li>
         </ul>
-        <div className="mt-4 pt-4 border-t border-red-300 font-bold text-red-900">
-          Total: Rp 9.5 - 14.3jt/bulan
-        </div>
-      </div>
-      <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 border border-green-200">
-        <h4 className="font-bold text-green-800 mb-4">🌾 Regional (Lebih Murah)</h4>
-        <ul className="space-y-2 text-sm">
-          <li className="flex justify-between"><span>Share room:</span><span>Rp 2.5-4jt</span></li>
-          <li className="flex justify-between"><span>Makan:</span><span>Rp 2-3jt</span></li>
-          <li className="flex justify-between"><span>Transport:</span><span>Rp 500rb</span></li>
+      </GuideCard>
+
+      <GuideCard
+        title="🌾 Regional (Lebih Murah)"
+        color="success"
+        className="from-green-50 to-emerald-50 bg-gradient-to-br"
+        footer={
+          <div className="space-y-2">
+            <div className="font-bold text-success flex justify-between">
+              <span>Total Estimasi:</span>
+              <span>Rp 6 - 9.5jt/bln</span>
+            </div>
+            <p className="text-xs text-green-700 font-medium italic">✓ Regional lebih murah dan hitung untuk <GlossaryTooltip term="88 Days" />!</p>
+          </div>
+        }
+      >
+        <ul className="space-y-2 text-sm text-gray-700">
+          <li className="flex justify-between"><span>Share room:</span><span className="font-medium">Rp 2.5-4jt</span></li>
+          <li className="flex justify-between"><span>Makan:</span><span className="font-medium">Rp 2-3jt</span></li>
+          <li className="flex justify-between"><span>Transport:</span><span className="font-medium">Rp 500rb</span></li>
+          <li className="flex justify-between"><span>Lain-lain:</span><span className="font-medium">Rp 1jt</span></li>
         </ul>
-        <div className="mt-4 pt-4 border-t border-green-300 font-bold text-green-900">
-          Total: Rp 6 - 9.5jt/bulan
-        </div>
-        <p className="mt-3 text-xs text-green-700">✓ Regional lebih murah dan hitung untuk 88 days!</p>
-      </div>
+      </GuideCard>
     </div>
   </div>
 );
 
 const renderImigrasi = () => (
   <div className="space-y-6">
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <div className="bg-white rounded-xl p-6 border-2 border-info/30">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="text-3xl">✈️</span>
-          <h3 className="font-bold text-lg">Saat Turun dari Pesawat</h3>
-        </div>
-        <ol className="space-y-2 text-sm text-gray-700">
-          <li className="flex items-start gap-2">
-            <span className="bg-info text-white rounded-full w-5 h-5 flex items-center justify-center text-xs flex-shrink-0 mt-0.5">1</span>
-            <span>Ikuti tanda "Arrivals" dan "Immigration"</span>
-          </li>
-          <li className="flex items-start gap-2">
-            <span className="bg-info text-white rounded-full w-5 h-5 flex items-center justify-center text-xs flex-shrink-0 mt-0.5">2</span>
-            <span>Siapkan paspor dan visa grant letter</span>
-          </li>
-          <li className="flex items-start gap-2">
-            <span className="bg-info text-white rounded-full w-5 h-5 flex items-center justify-center text-xs flex-shrink-0 mt-0.5">3</span>
-            <span>Isi Incoming Passenger Card (diberikan di pesawat)</span>
-          </li>
-        </ol>
-      </div>
-
-      <div className="bg-white rounded-xl p-6 border-2 border-warning/30">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="text-3xl">🛂</span>
-          <h3 className="font-bold text-lg">Di Counter Imigrasi</h3>
-        </div>
-        <ul className="space-y-2 text-sm text-gray-700">
-          <li className="flex items-start gap-2">
-            <span className="text-warning mt-0.5">▸</span>
-            <span>Jawab pertanyaan petugas dengan jujur</span>
-          </li>
-          <li className="flex items-start gap-2">
-            <span className="text-warning mt-0.5">▸</span>
-            <span>Sebutkan datang dengan WHV untuk holiday & work</span>
-          </li>
-          <li className="flex items-start gap-2">
-            <span className="text-warning mt-0.5">▸</span>
-            <span>Tidak perlu menyebutkan rencana kerja spesifik</span>
-          </li>
-        </ul>
-      </div>
-
-      <div className="bg-white rounded-xl p-6 border-2 border-success/30">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="text-3xl">🛄</span>
-          <h3 className="font-bold text-lg">Setelah Imigrasi</h3>
-        </div>
-        <ul className="space-y-2 text-sm text-gray-700">
-          <li className="flex items-start gap-2">
-            <span className="text-success mt-0.5">▸</span>
-            <span>Ambil bagasi</span>
-          </li>
-          <li className="flex items-start gap-2">
-            <span className="text-success mt-0.5">▸</span>
-            <span>Lewati biosecurity (declare makanan/obat)</span>
-          </li>
-          <li className="flex items-start gap-2">
-            <span className="text-success mt-0.5">▸</span>
-            <span>Keluar ke arrival hall</span>
-          </li>
-        </ul>
-      </div>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <GuideCard
+        icon="✈️"
+        title="Saat Turun Pesawat"
+        color="info"
+        items={[
+          "Ikuti tanda \"Arrivals\" dan \"Immigration\"",
+          "Siapkan paspor dan visa grant letter",
+          "Isi Incoming Passenger Card"
+        ]}
+      />
+      <GuideCard
+        icon="🛂"
+        title="Di Counter Imigrasi"
+        color="warning"
+        items={[
+          "Jawab pertanyaan petugas dengan jujur",
+          "Sebutkan datang dengan WHV untuk holiday & work",
+          "Tidak perlu menyebutkan rencana kerja spesifik"
+        ]}
+      />
+      <GuideCard
+        icon="🛄"
+        title="Setelah Imigrasi"
+        color="success"
+        items={[
+          "Ambil bagasi di conveyor belt",
+          "Lewati biosecurity (declare makanan/obat)",
+          "Keluar ke arrival hall"
+        ]}
+      />
     </div>
 
-    <div className="bg-danger/10 border-l-4 border-danger p-4 rounded-r-lg">
-      <p className="font-semibold text-danger flex items-center gap-2">
+    <div className="bg-error/10 border-l-4 border-error p-4 rounded-r-lg shadow-sm animate-in fade-in slide-in-from-bottom-4">
+      <p className="font-semibold text-error flex items-center gap-2">
         <span>⚠️</span>
-        <span>PENTING: Jangan bawa makanan/obat tanpa declare - dendanya besar!</span>
+        <span>PENTING: Jangan bawa makanan/obat tanpa declare - dendanya sangat besar!</span>
       </p>
     </div>
   </div>
@@ -356,89 +273,64 @@ const renderImigrasi = () => (
 
 const renderAkomodasi = () => (
   <div className="space-y-6">
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-200">
-        <h4 className="font-bold text-blue-900 mb-2">🏨 Hostel/Backpacker</h4>
-        <p className="text-sm text-blue-700 mb-3">Rp 300,000 - 600,000/malam</p>
-        <ul className="space-y-1.5 text-sm text-gray-700">
-          <li className="flex items-start gap-2">
-            <span className="text-blue-500 mt-0.5">✓</span>
-            <span>Paling populer untuk pemegang WHV</span>
-          </li>
-          <li className="flex items-start gap-2">
-            <span className="text-blue-500 mt-0.5">✓</span>
-            <span>Mudah bertemu orang lain</span>
-          </li>
-          <li className="flex items-start gap-2">
-            <span className="text-blue-500 mt-0.5">✓</span>
-            <span>Kontrak fleksibel (bisa per minggu)</span>
-          </li>
-        </ul>
-      </div>
-
-      <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 border border-green-200">
-        <h4 className="font-bold text-green-900 mb-2">🏠 Share House</h4>
-        <p className="text-sm text-green-700 mb-3">Rp 3,000,000 - 6,000,000/bulan</p>
-        <ul className="space-y-1.5 text-sm text-gray-700">
-          <li className="flex items-start gap-2">
-            <span className="text-green-500 mt-0.5">✓</span>
-            <span>Lebih murah untuk jangka panjang</span>
-          </li>
-          <li className="flex items-start gap-2">
-            <span className="text-green-500 mt-0.5">✓</span>
-            <span>Butuh deposit (2-4 minggu sewa)</span>
-          </li>
-          <li className="flex items-start gap-2">
-            <span className="text-green-500 mt-0.5">✓</span>
-            <span>Cari di Facebook Marketplace, Gumtree</span>
-          </li>
-        </ul>
-      </div>
-
-      <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 border border-purple-200">
-        <h4 className="font-bold text-purple-900 mb-2">🏢 Rental Sendiri</h4>
-        <p className="text-sm text-purple-700 mb-3">Rp 8,000,000+/bulan</p>
-        <ul className="space-y-1.5 text-sm text-gray-700">
-          <li className="flex items-start gap-2">
-            <span className="text-purple-500 mt-0.5">✓</span>
-            <span>Lebih privasi tapi mahal</span>
-          </li>
-          <li className="flex items-start gap-2">
-            <span className="text-purple-500 mt-0.5">✓</span>
-            <span>Kontrak minimal 6-12 bulan</span>
-          </li>
-          <li className="flex items-start gap-2">
-            <span className="text-purple-500 mt-0.5">✓</span>
-            <span>Butuh referensi & bukti income</span>
-          </li>
-        </ul>
-      </div>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <GuideCard
+        icon="🏨"
+        title="Hostel/Backpacker"
+        color="blue"
+        className="from-blue-50 to-indigo-50 bg-gradient-to-br"
+        footer={<p className="text-xs font-bold text-blue-700">Rp 300rb - 600rb / malam</p>}
+        items={[
+          "Paling populer untuk pemegang WHV",
+          "Mudah bertemu orang lain & cari info",
+          "Kontrak fleksibel (bisa per minggu)"
+        ]}
+      />
+      <GuideCard
+        icon="🏠"
+        title="Share House"
+        color="success"
+        className="from-green-50 to-emerald-50 bg-gradient-to-br"
+        footer={<p className="text-xs font-bold text-green-700">Rp 3jt - 6jt / bulan</p>}
+        items={[
+          "Lebih murah untuk jangka panjang",
+          "Butuh deposit (2-4 minggu sewa)",
+          "Cari di FB Marketplace atau Gumtree"
+        ]}
+      />
+      <GuideCard
+        icon="🏢"
+        title="Rental Sendiri"
+        color="purple"
+        className="from-purple-50 to-pink-50 bg-gradient-to-br"
+        footer={<p className="text-xs font-bold text-purple-700">Rp 8jt+ / bulan</p>}
+        items={[
+          "Lebih privasi tapi biaya sangat mahal",
+          "Kontrak minimal 6-12 bulan",
+          "Butuh referensi & bukti income stabil"
+        ]}
+      />
     </div>
 
-    <div className="bg-white rounded-xl p-6 border border-gray-200">
-      <h4 className="font-bold text-gray-900 mb-4">🌐 Website Populer</h4>
+    <div className="bg-white rounded-xl p-6 border-2 border-gray-100 shadow-sm">
+      <h4 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
+        <span className="text-info">🌐</span> Website Populer Cari Akomodasi
+      </h4>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <a href="https://flatmates.com.au" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded-lg bg-info/5 hover:bg-info/10 transition-colors">
-          <span className="text-2xl">👥</span>
-          <div>
-            <p className="font-semibold text-sm">Flatmates.com.au</p>
-            <p className="text-xs text-gray-600">Cari roommate</p>
-          </div>
-        </a>
-        <a href="https://facebook.com/marketplace" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded-lg bg-info/5 hover:bg-info/10 transition-colors">
-          <span className="text-2xl">📘</span>
-          <div>
-            <p className="font-semibold text-sm">Facebook Marketplace</p>
-            <p className="text-xs text-gray-600">Share house</p>
-          </div>
-        </a>
-        <a href="https://realestate.com.au" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded-lg bg-info/5 hover:bg-info/10 transition-colors">
-          <span className="text-2xl">🏘️</span>
-          <div>
-            <p className="font-semibold text-sm">Realestate.com.au</p>
-            <p className="text-xs text-gray-600">Rental apartment</p>
-          </div>
-        </a>
+        {[
+          { name: 'Flatmates.com.au', desc: 'Cari roommate & kamar', url: 'https://flatmates.com.au', emoji: '👥' },
+          { name: 'FB Marketplace', desc: 'Share house & barang', url: 'https://facebook.com/marketplace', emoji: '📘' },
+          { name: 'Realestate.com.au', desc: 'Rental apartment resmi', url: 'https://realestate.com.au', emoji: '🏘️' }
+        ].map((site) => (
+          <a key={site.name} href={site.url} target="_blank" rel="noopener noreferrer"
+            className="flex items-center gap-3 p-4 rounded-xl bg-gray-50 border border-gray-200 hover:border-info hover:bg-info/5 transition-all group shadow-sm">
+            <span className="text-3xl group-hover:scale-110 transition-transform">{site.emoji}</span>
+            <div>
+              <p className="font-bold text-sm text-gray-900">{site.name}</p>
+              <p className="text-xs text-gray-500">{site.desc}</p>
+            </div>
+          </a>
+        ))}
       </div>
     </div>
   </div>
@@ -447,92 +339,75 @@ const renderAkomodasi = () => (
 const renderTFNSuper = () => (
   <div className="space-y-6">
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <div className="bg-white rounded-xl p-6 border-2 border-info/30">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="text-3xl">📋</span>
-          <div>
-            <h3 className="font-bold text-lg">TFN (Tax File Number)</h3>
-            <p className="text-sm text-gray-600">Wajib punya jika ingin bekerja secara legal</p>
-          </div>
-        </div>
-
-        <div className="space-y-4">
-          <div>
-            <h4 className="font-semibold text-sm text-gray-900 mb-2">Cara Apply</h4>
-            <ol className="space-y-2">
-              <li className="flex items-start gap-2 text-sm">
-                <span className="bg-info text-white rounded-full w-5 h-5 flex items-center justify-center text-xs flex-shrink-0 mt-0.5">1</span>
-                <span>Kunjungi <a href="https://ato.gov.au" target="_blank" rel="noopener noreferrer" className="text-info underline">ato.gov.au</a></span>
-              </li>
-              <li className="flex items-start gap-2 text-sm">
-                <span className="bg-info text-white rounded-full w-5 h-5 flex items-center justify-center text-xs flex-shrink-0 mt-0.5">2</span>
-                <span>Apply online (butuh paspor)</span>
-              </li>
-              <li className="flex items-start gap-2 text-sm">
-                <span className="bg-info text-white rounded-full w-5 h-5 flex items-center justify-center text-xs flex-shrink-0 mt-0.5">3</span>
-                <span>Gratis, proses 2-4 minggu</span>
-              </li>
-              <li className="flex items-start gap-2 text-sm">
-                <span className="bg-info text-white rounded-full w-5 h-5 flex items-center justify-center text-xs flex-shrink-0 mt-0.5">4</span>
-                <span>TFN akan dikirim ke alamat di Australia</span>
-              </li>
-            </ol>
-          </div>
-
-          <div className="bg-info/5 rounded-lg p-4">
-            <h4 className="font-semibold text-sm text-gray-900 mb-2">Pentingnya TFN</h4>
-            <ul className="space-y-1 text-sm text-gray-700">
-              <li className="flex items-start gap-2">
-                <span className="text-info mt-0.5">✓</span>
-                <span>Wajib untuk buka bank account</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-info mt-0.5">✓</span>
-                <span>Wajib untuk kerja legal</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-info mt-0.5">✓</span>
-                <span>Tanpa TFN: tax rate 47% (dengan TFN max 32%)</span>
-              </li>
+      <GuideCard
+        icon="📋"
+        title="TFN (Tax File Number)"
+        color="info"
+        footer={
+          <div className="bg-info/5 rounded-lg p-3">
+            <h4 className="font-bold text-xs text-info mb-1 uppercase tracking-wider">Mengapa Penting?</h4>
+            <ul className="text-xs text-gray-700 space-y-1">
+              <li>• Wajib untuk buka rekening bank</li>
+              <li>• Wajib untuk bekerja secara legal</li>
+              <li>• Tanpa TFN: Pajak 47% (Dengan TFN: max 32%)</li>
             </ul>
           </div>
-        </div>
-      </div>
+        }
+      >
+        <p className="text-sm text-gray-600 mb-4">Wajib punya jika ingin bekerja secara legal di Australia.</p>
+        <h4 className="font-bold text-sm text-gray-900 mb-2">Cara Apply:</h4>
+        <ol className="space-y-2">
+          {[
+            { step: '1', text: <span>Kunjungi <a href="https://ato.gov.au" target="_blank" rel="noopener noreferrer" className="text-info underline hover:text-info/80 font-medium">ato.gov.au</a></span> },
+            { step: '2', text: 'Apply online (siapkan paspor)' },
+            { step: '3', text: 'Gratis, proses 2-4 minggu' },
+            { step: '4', text: 'TFN dikirim ke alamat Australia' }
+          ].map((item) => (
+            <li key={item.step} className="flex items-start gap-2 text-sm text-gray-700">
+              <span className="bg-info text-white rounded-full w-5 h-5 flex items-center justify-center text-xs flex-shrink-0 mt-0.5 shadow-sm font-bold">{item.step}</span>
+              <span>{item.text}</span>
+            </li>
+          ))}
+        </ol>
+      </GuideCard>
 
-      <div className="bg-white rounded-xl p-6 border-2 border-success/30">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="text-3xl">💼</span>
-          <div>
-            <h3 className="font-bold text-lg">Superannuation</h3>
-            <p className="text-sm text-gray-600">Tabungan wajib untuk masa depan</p>
-          </div>
-        </div>
-
-        <div className="space-y-4">
-          <div className="bg-success/5 rounded-lg p-4">
-            <ul className="space-y-2 text-sm text-gray-700">
-              <li className="flex items-start gap-2">
-                <span className="text-success mt-0.5">💰</span>
-                <span>Tabungan wajib dari gaji (11%)</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-success mt-0.5">🏦</span>
-                <span>Bisa di-claim saat pulang permanen</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-success mt-0.5">📊</span>
-                <span>Pilih fund: AustralianSuper, Hostplus</span>
-              </li>
-            </ul>
-          </div>
-
-          <div className="bg-warning/10 border-l-4 border-warning p-4 rounded-r-lg">
-            <p className="text-sm text-gray-700">
-              <strong>💡 Tip:</strong> Apply TFN segera setelah punya alamat Australia!
+      <GuideCard
+        icon="💼"
+        title="Superannuation"
+        color="success"
+        footer={
+          <div className="bg-warning/10 border-l-4 border-warning p-3 rounded-r-lg">
+            <p className="text-xs text-gray-700 font-medium italic">
+              <strong>💡 Tip:</strong> Apply <GlossaryTooltip term="TFN" /> segera setelah Anda tiba dan punya alamat tetap!
             </p>
           </div>
-        </div>
-      </div>
+        }
+      >
+        <p className="text-sm text-gray-600 mb-4">Tabungan masa tua wajib bagi semua pekerja di Australia.</p>
+        <ul className="space-y-4">
+          <li className="flex items-start gap-3">
+            <span className="bg-success/20 text-success p-1.5 rounded-lg text-lg">💰</span>
+            <div>
+              <p className="font-bold text-sm text-gray-900">Potongan Gaji</p>
+              <p className="text-xs text-gray-600">Employer wajib bayar 11% di luar gaji pokok</p>
+            </div>
+          </li>
+          <li className="flex items-start gap-3">
+            <span className="bg-success/20 text-success p-1.5 rounded-lg text-lg">🏦</span>
+            <div>
+              <p className="font-bold text-sm text-gray-900">Claim Dana</p>
+              <p className="text-xs text-gray-600">Bisa di-claim (DASP) saat pulang permanen ke Indonesia</p>
+            </div>
+          </li>
+          <li className="flex items-start gap-3">
+            <span className="bg-success/20 text-success p-1.5 rounded-lg text-lg">📊</span>
+            <div>
+              <p className="font-bold text-sm text-gray-900">Pilih Fund</p>
+              <p className="text-xs text-gray-600">Populer: AustralianSuper, Hostplus, atau ART</p>
+            </div>
+          </li>
+        </ul>
+      </GuideCard>
     </div>
   </div>
 );
@@ -540,334 +415,335 @@ const renderTFNSuper = () => (
 const renderTransport = () => (
   <div className="space-y-6">
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <div className="bg-white rounded-xl p-6 border border-gray-200">
-        <h4 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-          <span className="text-2xl">🚊</span> Public Transport
-        </h4>
-        <div className="space-y-3">
-          <div className="bg-info/5 rounded-lg p-3">
-            <p className="font-semibold text-sm text-info">Sydney</p>
-            <p className="text-xs text-gray-600">Opal Card (Train/Bus/Ferry)</p>
+      <GuideCard
+        icon="🚊"
+        title="Public Transport"
+        color="info"
+        footer={
+          <div className="space-y-2 pt-2">
+            <h5 className="text-sm font-bold text-gray-900 flex items-center gap-1">
+              <span className="text-indo-red">★</span> Estimasi Harga (Per Trip)
+            </h5>
+            <div className="space-y-1 text-sm text-gray-700">
+              <div className="flex justify-between border-b border-gray-100 pb-1">
+                <span>Peak hour:</span><span className="font-bold">Rp 30k - 50k</span>
+              </div>
+              <div className="flex justify-between border-b border-gray-100 pb-1">
+                <span>Off-peak:</span><span className="font-bold">Rp 20k - 35k</span>
+              </div>
+              <div className="flex justify-between text-success bg-success/5 p-1 rounded">
+                <span className="font-medium">Sunday cap:</span><span className="font-bold">Rp 60k (Unlimited)</span>
+              </div>
+            </div>
           </div>
-          <div className="bg-info/5 rounded-lg p-3">
-            <p className="font-semibold text-sm text-info">Melbourne</p>
-            <p className="text-xs text-gray-600">Myki Card (Train/Tram/Bus)</p>
-          </div>
-          <div className="bg-info/5 rounded-lg p-3">
-            <p className="font-semibold text-sm text-info">Brisbane</p>
-            <p className="text-xs text-gray-600">Go Card (Train/Bus)</p>
-          </div>
+        }
+      >
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {[
+            { city: 'Sydney', card: 'Opal Card', color: 'info' },
+            { city: 'Melbourne', card: 'Myki Card', color: 'success' },
+            { city: 'Brisbane', card: 'Go Card', color: 'warning' }
+          ].map((item) => (
+            <div key={item.city} className={`bg-gray-50 border border-gray-200 rounded-xl p-3 text-center transition-all hover:border-info hover:shadow-sm`}>
+              <p className="font-bold text-xs text-gray-500 uppercase tracking-tighter">{item.city}</p>
+              <p className="text-sm font-bold text-gray-900">{item.card}</p>
+            </div>
+          ))}
         </div>
+      </GuideCard>
 
-        <div className="mt-4 pt-4 border-t border-gray-200">
-          <h5 className="text-sm font-semibold mb-2">Harga (Per Trip)</h5>
-          <div className="space-y-1.5 text-sm">
-            <div className="flex justify-between">
-              <span className="text-gray-600">Peak hour:</span>
-              <span className="font-semibold">Rp 30,000 - 50,000</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600">Off-peak:</span>
-              <span className="font-semibold">Rp 20,000 - 35,000</span>
-            </div>
-            <div className="flex justify-between text-success">
-              <span className="text-gray-600">Sunday cap:</span>
-              <span className="font-semibold">Rp 60,000 (unlimited trips)</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="bg-white rounded-xl p-6 border border-gray-200">
-        <h4 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-          <span className="text-2xl">🚗</span> Kendaraan Pribadi
-        </h4>
-        <div className="space-y-3">
-          <div className="bg-warning/5 rounded-lg p-3">
-            <p className="font-semibold text-sm text-gray-900">🏍️ Motor Bekas</p>
-            <p className="text-lg font-bold text-warning">Rp 8 - 15 juta</p>
-          </div>
-          <div className="bg-warning/5 rounded-lg p-3">
-            <p className="font-semibold text-sm text-gray-900">🚗 Mobil Bekas</p>
-            <p className="text-lg font-bold text-warning">Rp 50 - 100 juta</p>
-          </div>
-          <div className="bg-danger/5 rounded-lg p-3">
-            <p className="font-semibold text-sm text-gray-900">Biaya Tambahan</p>
-            <ul className="text-xs text-gray-600 mt-1 space-y-1">
-              <li>• Asuransi wajib: Rp 1jt+/tahun</li>
-              <li>• Bengkel & sparepart mahal</li>
+      <GuideCard
+        icon="🚗"
+        title="Kendaraan Pribadi"
+        color="warning"
+        footer={
+          <div className="bg-error/5 rounded-lg p-3 border border-error/10">
+            <h5 className="text-xs font-bold text-error mb-1 uppercase">Hidden Costs</h5>
+            <ul className="text-[10px] text-gray-600 space-y-0.5">
+              <li>• Rego & Insuarance: Rp 15jt+/tahun</li>
+              <li>• Petrol: Rp 20k - 25k/liter</li>
+              <li>• Maintenance & Parkir sangat mahal</li>
             </ul>
           </div>
+        }
+      >
+        <div className="space-y-3">
+          <div className="flex items-center justify-between p-3 bg-gray-50 rounded-xl border border-gray-200 hover:border-warning transition-colors">
+            <div className="flex items-center gap-2">
+              <span className="text-2xl">🏍️</span>
+              <span className="font-bold text-sm text-gray-700">Motor Bekas</span>
+            </div>
+            <span className="text-sm font-bold text-warning">Rp 8 - 15 juta</span>
+          </div>
+          <div className="flex items-center justify-between p-3 bg-gray-50 rounded-xl border border-gray-200 hover:border-warning transition-colors">
+            <div className="flex items-center gap-2">
+              <span className="text-2xl">🚗</span>
+              <span className="font-bold text-sm text-gray-700">Mobil Bekas</span>
+            </div>
+            <span className="text-sm font-bold text-warning">Rp 50 - 100 juta</span>
+          </div>
         </div>
-      </div>
+      </GuideCard>
     </div>
 
-    <div className="bg-info/10 border-l-4 border-info p-4 rounded-r-lg text-sm text-gray-700">
-      <strong>💡 Rekomendasi:</strong> Di kota besar pakai public transport. Di regional pertimbangkan beli motor.
+    <div className="bg-info/10 border-l-4 border-info p-4 rounded-r-lg shadow-sm">
+      <p className="text-sm text-gray-700">
+        <strong>💡 Rekomendasi:</strong> Di kota besar gunakan public transport. Di area regional, mobil/motor hampir wajib untuk mobilitas kerja.
+      </p>
     </div>
   </div>
 );
 
 const renderMencariKerja = () => (
-  <div className="space-y-6">
-    <div className="bg-white rounded-xl p-6 border border-gray-200">
-      <h4 className="font-bold text-gray-900 mb-4">🌐 Website Populer</h4>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-        <a href="https://seek.com.au" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 rounded-lg bg-info/5 hover:bg-info/10 transition-colors">
-          <span className="text-2xl">💼</span>
-          <div>
-            <p className="font-semibold text-sm">Seek</p>
-            <p className="text-xs text-gray-600">Job board terbesar</p>
-          </div>
-        </a>
-        <a href="https://indeed.com.au" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 rounded-lg bg-info/5 hover:bg-info/10 transition-colors">
-          <span className="text-2xl">🔍</span>
-          <div>
-            <p className="font-semibold text-sm">Indeed</p>
-            <p className="text-xs text-gray-600">Job board internasional</p>
-          </div>
-        </a>
-        <a href="https://gumtree.com.au" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 rounded-lg bg-info/5 hover:bg-info/10 transition-colors">
-          <span className="text-2xl">📰</span>
-          <div>
-            <p className="font-semibold text-sm">Gumtree</p>
-            <p className="text-xs text-gray-600">Classified ads (banyak casual jobs)</p>
-          </div>
-        </a>
-        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 rounded-lg bg-info/5 hover:bg-info/10 transition-colors">
-          <span className="text-2xl">👥</span>
-          <div>
-            <p className="font-semibold text-sm">Facebook Groups</p>
-            <p className="text-xs text-gray-600">WHV Australia Groups</p>
-          </div>
-        </a>
+  <div className="space-y-8">
+    <div className="bg-white rounded-xl p-6 border-2 border-gray-100 shadow-sm">
+      <h4 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
+        <span className="text-info text-xl">🌐</span> Platform Cari Kerja Terpopuler
+      </h4>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {[
+          { name: 'Seek.com.au', desc: 'Job board terbesar & resmi', url: 'https://seek.com.au', color: 'bg-blue-600', emoji: '💼' },
+          { name: 'Indeed.com.au', desc: 'Job board internasional', url: 'https://indeed.com.au', color: 'bg-blue-400', emoji: '🔍' },
+          { name: 'Gumtree.com.au', desc: 'Casual jobs & local gigs', url: 'https://gumtree.com.au', color: 'bg-green-600', emoji: '📰' },
+          { name: 'FB Groups', desc: 'WHV Australia Community', url: 'https://facebook.com', color: 'bg-indigo-600', emoji: '👥' }
+        ].map((job) => (
+          <a key={job.name} href={job.url} target="_blank" rel="noopener noreferrer"
+            className="flex items-center gap-3 p-4 rounded-xl border border-gray-200 hover:border-info hover:bg-info/5 transition-all group shadow-sm bg-gray-50/50">
+            <div className={cn("w-12 h-12 rounded-xl flex items-center justify-center text-2xl shadow-sm text-white", job.color)}>
+              {job.emoji}
+            </div>
+            <div>
+              <p className="font-bold text-sm text-gray-900 group-hover:text-info transition-colors">{job.name}</p>
+              <p className="text-xs text-gray-500">{job.desc}</p>
+            </div>
+          </a>
+        ))}
       </div>
     </div>
 
-    <div>
-      <h4 className="font-bold text-gray-900 mb-4">💼 Jenis Kerja Populer untuk WHV</h4>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-xl p-5 border border-amber-200">
-          <h5 className="font-bold text-amber-900 mb-2">☕ Hospitality</h5>
-          <p className="text-xs text-amber-700 mb-3">Cafe/Restaurant</p>
-          <ul className="space-y-1.5 text-sm text-gray-700">
-            <li>• Barista, Waitstaff, Kitchen Hand</li>
-            <li>• Gaji: Rp 150rb - 250rb/jam</li>
-            <li>• Sering ada cash tip</li>
-          </ul>
-        </div>
-
-        <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-5 border border-green-200">
-          <h5 className="font-bold text-green-900 mb-2">🌾 Farm Work</h5>
-          <p className="text-xs text-green-700 mb-3">88 Days Eligible ✓</p>
-          <ul className="space-y-1.5 text-sm text-gray-700">
-            <li>• Fruit Picking, Packing, Farm Hand</li>
-            <li>• Gaji: Rp 170rb - 300rb/jam</li>
-            <li>• Biasanya ada akomodasi gratis</li>
-          </ul>
-        </div>
-
-        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-5 border border-blue-200">
-          <h5 className="font-bold text-blue-900 mb-2">🛍️ Retail</h5>
-          <p className="text-xs text-blue-700 mb-3">Sales & Service</p>
-          <ul className="space-y-1.5 text-sm text-gray-700">
-            <li>• Sales Assistant, Cashier</li>
-            <li>• Gaji: Rp 150rb - 220rb/jam</li>
-            <li>• Butuh bahasa Inggris baik</li>
-          </ul>
-        </div>
+    <div className="space-y-4">
+      <h4 className="font-bold text-gray-900 flex items-center gap-2">
+        <span className="w-10 h-10 bg-oz-gold/20 text-oz-gold rounded-xl flex items-center justify-center">💼</span>
+        Jenis Pekerjaan Populer (WHV)
+      </h4>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <GuideCard
+          title="☕ Hospitality"
+          color="warning"
+          className="from-amber-50 to-orange-50 bg-gradient-to-br"
+          footer={<p className="text-[10px] text-amber-700 italic">Cafe, Restaurant, Hotel, Barista</p>}
+          items={[
+            "Waitstaff, Kitchen Hand, Barista",
+            "Gaji: Rp 250rb - 350rb/jam",
+            "Sering mendapatkan cash tips"
+          ]}
+        />
+        <GuideCard
+          title="🌾 Farm Work"
+          color="success"
+          className="from-green-50 to-emerald-50 bg-gradient-to-br"
+          footer={<p className="text-[10px] text-green-700 font-bold italic">Eligible for 88 Days ✓</p>}
+          items={[
+            "Fruit Picking, Packing, Farm Hand",
+            "Gaji: Rp 280rb - 400rb/jam",
+            "Akomodasi sering disediakan"
+          ]}
+        />
+        <GuideCard
+          title="🛍️ Retail & Service"
+          color="blue"
+          className="from-blue-50 to-indigo-50 bg-gradient-to-br"
+          footer={<p className="text-[10px] text-blue-700 italic">Sales, Warehouse, Cleaning</p>}
+          items={[
+            "Sales Assistant, Cashier, Packer",
+            "Gaji: Rp 250rb - 320rb/jam",
+            "Butuh Bahasa Inggris yang lancar"
+          ]}
+        />
       </div>
     </div>
 
-    <div className="bg-success/10 border-l-4 border-success p-4 rounded-r-lg text-sm text-gray-700">
-      <strong>💡 Tip:</strong> Untuk 88 days, cari kerja di regional area!
+    <div className="bg-success/10 border-l-4 border-success p-4 rounded-r-lg shadow-sm">
+      <p className="text-sm text-gray-700 font-medium">
+        <strong>💡 Tip Pro:</strong> Untuk <GlossaryTooltip term="88 Days" />, pastikan Anda mencari kerja di area regional agar bisa memperpanjang visa ke tahun ke-2!
+      </p>
     </div>
   </div>
 );
 
 const renderExtensionWHV = () => (
   <div className="space-y-6">
-    <div className="bg-success/5 rounded-xl p-6 border-2 border-success/30">
-      <h4 className="font-bold text-success mb-4 flex items-center gap-2">
-        <span className="text-2xl">✅</span> Syarat Utama
-      </h4>
-      <ul className="space-y-2">
-        <ChecklistItem checked text="Selesaikan 88 days regional work" />
+    <GuideCard
+      icon="✅"
+      title="Syarat Utama Extension"
+      color="success"
+      className="from-green-50 to-emerald-50 bg-gradient-to-br"
+    >
+      <ul className="divide-y divide-green-100">
+        <ChecklistItem checked text={<span>Selesaikan <GlossaryTooltip term="88 Days" /> regional work</span>} />
         <ChecklistItem checked text="Apply sebelum WHV pertama expired" />
-        <ChecklistItem checked text="Usia masih di bawah 31 tahun" />
+        <ChecklistItem checked text="Usia masih di bawah 31 tahun (saat apply)" />
+        <ChecklistItem checked text="Memiliki paspor Indonesia yang valid" />
       </ul>
-    </div>
+    </GuideCard>
 
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div className="bg-white rounded-xl p-6 border border-gray-200">
-        <h4 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-          <span className="text-2xl">📅</span> Apa itu 88 Days?
-        </h4>
-        <ul className="space-y-2 text-sm text-gray-700">
-          <li className="flex items-start gap-2">
-            <span className="text-info mt-0.5">▸</span>
-            <span>3 bulan kerja di regional Australia</span>
-          </li>
-          <li className="flex items-start gap-2">
-            <span className="text-info mt-0.5">▸</span>
-            <span>Boleh tidak berturut-turut</span>
-          </li>
-          <li className="flex items-start gap-2">
-            <span className="text-info mt-0.5">▸</span>
-            <span>Boleh di beberapa employer</span>
-          </li>
-          <li className="flex items-start gap-2">
-            <span className="text-info mt-0.5">▸</span>
-            <span>Boleh part-time (jam dihitung)</span>
-          </li>
-        </ul>
-      </div>
-
-      <div className="bg-white rounded-xl p-6 border border-gray-200">
-        <h4 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-          <span className="text-2xl">🗺️</span> Regional Areas
-        </h4>
-        <ul className="space-y-2 text-sm text-gray-700">
-          <li><strong>NSW:</strong> Selain Sydney, Newcastle, Wollongong</li>
-          <li><strong>QLD:</strong> Selain Brisbane, Gold Coast</li>
-          <li><strong>VIC:</strong> Selain Melbourne, Geelong</li>
-          <li>Seluruh WA, SA, TAS, NT adalah regional</li>
-        </ul>
-      </div>
+      <GuideCard
+        icon="📅"
+        title="Apa itu 88 Days?"
+        color="info"
+        items={[
+          "Total 3 bulan (88 hari) kerja di regional",
+          "Boleh tidak berturut-turut (akumulasi)",
+          "Boleh di beberapa employer berbeda",
+          "Pekerjaan harus full-time atau part-time yang setara"
+        ]}
+      />
+      <GuideCard
+        icon="🗺️"
+        title="Regional Areas"
+        color="info"
+        items={[
+          "NSW: Selain Sydney, Newcastle, Wollongong",
+          "QLD: Selain Brisbane, Gold Coast",
+          "VIC: Selain Melbourne metro, Geelong",
+          "Seluruh WA, SA, TAS, NT adalah regional"
+        ]}
+      />
     </div>
 
-    <div className="bg-warning/10 border-l-4 border-warning p-4 rounded-r-lg text-sm text-gray-700">
-      <strong>📎 Dokumen:</strong> Simpan slip gaji, contract, reference letter untuk bukti!
+    <div className="bg-warning/10 border-l-4 border-warning p-4 rounded-r-lg shadow-sm animate-in fade-in slide-in-from-bottom-4">
+      <p className="text-sm text-gray-700">
+        <strong>📎 Bukti Dokumen:</strong> Simpan semua slip gaji (payslips), kontrak kerja, dan reference letter sebagai bukti kuat untuk imigrasi!
+      </p>
     </div>
   </div>
 );
 
 const renderPathwayPR = () => (
-  <div className="space-y-4">
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-5 border border-blue-300">
-        <div className="flex items-center gap-2 mb-3">
-          <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-bold">189</span>
-          <h4 className="font-bold text-blue-900">Skilled Independent</h4>
-        </div>
-        <ul className="space-y-1 text-sm text-gray-700">
-          <li>• Tidak butuh sponsor</li>
-          <li>• Butuh skill assessment</li>
-          <li>• Butuh high English score (IELTS 8+)</li>
-          <li>• Points test: 65+ poin</li>
-          <li className="text-danger font-semibold">• Competition sangat tinggi</li>
+  <div className="space-y-6">
+    <p className="text-gray-700 leading-relaxed">
+      Berikut adalah jalur umum untuk mendapatkan <GlossaryTooltip term="PR" /> di Australia dari jalur skilled migration:
+    </p>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <GuideCard
+        title="189 - Skilled Independent"
+        color="info"
+        className="from-blue-50 to-indigo-50 bg-gradient-to-br shadow-sm"
+        footer={<p className="text-[10px] text-error font-bold">Persaingan sangat ketat & poin tinggi</p>}
+      >
+        <ul className="space-y-2 text-sm text-gray-700">
+          <li>• Tidak butuh sponsor (State/Employer)</li>
+          <li>• Wajib lulus Skill Assessment</li>
+          <li>• High English score (PTE 79+ / IELTS 8+)</li>
+          <li>• Points test min 65 (Realita 90+)</li>
         </ul>
-      </div>
+      </GuideCard>
 
-      <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-5 border border-green-300">
-        <div className="flex items-center gap-2 mb-3">
-          <span className="bg-green-600 text-white px-2 py-1 rounded text-xs font-bold">190</span>
-          <h4 className="font-bold text-green-900">Skilled Nominated</h4>
-        </div>
-        <ul className="space-y-1 text-sm text-gray-700">
-          <li>• Butuh state sponsorship</li>
-          <li className="text-success font-semibold">• Lebih mudah daripada 189</li>
-          <li>• Harus tinggal di sponsoring state</li>
-          <li>• Points test: 65+ poin</li>
-          <li className="text-success font-semibold">• Lower cutoff</li>
+      <GuideCard
+        title="190 - Skilled Nominated"
+        color="success"
+        className="from-green-50 to-emerald-50 bg-gradient-to-br shadow-sm"
+        footer={<p className="text-[10px] text-success font-bold italic">Jalur paling populer & realistis ✓</p>}
+      >
+        <ul className="space-y-2 text-sm text-gray-700">
+          <li>• Butuh sponsorship dari Negara Bagian</li>
+          <li>• Mendapat tambahan 5 poin bonus</li>
+          <li>• Harus tinggal di negara bagian sponsor (2 thn)</li>
+          <li>• Kuota lebih banyak daripada 189</li>
         </ul>
-      </div>
+      </GuideCard>
 
-      <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-5 border border-purple-300">
-        <div className="flex items-center gap-2 mb-3">
-          <span className="bg-purple-600 text-white px-2 py-1 rounded text-xs font-bold">491</span>
-          <h4 className="font-bold text-purple-900">Skilled Work Regional</h4>
-        </div>
-        <ul className="space-y-1 text-sm text-gray-700">
-          <li>• Regional area only</li>
-          <li>• 5 years visa (leading to PR)</li>
+      <GuideCard
+        title="491 - Skilled Work Regional"
+        color="purple"
+        className="from-purple-50 to-pink-50 bg-gradient-to-br shadow-sm"
+        footer={<p className="text-[10px] text-purple-700 font-bold">Visa 5 thn → Jalur ke PR (191)</p>}
+      >
+        <ul className="space-y-2 text-sm text-gray-700">
+          <li>• Khusus untuk bekerja di area Regional</li>
+          <li>• Mendapat tambahan 15 poin bonus</li>
           <li>• Butuh regional sponsorship</li>
-          <li className="text-purple-700 font-semibold">• Lebih mudah daripada 189/190</li>
+          <li>• Syarat poin jauh lebih rendah</li>
         </ul>
-      </div>
+      </GuideCard>
 
-      <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-5 border border-amber-300">
-        <div className="flex items-center gap-2 mb-3">
-          <span className="bg-amber-600 text-white px-2 py-1 rounded text-xs font-bold">500</span>
-          <h4 className="font-bold text-amber-900">Student Visa</h4>
-        </div>
-        <ul className="space-y-1 text-sm text-gray-700">
-          <li>• Study 2 years di Australia</li>
-          <li>• Graduate → 485 visa → 189/190</li>
-          <li className="text-amber-700 font-semibold">• Biaya kuliah: Rp 150jt+/tahun</li>
+      <GuideCard
+        title="500 - Student Visa"
+        color="warning"
+        className="from-amber-50 to-orange-50 bg-gradient-to-br shadow-sm"
+        footer={<p className="text-[10px] text-amber-700 font-bold uppercase">Membutuhkan modal besar</p>}
+      >
+        <ul className="space-y-2 text-sm text-gray-700">
+          <li>• Kuliah min 2 tahun di Australia</li>
+          <li>• Graduate → 485 Visa (Kerja) → Skiled Visa</li>
+          <li>• Menambah poin Australian Study</li>
+          <li>• Biaya kuliah: Rp 150jt - 400jt/tahun</li>
         </ul>
-      </div>
+      </GuideCard>
     </div>
 
-    <div className="bg-info/10 border-l-4 border-info p-4 rounded-r-lg text-sm text-gray-700">
-      <strong>💡 Tip:</strong> Kalkulator poin PR ada di menu IndOz+ (Premium)
+    <div className="bg-info/10 border-l-4 border-info p-4 rounded-r-lg text-sm text-gray-700 shadow-sm">
+      <strong>💡 Premium Info:</strong> Kalkulator poin <GlossaryTooltip term="PR" /> lengkap tersedia di fitur Premium IndOz.
     </div>
   </div>
 );
 
 const renderSkillAssessment = () => (
-  <div className="space-y-6">
-    <div className="bg-info/5 rounded-xl p-6 border border-info/30">
-      <h4 className="font-bold text-info mb-3 flex items-center gap-2">
-        <span className="text-2xl">📋</span> Apa itu Skill Assessment?
+  <div className="space-y-8">
+    <div className="bg-info/5 rounded-2xl p-8 border border-info/20 shadow-inner">
+      <h4 className="font-bold text-info mb-4 flex items-center gap-3">
+        <span className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-2xl">📋</span>
+        Apa itu Skill Assessment?
       </h4>
-      <p className="text-gray-700">Evaluasi kualifikasi & pengalaman kerja oleh organisasi profesional di Australia.</p>
+      <p className="text-gray-700 leading-relaxed">
+        Proses evaluasi kualifikasi pendidikan dan pengalaman kerja Anda oleh organisasi profesional resmi di Australia untuk memastikan standar Anda setara dengan standar Australia.
+      </p>
     </div>
 
-    <div className="bg-white rounded-xl p-6 border border-gray-200">
-      <h4 className="font-bold text-gray-900 mb-4">🏢 Organisasi Populer</h4>
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
-        <div className="bg-info/5 rounded-lg p-3 text-center">
-          <p className="font-bold text-info text-sm">Accounting</p>
-          <p className="text-xs text-gray-600">CPA/CA/IPA</p>
-        </div>
-        <div className="bg-success/5 rounded-lg p-3 text-center">
-          <p className="font-bold text-success text-sm">IT</p>
-          <p className="text-xs text-gray-600">ACS</p>
-        </div>
-        <div className="bg-warning/5 rounded-lg p-3 text-center">
-          <p className="font-bold text-warning text-sm">Engineering</p>
-          <p className="text-xs text-gray-600">Engineers Australia</p>
-        </div>
-        <div className="bg-purple-5 rounded-lg p-3 text-center bg-purple-50">
-          <p className="font-bold text-purple-700 text-sm">Nursing</p>
-          <p className="text-xs text-gray-600">ANMAC</p>
-        </div>
-        <div className="bg-danger/5 rounded-lg p-3 text-center">
-          <p className="font-bold text-danger text-sm">Trades</p>
-          <p className="text-xs text-gray-600">TRA</p>
-        </div>
+    <div className="space-y-4">
+      <h4 className="font-bold text-gray-900 flex items-center gap-2">🏢 Lembaga Assessing Authority</h4>
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+        {[
+          { name: 'Accounting', tech: 'CPA / CA', color: 'bg-blue-50 text-blue-700 border-blue-200' },
+          { name: 'IT / Tech', tech: 'ACS', color: 'bg-green-50 text-green-700 border-green-200' },
+          { name: 'Engineering', tech: 'EA', color: 'bg-amber-50 text-amber-700 border-amber-200' },
+          { name: 'Nursing', tech: 'ANMAC', color: 'bg-purple-50 text-purple-700 border-purple-200' },
+          { name: 'Trade / Skill', tech: 'TRA', color: 'bg-error/5 text-error border-error/20' }
+        ].map((item) => (
+          <div key={item.name} className={cn("p-4 rounded-xl border text-center transition-all hover:scale-105 shadow-sm", item.color)}>
+            <p className="font-bold text-sm mb-1">{item.name}</p>
+            <p className="text-[10px] opacity-80 uppercase tracking-widest">{item.tech}</p>
+          </div>
+        ))}
       </div>
     </div>
 
-    <div className="bg-white rounded-xl p-6 border border-gray-200">
-      <h4 className="font-bold text-gray-900 mb-4">📝 Proses Umum</h4>
-      <div className="space-y-3">
-        <div className="flex items-start gap-4">
-          <span className="bg-info text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold flex-shrink-0">1</span>
-          <p className="text-gray-700">Cek ANZSCO code untuk job Anda</p>
-        </div>
-        <div className="flex items-start gap-4">
-          <span className="bg-info text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold flex-shrink-0">2</span>
-          <p className="text-gray-700">Persiapkan dokumen (ijazah, transkrip, referensi kerja)</p>
-        </div>
-        <div className="flex items-start gap-4">
-          <span className="bg-info text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold flex-shrink-0">3</span>
-          <p className="text-gray-700">Apply ke assessing body</p>
-        </div>
-        <div className="flex items-start gap-4">
-          <span className="bg-info text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold flex-shrink-0">4</span>
-          <p className="text-gray-700">Biaya: <span className="font-bold">Rp 10,000,000 - 25,000,000</span></p>
-        </div>
-        <div className="flex items-start gap-4">
-          <span className="bg-info text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold flex-shrink-0">5</span>
-          <p className="text-gray-700">Proses: <span className="font-bold">2-6 bulan</span></p>
-        </div>
+    <div className="bg-white rounded-2xl p-6 border-2 border-gray-100 shadow-sm space-y-6">
+      <h4 className="font-bold text-gray-900 flex items-center gap-2 text-lg">📝 Langkah-langkah Proses</h4>
+      <div className="space-y-4">
+        {[
+          { step: '1', title: 'Cek ANZSCO Code', desc: 'Tentukan kode pekerjaan yang sesuai dengan profesi Anda di daftar resmi.' },
+          { step: '2', title: 'Kumpulkan Dokumen', desc: 'Ijazah, Transkrip Nilai, Surat Referensi Kerja, dan Bukti Gaji (Payslips).' },
+          { step: '3', title: 'Sertifikasi Bahasa', desc: 'Siapkan sertifikat IELTS/PTE/TOEFL dengan skor yang diminta lembaga.' },
+          { step: '4', title: 'Submit & Bayar', desc: 'Biaya rata-rata berkisar antara Rp 10jt - 25jt tergantung lembaga.' },
+          { step: '5', title: 'Tunggu Hasil', desc: 'Proses evaluasi biasanya memakan waktu antara 2 hingga 6 bulan.' }
+        ].map((item) => (
+          <div key={item.step} className="flex gap-4 group">
+            <span className="flex-shrink-0 w-8 h-8 rounded-full bg-info/10 text-info flex items-center justify-center font-bold group-hover:bg-info group-hover:text-white transition-colors">{item.step}</span>
+            <div>
+              <p className="font-bold text-gray-900 text-sm mb-0.5">{item.title}</p>
+              <p className="text-xs text-gray-600 leading-relaxed">{item.desc}</p>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
 
-    <div className="bg-warning/10 border-l-4 border-warning p-4 rounded-r-lg text-sm text-gray-700">
-      <strong>⚠️ Penting:</strong> Skill assessment hanya bisa dilakukan untuk occupation di <a href="https://immi.homeaffairs.gov.au/visas/working-in-australia/skill-occupation-list" target="_blank" rel="noopener noreferrer" className="text-warning underline">MLTSSL/STSOL list</a>.
+    <div className="bg-warning/10 border-l-4 border-warning p-4 rounded-r-lg shadow-sm">
+      <p className="text-sm text-gray-700">
+        <strong>⚠️ Penting:</strong> Skill assessment hanya berlaku untuk pekerjaan yang ada dalam daftar <a href="https://immi.homeaffairs.gov.au/visas/working-in-australia/skill-occupation-list" target="_blank" rel="noopener noreferrer" className="text-warning underline font-bold">Skilled Occupation List (SOL)</a>.
+      </p>
     </div>
   </div>
 );
