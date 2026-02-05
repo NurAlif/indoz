@@ -58,9 +58,11 @@ const TopBar = () => {
 
           {/* Login Button */}
           <div className="hidden md:block">
-            <Link to="/login" className="btn-primary">
-              Masuk
-            </Link>
+            {location.pathname.startsWith('/premium') ? null : (
+              <Link to="/login" className="btn-primary">
+                Masuk
+              </Link>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
