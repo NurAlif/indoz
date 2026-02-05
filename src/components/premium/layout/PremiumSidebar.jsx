@@ -7,17 +7,23 @@ import {
   Briefcase,
   Settings,
   LogOut,
-  Star
+  Star,
+  MessageSquare,
+  FileSearch,
+  BookOpen
 } from 'lucide-react';
 import { cn } from '../../../utils/cn';
 
 const PremiumSidebar = ({ activeTab, onTabChange, onLogout, className }) => {
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+    { id: 'aichat', label: 'AI Chat', icon: MessageSquare },
+    { id: 'jobs', label: 'Job Matches', icon: Briefcase },
+    { id: 'resume', label: 'Cek Resume', icon: FileSearch },
+    { id: 'guides', label: 'Panduan', icon: BookOpen },
     { id: 'documents', label: 'Document Vault', icon: FileText },
     { id: 'logbook', label: '88-Day Logbook', icon: Scroll },
     { id: 'pr-calc', label: 'PR Points Simulator', icon: Calculator },
-    { id: 'jobs', label: 'Job Matches', icon: Briefcase },
   ];
 
   return (

@@ -11,6 +11,9 @@ import DocumentsVault from './DocumentsVault/DocumentsVault';
 import Logbook from './Logbook';
 import PRCalculator from './PRCalculator/PRCalculator';
 import JobSearchContainer from '../jobs/JobSearchContainer';
+import AIChatContainer from '../ai-chat/AIChatContainer';
+import ResumeCheckerContainer from '../resume/ResumeCheckerContainer';
+import GuidesContainer from '../guides/GuidesContainer';
 
 const PremiumDashboard = ({ onLogout }) => {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -59,6 +62,12 @@ const PremiumDashboard = ({ onLogout }) => {
             </div>
           </>
         );
+      case 'aichat':
+        return <AIChatContainer embedded={true} />;
+      case 'resume':
+        return <ResumeCheckerContainer />;
+      case 'guides':
+        return <GuidesContainer />;
       case 'documents':
         return <DocumentsVault />;
       case 'logbook':
