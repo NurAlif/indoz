@@ -1,5 +1,5 @@
-const API_KEY = import.meta.env.VITE_GOOGLE_AI_API_KEY;
-const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
+const API_KEY = 'sk-828bfe2ccc32452096b008a470d03a8d';
+const API_URL = 'https://api.deepseek.com/chat/completions';
 
 const SYSTEM_PROMPT = `You are Ollie, a friendly and knowledgeable AI assistant helping Indonesians with their Working Holiday Visa (WHV) and Permanent Residency (PR) journey to Australia.
 
@@ -30,32 +30,30 @@ PRIVACY WARNING:
 
 export async function generateAIResponse(message, conversationHistory = []) {
   try {
-    // Build contents array with history
-    const contents = [
+    // Build messages array with system prompt and history
+    const messages = [
+      { role: 'system', content: SYSTEM_PROMPT },
       ...conversationHistory.map(msg => ({
-        role: msg.role === 'user' ? 'user' : 'model',
-        parts: [{ text: msg.content }]
+        role: msg.role === 'assistant' ? 'assistant' : 'user',
+        content: msg.content
       })),
       {
         role: 'user',
-        parts: [{ text: message }]
+        content: message
       }
     ];
 
-    const response = await fetch(`${API_URL}?key=${API_KEY}`, {
+    const response = await fetch(API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${API_KEY}`,
       },
       body: JSON.stringify({
-        contents,
-        systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
-        generationConfig: {
-          temperature: 0.7,
-          topK: 40,
-          topP: 0.95,
-          maxOutputTokens: 2048,
-        },
+        model: 'deepseek-chat',
+        messages,
+        stream: false,
+        temperature: 0.7,
       }),
     });
 
@@ -66,11 +64,11 @@ export async function generateAIResponse(message, conversationHistory = []) {
 
     const data = await response.json();
 
-    if (!data.candidates || data.candidates.length === 0) {
+    if (!data.choices || data.choices.length === 0) {
       throw new Error('No response generated');
     }
 
-    return data.candidates[0].content.parts[0].text;
+    return data.choices[0].message.content;
   } catch (error) {
     console.error('Error generating AI response:', error);
     throw error;

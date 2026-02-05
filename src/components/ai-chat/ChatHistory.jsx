@@ -1,16 +1,12 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { User, Bot } from 'lucide-react';
 import { cn } from '../../utils/cn';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 const ChatHistory = ({ messages = [], isTyping = false }) => {
-  const messagesEndRef = useRef(null);
-
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, isTyping]);
-
   return (
-    <div className="flex-1 overflow-y-auto space-y-4 p-4">
+    <div className="min-h-[400px] max-h-[600px] overflow-y-auto space-y-4 p-4">
       {messages.map((message, index) => (
         <div
           key={index}
@@ -27,13 +23,37 @@ const ChatHistory = ({ messages = [], isTyping = false }) => {
 
           <div
             className={cn(
-              "max-w-[80%] rounded-2xl px-4 py-3",
+              "max-w-[80%] rounded-2xl px-4 py-3 prose prose-sm max-w-none",
               message.role === 'user'
-                ? "bg-indo-red text-white"
+                ? "bg-indo-red text-white prose-invert"
                 : "bg-gray-100 text-gray-900"
             )}
           >
-            <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={{
+                p: ({ children }) => <p className="text-sm mb-2 last:mb-0">{children}</p>,
+                ul: ({ children }) => <ul className="list-disc list-inside mb-2 space-y-1">{children}</ul>,
+                ol: ({ children }) => <ol className="list-decimal list-inside mb-2 space-y-1">{children}</ol>,
+                li: ({ children }) => <li className="text-sm">{children}</li>,
+                strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
+                h1: ({ children }) => <h1 className="text-lg font-bold mb-2">{children}</h1>,
+                h2: ({ children }) => <h2 className="text-base font-bold mb-2">{children}</h2>,
+                h3: ({ children }) => <h3 className="text-sm font-bold mb-1">{children}</h3>,
+                code: ({ children }) => (
+                  <code className="bg-gray-200 px-1 py-0.5 rounded text-xs font-mono">
+                    {children}
+                  </code>
+                ),
+                a: ({ children, href }) => (
+                  <a href={href} className="text-indo-red hover:underline" target="_blank" rel="noopener noreferrer">
+                    {children}
+                  </a>
+                ),
+              }}
+            >
+              {message.content}
+            </ReactMarkdown>
           </div>
 
           {message.role === 'user' && (
@@ -58,8 +78,6 @@ const ChatHistory = ({ messages = [], isTyping = false }) => {
           </div>
         </div>
       )}
-
-      <div ref={messagesEndRef} />
     </div>
   );
 };

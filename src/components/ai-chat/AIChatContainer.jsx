@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Send, X } from 'lucide-react';
-import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { Send, X, Menu } from 'lucide-react';
 import { generateAIResponse } from '../../services/googleAI';
 import AIProfile from './AIProfile';
 import ChatTabMenu from './ChatTabMenu';
@@ -9,15 +8,41 @@ import PrivacyNotice from './PrivacyNotice';
 import Button from '../common/Button';
 
 const AIChatContainer = () => {
+  // Initial static AI message
+  const initialAI = {
+    role: 'assistant',
+    content: `Halo! Saya Ollie, asisten AI yang siap membantu Anda dengan perjalanan Working Holiday Visa (WHV) dan Permanent Residency (PR) ke Australia.
+
+Saya punya pengalaman 5 tahun sebagai WHV di Australia dan sudah melalui proses WHV hingga PR. Ada yang bisa saya bantu hari ini?
+
+Misalnya:
+- Anda mau tanya tentang cara apply WHV?
+- Bingung cari kerja di Australia?
+- Mau tahu tentang 88 days regional work?
+- Atau sedang hitung-hitung poin untuk PR?
+
+Silakan tanyakan apa saja! 😊`
+  };
+
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
-  const [showTabMenu, setShowTabMenu] = useLocalStorage('indoz_chat_first_open', true);
+  const [showTabMenu, setShowTabMenu] = useState(true);
 
   const handleSuggestionClick = (query) => {
     setInput(query);
     setShowTabMenu(false);
   };
+
+  // Always show menu when no user messages
+  useEffect(() => {
+    if (messages.length === 0) {
+      setShowTabMenu(true);
+    }
+  }, [messages.length]);
+
+  // Combine initial AI message with user messages for display
+  const displayMessages = messages.length === 0 ? [initialAI] : [initialAI, ...messages];
 
   const handleSend = async () => {
     if (!input.trim() || isGenerating) return;
@@ -45,7 +70,11 @@ const AIChatContainer = () => {
 
   const handleClearChat = () => {
     setMessages([]);
-    setShowTabMenu(false);
+    setShowTabMenu(true);
+  };
+
+  const toggleTabMenu = () => {
+    setShowTabMenu((prev) => !prev);
   };
 
   const handleKeyPress = (e) => {
@@ -55,85 +84,96 @@ const AIChatContainer = () => {
     }
   };
 
-  // Show welcome message if no messages
-  const showWelcome = messages.length === 0;
-
   return (
-    <div className="max-w-4xl mx-auto py-8 px-4">
-      {/* Header */}
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">AI Chat</h1>
-        {!showWelcome && (
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={handleClearChat}
-            icon={<X size={16} />}
-          >
-            Clear Chat
-          </Button>
-        )}
+    <div className="h-screen flex flex-col bg-gray-50 overflow-hidden">
+      {/* Top Section - Fixed height */}
+      <div className="flex-shrink-0 bg-white border-b border-gray-200">
+        <div className="max-w-4xl mx-auto px-4 py-4">
+          {/* Header */}
+          <div className="flex items-center justify-between mb-4">
+            <h1 className="text-2xl font-bold text-gray-900">AI Chat</h1>
+            <div className="flex gap-2">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={toggleTabMenu}
+                icon={<Menu size={16} />}
+                className={!showTabMenu ? 'text-gray-600' : 'text-indo-red bg-indo-red/5'}
+              >
+                Menu
+              </Button>
+              {messages.length > 0 && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleClearChat}
+                  icon={<X size={16} />}
+                >
+                  Clear Chat
+                </Button>
+              )}
+            </div>
+          </div>
+
+          {/* Profile */}
+          <AIProfile isCompact={messages.length > 0} />
+        </div>
       </div>
 
-      {/* Profile */}
-      <AIProfile isCompact={!showWelcome} />
+      {/* Middle Section - Scrollable */}
+      <div className="flex-1 overflow-y-auto">
+        <div className="max-w-4xl mx-auto px-4 py-4">
+          {/* Chat History - Always visible */}
+          <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
+            <ChatHistory messages={displayMessages} isTyping={isGenerating} />
 
-      {/* Welcome Message */}
-      {showWelcome && (
-        <div className="bg-white rounded-xl p-6 mb-6 text-center">
-          <p className="text-gray-700 mb-2">
-            Selamat datang di IndOz! Saya Ollie,
-          </p>
-          <p className="text-gray-700">
-            asisten virtual yang akan membantu perjalanan WHV dan rencana PR ke Australia.
-          </p>
-        </div>
-      )}
-
-      {/* Tab Menu - First time only */}
-      {showWelcome && showTabMenu && (
-        <ChatTabMenu onSuggestionClick={handleSuggestionClick} />
-      )}
-
-      {/* Chat History */}
-      {!showWelcome && (
-        <div className="bg-white border border-gray-200 rounded-xl overflow-hidden mb-4">
-          <ChatHistory messages={messages} isTyping={isGenerating} />
-        </div>
-      )}
-
-      {/* Input */}
-      <div className="bg-white border border-gray-200 rounded-xl p-4 mb-4">
-        <div className="flex gap-3">
-          <textarea
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyPress={handleKeyPress}
-            placeholder="Type your message..."
-            rows={2}
-            disabled={isGenerating}
-            className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indo-red focus:border-transparent resize-none disabled:bg-gray-100 disabled:cursor-not-allowed"
-          />
-          <Button
-            onClick={handleSend}
-            disabled={!input.trim() || isGenerating}
-            variant="primary"
-            className="self-end"
-          >
-            {isGenerating ? (
-              '...'
-            ) : (
-              <>
-                <Send size={16} className="mr-2" />
-                Send
-              </>
+            {/* Tab Menu - Nested inside chat container, below AI message */}
+            {showTabMenu && messages.length === 0 && (
+              <div className="border-t border-gray-200">
+                <ChatTabMenu onSuggestionClick={handleSuggestionClick} />
+              </div>
             )}
-          </Button>
+          </div>
         </div>
       </div>
 
-      {/* Privacy Notice */}
-      <PrivacyNotice />
+      {/* Bottom Section - Fixed height */}
+      <div className="flex-shrink-0 bg-white border-t border-gray-200">
+        <div className="max-w-4xl mx-auto px-4 py-4">
+          {/* Input */}
+          <div className="mb-4">
+            <div className="flex gap-3">
+              <textarea
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyPress={handleKeyPress}
+                placeholder="Type your message..."
+                rows={2}
+                disabled={isGenerating}
+                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indo-red focus:border-transparent resize-none disabled:bg-gray-100 disabled:cursor-not-allowed"
+              />
+              <Button
+                onClick={handleSend}
+                disabled={!input.trim() || isGenerating}
+                variant="primary"
+                className="self-end"
+              >
+                {isGenerating ? (
+                  '...'
+                ) : (
+                  <>
+                    <Send size={16} className="mr-2" />
+                    Send
+                  </>
+                )}
+              </Button>
+            </div>
+          </div>
+
+          {/* Privacy Notice */}
+          <PrivacyNotice />
+        </div>
+      </div>
     </div>
   );
 };
