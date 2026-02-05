@@ -1,6 +1,7 @@
 import React from 'react';
 import { MapPin, DollarSign, Building2, ExternalLink } from 'lucide-react';
 import { cn } from '../../utils/cn';
+import GlossaryTooltip from '../common/GlossaryTooltip';
 
 const JobCard = ({ job = {}, onViewDetails = () => {} }) => {
   const {
@@ -32,8 +33,8 @@ const JobCard = ({ job = {}, onViewDetails = () => {} }) => {
         {/* 88 Days Badge */}
         {is88DaysEligible && (
           <div className="flex-shrink-0 ml-4">
-            <span className="inline-flex items-center px-3 py-1 bg-oz-gold/20 text-oz-gold text-xs font-semibold rounded-full">
-              ✓ 88 Days Eligible
+            <span className="inline-flex items-center px-3 py-1 bg-oz-gold/20 text-oz-gold text-xs font-semibold rounded-full gap-1">
+              ✓ <GlossaryTooltip term="88 Days" /> Eligible
             </span>
           </div>
         )}

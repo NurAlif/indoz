@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Markdown from 'react-markdown';
 import { cn } from '../../utils/cn';
+import GlossaryTooltip from '../common/GlossaryTooltip';
 
 // Card components for visual layouts
 const RequirementCard = ({ icon, title, items, color = 'info' }) => {
@@ -94,7 +95,7 @@ const TimelineCard = ({ period, items, icon }) => (
 const renderSyaratWHV = () => (
   <div className="space-y-6">
     <p className="text-gray-700 leading-relaxed">
-      Untuk mendapatkan visa WHV Subclass 417, Anda harus memenuhi syarat-syarat berikut:
+      Untuk mendapatkan visa <GlossaryTooltip term="WHV" /> Subclass 417, Anda harus memenuhi syarat-syarat berikut:
     </p>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       <RequirementCard
@@ -144,7 +145,7 @@ const renderBiaya = () => (
         category="💳 Visa Application"
         color="info"
         items={[
-          "Biaya aplikasi WHV: AUD 510",
+          <span>Biaya aplikasi <GlossaryTooltip term="WHV" />: AUD 510</span>,
           "Asuransi wajib: AUD 300-500/tahun"
         ]}
       />
@@ -314,7 +315,7 @@ const renderImigrasi = () => (
           </li>
           <li className="flex items-start gap-2">
             <span className="text-warning mt-0.5">▸</span>
-            <span>Sebutkan datang dengan WHV untuk holiday & work</span>
+            <span>Sebutkan datang dengan <GlossaryTooltip term="WHV" /> untuk holiday & work</span>
           </li>
           <li className="flex items-start gap-2">
             <span className="text-warning mt-0.5">▸</span>
@@ -363,7 +364,7 @@ const renderAkomodasi = () => (
         <ul className="space-y-1.5 text-sm text-gray-700">
           <li className="flex items-start gap-2">
             <span className="text-blue-500 mt-0.5">✓</span>
-            <span>Paling populer untuk pemegang WHV</span>
+            <span>Paling populer untuk pemegang <GlossaryTooltip term="WHV" /></span>
           </li>
           <li className="flex items-start gap-2">
             <span className="text-blue-500 mt-0.5">✓</span>
@@ -638,14 +639,14 @@ const renderMencariKerja = () => (
           <span className="text-2xl">👥</span>
           <div>
             <p className="font-semibold text-sm">Facebook Groups</p>
-            <p className="text-xs text-gray-600">WHV Australia Groups</p>
+            <p className="text-xs text-gray-600"><GlossaryTooltip term="WHV" /> Australia Groups</p>
           </div>
         </a>
       </div>
     </div>
 
     <div>
-      <h4 className="font-bold text-gray-900 mb-4">💼 Jenis Kerja Populer untuk WHV</h4>
+      <h4 className="font-bold text-gray-900 mb-4">💼 Jenis Kerja Populer untuk <GlossaryTooltip term="WHV" /></h4>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-xl p-5 border border-amber-200">
           <h5 className="font-bold text-amber-900 mb-2">☕ Hospitality</h5>
@@ -659,7 +660,7 @@ const renderMencariKerja = () => (
 
         <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-5 border border-green-200">
           <h5 className="font-bold text-green-900 mb-2">🌾 Farm Work</h5>
-          <p className="text-xs text-green-700 mb-3">88 Days Eligible ✓</p>
+          <p className="text-xs text-green-700 mb-3"><GlossaryTooltip term="88 Days" /> Eligible ✓</p>
           <ul className="space-y-1.5 text-sm text-gray-700">
             <li>• Fruit Picking, Packing, Farm Hand</li>
             <li>• Gaji: Rp 170rb - 300rb/jam</li>
@@ -680,7 +681,7 @@ const renderMencariKerja = () => (
     </div>
 
     <div className="bg-success/10 border-l-4 border-success p-4 rounded-r-lg text-sm text-gray-700">
-      <strong>💡 Tip:</strong> Untuk 88 days, cari kerja di regional area!
+      <strong>💡 Tip:</strong> Untuk <GlossaryTooltip term="88 Days" />, cari kerja di regional area!
     </div>
   </div>
 );
@@ -692,8 +693,8 @@ const renderExtensionWHV = () => (
         <span className="text-2xl">✅</span> Syarat Utama
       </h4>
       <ul className="space-y-2">
-        <ChecklistItem checked text="Selesaikan 88 days regional work" />
-        <ChecklistItem checked text="Apply sebelum WHV pertama expired" />
+        <ChecklistItem checked text={<span>Selesaikan <GlossaryTooltip term="88 Days" /> regional work</span>} />
+        <ChecklistItem checked text={<span>Apply sebelum <GlossaryTooltip term="WHV" /> pertama expired</span>} />
         <ChecklistItem checked text="Usia masih di bawah 31 tahun" />
       </ul>
     </div>
@@ -701,7 +702,7 @@ const renderExtensionWHV = () => (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div className="bg-white rounded-xl p-6 border border-gray-200">
         <h4 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-          <span className="text-2xl">📅</span> Apa itu 88 Days?
+          <span className="text-2xl">📅</span> Apa itu <GlossaryTooltip term="88 Days" />?
         </h4>
         <ul className="space-y-2 text-sm text-gray-700">
           <li className="flex items-start gap-2">
@@ -780,7 +781,7 @@ const renderPathwayPR = () => (
         </div>
         <ul className="space-y-1 text-sm text-gray-700">
           <li>• Regional area only</li>
-          <li>• 5 years visa (leading to PR)</li>
+          <li>• 5 years visa (leading to <GlossaryTooltip term="PR" />)</li>
           <li>• Butuh regional sponsorship</li>
           <li className="text-purple-700 font-semibold">• Lebih mudah daripada 189/190</li>
         </ul>
@@ -800,7 +801,7 @@ const renderPathwayPR = () => (
     </div>
 
     <div className="bg-info/10 border-l-4 border-info p-4 rounded-r-lg text-sm text-gray-700">
-      <strong>💡 Tip:</strong> Kalkulator poin PR ada di menu IndOz+ (Premium)
+      <strong>💡 Tip:</strong> Kalkulator poin <GlossaryTooltip term="PR" /> ada di menu IndOz+ (Premium)
     </div>
   </div>
 );

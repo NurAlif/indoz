@@ -1,0 +1,10 @@
+
+> indoz-work@0.0.0 dev
+> vite
+
+
+  VITE v5.4.21  ready in 294 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+9:10:18 PM [vite] hmr update /src/components/premium/PRCalculator/VisaSelector.jsx, /src/index.css

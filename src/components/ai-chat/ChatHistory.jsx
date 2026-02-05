@@ -3,6 +3,29 @@ import { CheckCheck } from 'lucide-react';
 import { cn } from '../../utils/cn';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import GlossaryTooltip from '../common/GlossaryTooltip';
+
+const wrapWithGlossary = (text) => {
+  if (typeof text !== 'string') return text;
+  const regex = /(WHV|SDUWHV|88 Days|PR)/g;
+  const parts = text.split(regex);
+  if (parts.length === 1) return text;
+  return parts.map((part, i) => {
+    if (['WHV', 'SDUWHV', '88 Days', 'PR'].includes(part)) {
+      return <GlossaryTooltip key={i} term={part} />;
+    }
+    return part;
+  });
+};
+
+const ProcessChildren = ({ children }) => {
+  return React.Children.map(children, (child) => {
+    if (typeof child === 'string') {
+      return wrapWithGlossary(child);
+    }
+    return child;
+  });
+};
 
 const ChatHistory = ({ messages = [], isTyping = false }) => {
   return (
@@ -44,11 +67,11 @@ const ChatHistory = ({ messages = [], isTyping = false }) => {
               <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 components={{
-                  p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
-                  ul: ({ children }) => <ul className="list-disc list-inside mb-2 space-y-1">{children}</ul>,
-                  ol: ({ children }) => <ol className="list-decimal list-inside mb-2 space-y-1">{children}</ol>,
-                  li: ({ children }) => <li className="">{children}</li>,
-                  strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
+                  p: ({ children }) => <p className="mb-2 last:mb-0"><ProcessChildren>{children}</ProcessChildren></p>,
+                  ul: ({ children }) => <ul className="list-disc list-inside mb-2 space-y-1"><ProcessChildren>{children}</ProcessChildren></ul>,
+                  ol: ({ children }) => <ol className="list-decimal list-inside mb-2 space-y-1"><ProcessChildren>{children}</ProcessChildren></ol>,
+                  li: ({ children }) => <li className=""><ProcessChildren>{children}</ProcessChildren></li>,
+                  strong: ({ children }) => <strong className="font-semibold"><ProcessChildren>{children}</ProcessChildren></strong>,
                   a: ({ children, href }) => (
                     <a
                       href={href}

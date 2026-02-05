@@ -1,5 +1,5 @@
 import React from 'react';
-import InlineTooltip from './InlineTooltip';
+import GlossaryTooltip from '../../common/GlossaryTooltip';
 
 const CriteriaForm = ({ criteria, onChange }) => {
   const handleChange = (e) => {
@@ -12,7 +12,7 @@ const CriteriaForm = ({ criteria, onChange }) => {
       <label className="block text-sm font-medium text-gray-700 mb-1">
         <span className="flex items-center gap-1">
             {label}
-            {tooltipTerm && <InlineTooltip term={tooltipTerm} definition={tooltipDef} />}
+            {tooltipTerm && <GlossaryTooltip term={tooltipTerm} definition={tooltipDef} />}
         </span>
       </label>
       <select
