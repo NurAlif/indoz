@@ -1,6 +1,10 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import TopBar from './components/layout/TopBar';
 import Footer from './components/layout/Footer';
+import { useOnboarding } from './hooks/useOnboarding';
+import OnboardingModal from './components/onboarding/OnboardingModal';
+import AIChatContainer from './components/ai-chat/AIChatContainer';
+import PremiumRoute from './components/premium/PremiumRoute';
 
 // Placeholder pages - other agents will build these
 const AIChat = () => <AIChatContainer />;
@@ -12,18 +16,18 @@ const Login = () => <div className="pt-20 px-4">Login Page</div>;
 
 function AppContent() {
   const { isOpen, handleClose } = useOnboarding();
+  const location = useLocation();
+  const isPremium = location.pathname.startsWith('/premium');
 
   return (
     <>
-      <TopBar />
+      {!isPremium && <TopBar />}
 
-      <main className="flex-grow">
+      <main className={!isPremium ? "flex-grow" : "flex-grow min-h-screen bg-gray-50"}>
         <Routes>
           <Route path="/" element={<AIChat />} />
           <Route path="/chat" element={<AIChat />} />
           <Route path="/jobs" element={<div className="pt-16"><JobSearchContainer /></div>} />
-          <Route path="/resume" element={<ResumeChecker />} />
-          <Route path="/jobs" element={<JobSearch />} />
           <Route
             path="/resume"
             element={
@@ -34,12 +38,13 @@ function AppContent() {
           />
           <Route path="/guides" element={<Guides />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/premium" element={<PremiumRoute />} />
         </Routes>
       </main>
 
-      <Footer />
+      {!isPremium && <Footer />}
 
-      <OnboardingModal isOpen={isOpen} onClose={handleClose} />
+      {!isPremium && <OnboardingModal isOpen={isOpen} onClose={handleClose} />}
     </>
   );
 }
