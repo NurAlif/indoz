@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import TopBar from './components/layout/TopBar';
 import Footer from './components/layout/Footer';
+import OnboardingModal from './components/onboarding/OnboardingModal';
+import { useOnboarding } from './hooks/useOnboarding';
 
 // Placeholder pages - other agents will build these
 const AIChat = () => <div className="pt-20 px-4">AI Chat - Agent 04 will build this</div>;
@@ -9,24 +11,36 @@ const ResumeChecker = () => <div className="pt-20 px-4">Cek Resume - Agent 06 wi
 const Guides = () => <div className="pt-20 px-4">Panduan Lengkap - Agent 07 will build this</div>;
 const Login = () => <div className="pt-20 px-4">Login Page</div>;
 
+function AppContent() {
+  const { isOpen, handleClose } = useOnboarding();
+
+  return (
+    <>
+      <TopBar />
+
+      <main className="flex-grow">
+        <Routes>
+          <Route path="/" element={<AIChat />} />
+          <Route path="/chat" element={<AIChat />} />
+          <Route path="/jobs" element={<JobSearch />} />
+          <Route path="/resume" element={<ResumeChecker />} />
+          <Route path="/guides" element={<Guides />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </main>
+
+      <Footer />
+
+      <OnboardingModal isOpen={isOpen} onClose={handleClose} />
+    </>
+  );
+}
+
 function App() {
   return (
     <BrowserRouter>
       <div className="min-h-screen bg-gray-50 flex flex-col">
-        <TopBar />
-
-        <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<AIChat />} />
-            <Route path="/chat" element={<AIChat />} />
-            <Route path="/jobs" element={<JobSearch />} />
-            <Route path="/resume" element={<ResumeChecker />} />
-            <Route path="/guides" element={<Guides />} />
-            <Route path="/login" element={<Login />} />
-          </Routes>
-        </main>
-
-        <Footer />
+        <AppContent />
       </div>
     </BrowserRouter>
   );
