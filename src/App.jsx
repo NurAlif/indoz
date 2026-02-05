@@ -5,6 +5,7 @@ import { useOnboarding } from './hooks/useOnboarding';
 import OnboardingModal from './components/onboarding/OnboardingModal';
 import AIChatContainer from './components/ai-chat/AIChatContainer';
 import PremiumRoute from './components/premium/PremiumRoute';
+import FloatingChatWidget from './components/common/FloatingChatWidget';
 
 // Placeholder pages - other agents will build these
 const AIChat = () => <AIChatContainer />;
@@ -46,6 +47,7 @@ function AppContent() {
       {!isPremium && !isChat && <Footer />}
 
       {!isPremium && <OnboardingModal isOpen={isOpen} onClose={handleClose} />}
+      {!isChat && <FloatingChatWidget />}
     </>
   );
 }
