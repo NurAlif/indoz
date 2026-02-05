@@ -63,11 +63,15 @@ const PremiumDashboard = ({ onLogout = () => {} }) => {
       strategy: <FutureStrategy onBack={() => setActiveFeature(null)} />,
     };
 
-    return featureComponents[activeFeature] || null;
+    return (
+      <div className="pt-24 px-4 pb-8 min-h-screen bg-gray-50">
+        {featureComponents[activeFeature] || null}
+      </div>
+    );
   }
 
   return (
-    <div className="max-w-6xl mx-auto py-8 px-4">
+    <div className="max-w-6xl mx-auto pt-24 pb-8 px-4 min-h-screen">
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>

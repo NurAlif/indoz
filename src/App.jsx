@@ -22,9 +22,9 @@ function AppContent() {
 
   return (
     <>
-      {!isPremium && !isChat && <TopBar />}
+      {!isChat && <TopBar />}
 
-      <main className={!isPremium ? "flex-grow" : "flex-grow min-h-screen bg-gray-50"}>
+      <main className="flex-grow">
         <Routes>
           <Route path="/" element={<AIChat />} />
           <Route path="/chat" element={<AIChat />} />
@@ -43,7 +43,7 @@ function AppContent() {
         </Routes>
       </main>
 
-      {!isPremium && !isChat && <Footer />}
+      {!isChat && <Footer />}
 
       {!isPremium && <OnboardingModal isOpen={isOpen} onClose={handleClose} />}
     </>
