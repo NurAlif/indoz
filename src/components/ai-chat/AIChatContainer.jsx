@@ -1,75 +1,48 @@
-import React, { useState, useEffect } from 'react';
-import { Send, X, Menu } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import {
+  Users,
+  RotateCcw,
+  ShieldCheck,
+  GraduationCap,
+  Briefcase,
+  DollarSign,
+  PlusCircle,
+  Mic,
+  Send
+} from 'lucide-react';
 import { generateAIResponse } from '../../services/googleAI';
-import AIProfile from './AIProfile';
-import ChatTabMenu from './ChatTabMenu';
 import ChatHistory from './ChatHistory';
-import Button from '../common/Button';
+import { cn } from '../../utils/cn';
 
 const AIChatContainer = () => {
   // Initial static AI message
   const initialAI = {
     role: 'assistant',
-    content: `Halo! Saya Ollie, asisten AI yang siap membantu Anda dengan perjalanan Working Holiday Visa (WHV) dan Permanent Residency (PR) ke Australia.
-
-Saya punya pengalaman 5 tahun sebagai WHV di Australia dan sudah melalui proses WHV hingga PR. Ada yang bisa saya bantu hari ini?
-
-Misalnya:
-- Anda mau tanya tentang cara apply WHV?
-- Bingung cari kerja di Australia?
-- Mau tahu tentang 88 days regional work?
-- Atau sedang hitung-hitung poin untuk PR?
-
-Silakan tanyakan apa saja! 😊`
+    content: `Halo! I'm Ollie 2.0. 👋\n\nHow can I help you with your move to Australia today? I can assist with:\n• Visa requirements (WHV, SDUWHV)\n• Finding a job in hospitality or farm work\n• Accommodation tips`
   };
 
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
-  const [showTabMenu, setShowTabMenu] = useState(true);
+  const chatEndRef = useRef(null);
 
-  const handleSuggestionClick = async (query) => {
-    if (isGenerating) return;
+  const displayMessages = messages.length === 0 ? [initialAI] : [initialAI, ...messages];
 
-    const userMessage = { role: 'user', content: query };
-    setMessages((prev) => [...prev, userMessage]);
-    setInput('');
-    setIsGenerating(true);
-    setShowTabMenu(false);
-
-    try {
-      const response = await generateAIResponse(query, messages);
-      const assistantMessage = { role: 'assistant', content: response };
-      setMessages((prev) => [...prev, assistantMessage]);
-    } catch (error) {
-      const errorMessage = {
-        role: 'assistant',
-        content: 'Maaf, terjadi kesalahan. Silakan coba lagi atau hubungi support jika masalah berlanjut.'
-      };
-      setMessages((prev) => [...prev, errorMessage]);
-    } finally {
-      setIsGenerating(false);
-    }
+  const scrollToBottom = () => {
+    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // Always show menu when no user messages
   useEffect(() => {
-    if (messages.length === 0) {
-      setShowTabMenu(true);
-    }
-  }, [messages.length]);
-
-  // Combine initial AI message with user messages for display
-  const displayMessages = messages.length === 0 ? [initialAI] : [initialAI, ...messages];
+    scrollToBottom();
+  }, [messages, isGenerating]);
 
   const handleSend = async () => {
     if (!input.trim() || isGenerating) return;
 
-    const userMessage = { role: 'user', content: input };
+    const userMessage = { role: 'user', content: input, timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) };
     setMessages((prev) => [...prev, userMessage]);
     setInput('');
     setIsGenerating(true);
-    setShowTabMenu(false);
 
     try {
       const response = await generateAIResponse(input, messages);
@@ -78,7 +51,7 @@ Silakan tanyakan apa saja! 😊`
     } catch (error) {
       const errorMessage = {
         role: 'assistant',
-        content: 'Maaf, terjadi kesalahan. Silakan coba lagi atau hubungi support jika masalah berlanjut.'
+        content: 'Maaf, terjadi kesalahan. Silakan coba lagi.'
       };
       setMessages((prev) => [...prev, errorMessage]);
     } finally {
@@ -86,13 +59,29 @@ Silakan tanyakan apa saja! 😊`
     }
   };
 
-  const handleClearChat = () => {
-    setMessages([]);
-    setShowTabMenu(true);
+  const handleSuggestionClick = (text) => {
+    if (isGenerating) return;
+
+    // Send immediately to match expected UX
+    const userMessage = { role: 'user', content: text, timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) };
+    setMessages((prev) => [...prev, userMessage]);
+    setInput('');
+    setIsGenerating(true);
+
+    // We need to call API effectively
+    generateAIResponse(text, messages).then(response => {
+       setMessages(prev => [...prev, { role: 'assistant', content: response }]);
+       setIsGenerating(false);
+    }).catch(() => {
+       setMessages(prev => [...prev, { role: 'assistant', content: 'Error.' }]);
+       setIsGenerating(false);
+    });
   };
 
-  const toggleTabMenu = () => {
-    setShowTabMenu((prev) => !prev);
+  // Refactored handleSuggestionClick to reuse logic if possible, but inline is fine for now.
+
+  const handleClearChat = () => {
+    setMessages([]);
   };
 
   const handleKeyPress = (e) => {
@@ -102,92 +91,138 @@ Silakan tanyakan apa saja! 😊`
     }
   };
 
+  const SUGGESTIONS = [
+    { icon: ShieldCheck, text: 'Cek Syarat WHV', color: 'text-indo-red' },
+    { icon: GraduationCap, text: 'Info Kuliah S2', color: 'text-amber-500' },
+    { icon: Briefcase, text: 'Cari Kerja Farm', color: 'text-blue-500' },
+    { icon: DollarSign, text: 'Biaya Hidup', color: 'text-green-600' },
+  ];
+
   return (
-    <div className="h-screen flex flex-col bg-gray-50 overflow-hidden">
-      {/* Top Section - Fixed */}
-      <div className="flex-shrink-0 bg-white border-b border-gray-200">
-        <div className="max-w-4xl mx-auto px-4 py-2">
-          {/* Header */}
-          <div className="flex items-center justify-between mb-2">
-            <h1 className="text-lg font-bold text-gray-900">AI Chat</h1>
-            <div className="flex gap-2">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={toggleTabMenu}
-                icon={<Menu size={14} />}
-                className={!showTabMenu ? 'text-gray-600' : 'text-indo-red bg-indo-red/5'}
-                disabled={isGenerating}
-              >
-                Menu
-              </Button>
-              {messages.length > 0 && (
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={handleClearChat}
-                  icon={<X size={14} />}
+    <div className="h-screen flex flex-col overflow-hidden bg-gray-50 text-gray-900 font-sans">
+      {/* Header */}
+      <header className="flex shrink-0 items-center justify-between whitespace-nowrap border-b border-gray-200 bg-white px-6 py-3 z-20 shadow-sm relative">
+        <div className="flex items-center gap-4 text-gray-900">
+          <div className="w-8 h-8 text-indo-red flex items-center justify-center">
+            <Users size={32} />
+          </div>
+          <h2 className="text-gray-900 text-xl font-bold leading-tight tracking-tight">IndOz.work</h2>
+        </div>
+        <div className="flex flex-1 justify-end gap-6 items-center">
+          <button onClick={() => window.location.href='/'} className="hidden md:flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 px-4 bg-indo-red text-white text-sm font-bold leading-normal hover:bg-red-700 transition-colors shadow-sm">
+            <span className="truncate">Back to Home</span>
+          </button>
+          <div className="flex items-center gap-3">
+            <span className="text-sm font-medium hidden sm:block">Dian S.</span>
+            <div
+              className="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-10 h-10 border-2 border-indo-red/20"
+              style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuDOzNwu3U-JF-Is5iYg_QQSwe9Ko1bN0iNUdansVIl0OCFwp_LY8d8DThiKlOBLIvoqvcHOHa9swMZhTdnSV1r2a9pN5ALNr8ZhfI4qIbEEB7fJ5VbGl_MjvsZKzLRYYJaIdPpTxOoMBszhJlLD8FNY7McLLaY2M1cMhkFMNIkJpiVx5KOY0zNRRrcwEDTc4yGV5V21I1MiWVJJZeR21unsCG4wlfF8pqBIHe_tLdOGN6FkviUlgf9eskLKrAH98WqZIZsbfdhMqZzv")' }}
+            ></div>
+          </div>
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <div className="flex flex-1 overflow-hidden w-full justify-center bg-gray-50 relative">
+        <main className="w-full max-w-5xl h-full flex flex-col bg-white shadow-xl shadow-gray-200/60 border-x border-gray-200">
+
+          {/* Ollie Header */}
+          <div className="shrink-0 px-6 py-4 flex items-center justify-between bg-white border-b border-gray-100 z-10 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.05)]">
+            <div className="flex items-center gap-4">
+              <div className="relative">
+                <div
+                  className="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-12 h-12 shadow-sm border border-gray-100"
+                  style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuC5JWg3wVK1W01zF04ccC60xKNoj40pEGgog9eUFL8NDDnNsOvJVjiaXGXv8um7-4knjRO4UAj6_kPnol3_f8PD8X716oo58hDDlZe1Le1MwYEJClpYT0B5azlJofpGz9oR8Imbz2IL7WprMSlE8HIVGzLuxj0egKkhFIE-lyreG5q-8R_i26Cu5kWjKA7sIjcszBDqmdqQV0FNgJ-DGDMQ6YV3l_FW0iGnv_zwPKhWaB5nYsK-D0DRQfg-tGO7YkJ0yrvHrnpgKeg3")' }}
+                ></div>
+                <span className="absolute bottom-0 right-0 block h-3.5 w-3.5 rounded-full ring-2 ring-white bg-green-500"></span>
+              </div>
+              <div className="flex flex-col">
+                <div className="flex items-center gap-2">
+                  <h1 className="text-lg font-bold text-gray-900">Ollie 2.0</h1>
+                  <span className="px-2 py-0.5 rounded text-[10px] bg-amber-50 text-amber-600 font-bold uppercase tracking-wider border border-amber-200">PRO</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                  </span>
+                  <span className="text-xs font-medium text-green-600">Online</span>
+                </div>
+              </div>
+            </div>
+            <button
+              onClick={handleClearChat}
+              className="group flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-500 hover:text-indo-red hover:bg-red-50 rounded-lg transition-all border border-transparent hover:border-red-100"
+              title="Clear conversation"
+            >
+              <RotateCcw className="group-hover:-rotate-180 transition-transform duration-500" size={20} />
+              <span className="hidden sm:inline">Reset Chat</span>
+            </button>
+          </div>
+
+          {/* Chat History */}
+          <div className="flex-1 overflow-y-auto p-4 md:p-8 flex flex-col gap-6" id="chat-container">
+            <div className="flex justify-center mb-2">
+              <span className="text-xs font-medium text-gray-400 bg-gray-50 px-4 py-1.5 rounded-full border border-gray-100 shadow-sm">
+                Today, {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+              </span>
+            </div>
+
+            <ChatHistory messages={displayMessages} isTyping={isGenerating} />
+            <div ref={chatEndRef} />
+          </div>
+
+          {/* Bottom Area: Suggestions & Input */}
+          <div className="shrink-0 p-4 md:px-8 md:pb-8 bg-white border-t border-gray-100 z-10">
+            <div className="max-w-4xl mx-auto flex flex-col gap-3">
+              {/* Suggestions */}
+              <div className="flex gap-2 overflow-x-auto pb-2 no-scrollbar mask-gradient">
+                {SUGGESTIONS.map((suggestion, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleSuggestionClick(suggestion.text)}
+                    disabled={isGenerating}
+                    className="shrink-0 flex items-center gap-2 px-3 py-1.5 bg-gray-50 rounded-lg border border-gray-200 shadow-sm text-sm font-medium text-gray-700 hover:bg-white hover:border-indo-red/30 transition-all"
+                  >
+                    <suggestion.icon className={suggestion.color} size={18} />
+                    {suggestion.text}
+                  </button>
+                ))}
+              </div>
+
+              {/* Input */}
+              <div className="relative flex items-end gap-2 bg-white rounded-2xl border border-gray-200 shadow-lg shadow-gray-100/50 p-2 focus-within:ring-2 focus-within:ring-indo-red/20 focus-within:border-indo-red transition-all">
+                <button className="p-2 text-gray-400 hover:text-indo-red transition-colors rounded-xl hover:bg-gray-50">
+                  <PlusCircle size={24} />
+                </button>
+                <textarea
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                  className="flex-1 max-h-32 min-h-[44px] py-2.5 bg-transparent border-none focus:ring-0 text-gray-900 placeholder:text-gray-400 resize-none text-base"
+                  placeholder="Type your message to Ollie..."
+                  rows={1}
                   disabled={isGenerating}
+                />
+                <button className="p-2 text-gray-400 hover:text-indo-red transition-colors rounded-xl hover:bg-gray-50">
+                  <Mic size={24} />
+                </button>
+                <button
+                  onClick={handleSend}
+                  disabled={!input.trim() || isGenerating}
+                  className={cn(
+                    "p-2 rounded-xl shadow-md shadow-red-200 transition-transform active:scale-95 flex items-center justify-center",
+                    !input.trim() || isGenerating ? "bg-gray-300 cursor-not-allowed" : "bg-indo-red text-white hover:bg-red-700"
+                  )}
                 >
-                  Clear
-                </Button>
-              )}
+                  <Send size={24} />
+                </button>
+              </div>
+
+              <p className="text-center text-xs text-gray-400">Ollie can make mistakes. Please verify important visa information.</p>
             </div>
           </div>
-
-          {/* Profile */}
-          <AIProfile isCompact={messages.length > 0} />
-        </div>
-      </div>
-
-      {/* Middle Section - Scrollable */}
-      <div className="flex-1 overflow-y-auto">
-        <div className="max-w-4xl mx-auto px-4 py-2">
-          {/* Chat History - Always visible */}
-          <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
-            <ChatHistory messages={displayMessages} isTyping={isGenerating} />
-
-            {/* Tab Menu - Nested inside chat container, below AI message */}
-            {showTabMenu && messages.length === 0 && (
-              <div className="border-t border-gray-200">
-                <ChatTabMenu onSuggestionClick={handleSuggestionClick} disabled={isGenerating} />
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-
-      {/* Bottom Section - Fixed */}
-      <div className="flex-shrink-0 bg-white border-t border-gray-200">
-        <div className="max-w-4xl mx-auto px-4 py-3">
-          {/* Input */}
-          <div className="flex gap-2">
-            <textarea
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder="Ketik pesan..."
-              rows={1}
-              disabled={isGenerating}
-              className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indo-red focus:border-transparent resize-none disabled:bg-gray-100 disabled:cursor-not-allowed text-sm"
-            />
-            <Button
-              onClick={handleSend}
-              disabled={!input.trim() || isGenerating}
-              variant="primary"
-              size="sm"
-              className="self-end"
-            >
-              {isGenerating ? (
-                '...'
-              ) : (
-                <>
-                  <Send size={14} />
-                </>
-              )}
-            </Button>
-          </div>
-        </div>
+        </main>
       </div>
     </div>
   );

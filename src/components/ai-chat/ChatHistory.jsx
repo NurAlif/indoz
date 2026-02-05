@@ -1,84 +1,105 @@
 import React from 'react';
-import { User, Bot } from 'lucide-react';
+import { CheckCheck } from 'lucide-react';
 import { cn } from '../../utils/cn';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
 const ChatHistory = ({ messages = [], isTyping = false }) => {
   return (
-    <div className="min-h-[300px] max-h-[calc(100vh-280px)] overflow-y-auto space-y-3 p-3">
+    <>
       {messages.map((message, index) => (
         <div
           key={index}
           className={cn(
-            "flex gap-2",
-            message.role === 'user' ? 'justify-end' : 'justify-start'
+            "flex items-end gap-3 max-w-3xl w-full group",
+            message.role === 'user' ? "ml-auto justify-end" : "mr-auto"
           )}
         >
+          {/* Assistant Avatar (Left) */}
           {message.role === 'assistant' && (
-            <div className="flex-shrink-0 w-6 h-6 bg-indo-red rounded-full flex items-center justify-center">
-              <Bot size={14} className="text-white" />
-            </div>
+            <div
+              className="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-8 h-8 shadow-sm border border-gray-200 shrink-0 mb-1"
+              style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuC5JWg3wVK1W01zF04ccC60xKNoj40pEGgog9eUFL8NDDnNsOvJVjiaXGXv8um7-4knjRO4UAj6_kPnol3_f8PD8X716oo58hDDlZe1Le1MwYEJClpYT0B5azlJofpGz9oR8Imbz2IL7WprMSlE8HIVGzLuxj0egKkhFIE-lyreG5q-8R_i26Cu5kWjKA7sIjcszBDqmdqQV0FNgJ-DGDMQ6YV3l_FW0iGnv_zwPKhWaB5nYsK-D0DRQfg-tGO7YkJ0yrvHrnpgKeg3")' }}
+            ></div>
           )}
 
-          <div
-            className={cn(
-              "max-w-[85%] rounded-xl px-3 py-2 prose prose-sm max-w-none",
-              message.role === 'user'
-                ? "bg-indo-red text-white prose-invert"
-                : "bg-gray-100 text-gray-900"
+          <div className={cn(
+            "flex flex-col gap-1 max-w-[85%] md:max-w-[75%]",
+            message.role === 'user' ? "items-end" : "items-start"
+          )}>
+            {/* Assistant Name Label */}
+            {message.role === 'assistant' && (
+              <span className="text-[11px] font-bold text-gray-400 ml-1">Ollie</span>
             )}
-          >
-            <ReactMarkdown
-              remarkPlugins={[remarkGfm]}
-              components={{
-                p: ({ children }) => <p className="text-sm mb-2 last:mb-0">{children}</p>,
-                ul: ({ children }) => <ul className="list-disc list-inside mb-2 space-y-1">{children}</ul>,
-                ol: ({ children }) => <ol className="list-decimal list-inside mb-2 space-y-1">{children}</ol>,
-                li: ({ children }) => <li className="text-sm">{children}</li>,
-                strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
-                h1: ({ children }) => <h1 className="text-lg font-bold mb-2">{children}</h1>,
-                h2: ({ children }) => <h2 className="text-base font-bold mb-2">{children}</h2>,
-                h3: ({ children }) => <h3 className="text-sm font-bold mb-1">{children}</h3>,
-                code: ({ children }) => (
-                  <code className="bg-gray-200 px-1 py-0.5 rounded text-xs font-mono">
-                    {children}
-                  </code>
-                ),
-                a: ({ children, href }) => (
-                  <a href={href} className="text-indo-red hover:underline" target="_blank" rel="noopener noreferrer">
-                    {children}
-                  </a>
-                ),
-              }}
+
+            {/* Message Bubble */}
+            <div
+              className={cn(
+                "p-5 rounded-2xl shadow-sm text-[15px] leading-relaxed relative prose prose-sm max-w-none",
+                message.role === 'user'
+                  ? "bg-indo-red text-white rounded-br-none shadow-red-100 prose-invert"
+                  : "bg-[#fafafa] text-gray-900 rounded-tl-none border border-gray-100"
+              )}
             >
-              {message.content}
-            </ReactMarkdown>
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                components={{
+                  p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
+                  ul: ({ children }) => <ul className="list-disc list-inside mb-2 space-y-1">{children}</ul>,
+                  ol: ({ children }) => <ol className="list-decimal list-inside mb-2 space-y-1">{children}</ol>,
+                  li: ({ children }) => <li className="">{children}</li>,
+                  strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
+                  a: ({ children, href }) => (
+                    <a
+                      href={href}
+                      className={message.role === 'user' ? "text-white underline decoration-white/50" : "text-indo-red hover:underline"}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {children}
+                    </a>
+                  ),
+                }}
+              >
+                {message.content}
+              </ReactMarkdown>
+            </div>
+
+            {/* User Metadata (Timestamp & Check) */}
+            {message.role === 'user' && (
+              <div className="flex items-center gap-1 mr-1">
+                <p className="text-gray-300 text-[10px]">{message.timestamp || "Just now"}</p>
+                <CheckCheck size={12} className="text-gray-300" />
+              </div>
+            )}
           </div>
 
+          {/* User Avatar (Right) */}
           {message.role === 'user' && (
-            <div className="flex-shrink-0 w-6 h-6 bg-oz-gold rounded-full flex items-center justify-center">
-              <User size={14} className="text-white" />
-            </div>
+            <div
+              className="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-8 h-8 border-2 border-white shadow-sm shrink-0 mb-6"
+              style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuDg02g-iHRAkYeq01tlMAmVG-TEf2mAt6eXU-JjJV5XDLEwvg5UxcJDjEZF7Dq483VqPWcbwk5xZTvS06fhzTj3_Ae7nmj6OUn2NLiaxhBN3c95tQwk5z7zHvwL2gudix7VMj4jQ5gxhzV-PiKbS34ps8kr5qh0NMLBXq-PbUNDf5nwr5qLwsCF8yn0BlegMwH8Ijt_k86aLAQ2ugyb4Y0wUJ-AMHCP5nrCpZ2UVqC2ijHy_tesqwp3yDzX4hrVD7UdXU4TmwnsDifd")' }}
+            ></div>
           )}
         </div>
       ))}
 
       {isTyping && (
-        <div className="flex gap-2 justify-start">
-          <div className="flex-shrink-0 w-6 h-6 bg-indo-red rounded-full flex items-center justify-center">
-            <Bot size={14} className="text-white" />
-          </div>
-          <div className="bg-gray-100 rounded-xl px-3 py-2">
-            <div className="flex gap-1">
-              <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-              <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-              <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+        <div className="flex items-end gap-3 max-w-3xl mr-auto w-full animate-in fade-in">
+          <div
+            className="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-8 h-8 shadow-sm border border-gray-200 shrink-0 mb-1"
+            style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuC5JWg3wVK1W01zF04ccC60xKNoj40pEGgog9eUFL8NDDnNsOvJVjiaXGXv8um7-4knjRO4UAj6_kPnol3_f8PD8X716oo58hDDlZe1Le1MwYEJClpYT0B5azlJofpGz9oR8Imbz2IL7WprMSlE8HIVGzLuxj0egKkhFIE-lyreG5q-8R_i26Cu5kWjKA7sIjcszBDqmdqQV0FNgJ-DGDMQ6YV3l_FW0iGnv_zwPKhWaB5nYsK-D0DRQfg-tGO7YkJ0yrvHrnpgKeg3")' }}
+          ></div>
+          <div className="flex flex-col gap-1 items-start">
+            <div className="px-4 py-3 bg-[#fafafa] rounded-2xl rounded-tl-none shadow-sm border border-gray-100 flex items-center gap-1">
+              <span className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
+              <span className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
+              <span className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
             </div>
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

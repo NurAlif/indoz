@@ -18,10 +18,11 @@ function AppContent() {
   const { isOpen, handleClose } = useOnboarding();
   const location = useLocation();
   const isPremium = location.pathname.startsWith('/premium');
+  const isChat = location.pathname === '/' || location.pathname === '/chat';
 
   return (
     <>
-      {!isPremium && <TopBar />}
+      {!isPremium && !isChat && <TopBar />}
 
       <main className={!isPremium ? "flex-grow" : "flex-grow min-h-screen bg-gray-50"}>
         <Routes>
@@ -42,7 +43,7 @@ function AppContent() {
         </Routes>
       </main>
 
-      {!isPremium && <Footer />}
+      {!isPremium && !isChat && <Footer />}
 
       {!isPremium && <OnboardingModal isOpen={isOpen} onClose={handleClose} />}
     </>
