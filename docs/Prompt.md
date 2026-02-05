@@ -1,96 +1,1002 @@
-# **IndOz.work Reconstruction: UI/UX Design Prompt**
+# **IndOz.work Reconstruction: Complete Implementation Prompt**
 
-**Role:** Expert UI/UX Designer & Frontend Architect
+## **Phase 0: Critical Pre-Implementation Review**
+
+**BEFORE writing any code, you MUST:**
+
+1. **Read and analyze** all screenshots in the `docs/` folder to understand the existing features
+2. **Read thoroughly** `docs/final-evaluation.md` to understand:
+   - What works well (Good Practices) → KEEP these
+   - What are issues (Issues) → FIX these
+   - All suggestions (Saran) → IMPLEMENT these
+
+3. **Reference screenshots:**
+   - `first-page-ai-chat.png` - AI Chat initial state with tab menu
+   - `contoh-chat.png` - Chat conversation example
+   - `topbar.png` - Navigation structure
+   - `dropdown-tools-and-guides.png` - Dropdown menu
+   - `panduan-lengkap.png` - Complete guide with tabs
+   - `cari-lowongan.png` - Job search interface
+   - `cek-resume.png` - Resume checker
+   - `indoz-premium.png` - Premium landing page
+   - `indoz-dokumen.png` - Documents tracking
+   - `indoz-logboook.png` - 88 Days Logbook
+   - `indoz-pr-calc.png` - PR Calculator
+   - `indoz-exit-strategy.png` - Future strategy
+
+---
+
+## **Phase 1: Project Setup & Foundation**
+
+### **1.1 Project Context**
+
+**Role:** Expert UI/UX Designer & Full-Stack Frontend Architect
 
 **Project Name:** IndOz.work (Reconstruction Edition)
 
-**Goal:** Design a professional, dual-system web application that serves as a career and residential gateway for Indonesians moving to Australia.
+**Goal:** Build a professional, dual-system web application serving as a career and residential gateway for Indonesians moving to Australia.
 
-## **1\. Project Context & Brand Identity**
+**Mission:** "Gerbang Karir & Residensial Australia untuk Indonesia" (Career & Residential Gateway)
 
-**Mission:** "Gerbang Karir & Residensial Australia untuk Indonesia" (Career & Residential Gateway).
+**Target Audience:** Indonesians (Youth/Adults) seeking Working Holiday Visas (WHV) or Permanent Residency (PR)
 
-**Target Audience:** Indonesians (Youth/Adults) seeking Working Holiday Visas (WHV) or Permanent Residency (PR).
+**Tone:** Professional, reliable, empowering, yet friendly. Clear and accessible language (avoid excessive slang).
 
-**Tone:** Professional, reliable, empowering, yet friendly. Move away from excessive slang; aim for clear, high-trust visuals.
+### **1.2 Technology Stack**
 
-**Color Palette:**
+```
+- Framework: React 18 with Vite
+- Styling: Tailwind CSS
+- Icons: Lucide React
+- Utilities: clsx, tailwind-merge
+- AI API: Google AI Studio (API Key: AIzaSyCNI-frnjR5oBJjSCREteLXOhysAg8ahG8)
+- Language: JavaScript (JSX) or TypeScript (TSX)
+```
 
-* **Primary:** "Indo Red" (A bold, professional red) & "Oz Gold" (A warm, reliable gold).  
-* **Neutral:** Clean whites, light grays for backgrounds, high-contrast dark text.  
-* **Constraint:** Use specific CSS variables for these colors to ensure consistency across the app.
+### **1.3 Color Palette (CSS Variables)**
 
-## **2\. Navigation & Layout Structure**
+```css
+:root {
+  /* Primary Colors */
+  --indo-red: #C41E3A;        /* Bold, professional red */
+  --oz-gold: #D4AF37;         /* Warm, reliable gold */
 
-**Requirement:** The app must be split into two distinct systems with different layouts.
+  /* Semantic Colors */
+  --success: #10B981;         /* Green for success states */
+  --warning: #F59E0B;         /* Orange/amber for warnings */
+  --error: #EF4444;           /* Red for errors */
+  --info: #3B82F6;            /* Blue for information */
 
-### **A. Public System (The Landing Page)**
+  /* Neutral Colors */
+  --white: #FFFFFF;
+  --gray-50: #F9FAFB;
+  --gray-100: #F3F4F6;
+  --gray-200: #E5E7EB;
+  --gray-300: #D1D5DB;
+  --gray-400: #9CA3AF;
+  --gray-500: #6B7280;
+  --gray-600: #4B5563;
+  --gray-700: #374151;
+  --gray-800: #1F2937;
+  --gray-900: #111827;
+}
+```
 
-* **Top Navigation (Flattened):**  
-  * **Logo:** Modern "IndOz" wordmark (No flags).  
-  * **Menu Items:** Direct links to "AI Chat", "Cari Lowongan" (Jobs), "Cek Resume", "Panduan" (Guides).  
-  * **Action:** "Login/Masuk" button prominently displayed.  
-* **Mobile Responsiveness:** Hamburger menu must stack gracefully.  
-* **Breadcrumbs:** None. Use a simple "Back to Home" if deep linking.
+---
 
-### **B. Premium System (IndOz+ Dashboard)**
+## **Phase 2: Critical Requirements from Evaluation**
 
-* **Layout:** Sidebar or distinct top-bar layout separate from the public site.  
-* **Vibe:** "Control Center" / "Hub". Darker accents or boxed containers to denote a private, secure area.
+### **2.1 MUST FIX Issues (from final-evaluation.md)**
 
-## **3\. Key Page Specifications**
+#### **System Level:**
+- ❌ **REMOVE** `user-select: none` restriction - allow users to copy text
+- ❌ **REMOVE** `oncontextmenu="return false;"` - allow right-click for "open in new tab"
+- ✅ **ADD** Onboarding/Welcome modal explaining: WHV, SDUWHV, 88 days, app purpose
+- ✅ **ADD** Glossary section or tooltips for: WHV, SDUWHV, 88 days, PR
+- ✅ **ADD** Clear explanation of use case: planning vs tracking
 
-### **Page 1: Public Landing & Onboarding**
+#### **Navigation:**
+- ✅ **FLATTEN** navigation - expose all 4 main menu items directly in topbar
+- ❌ **REMOVE** "Tools & Guides" dropdown
+- ❌ **REMOVE** breadcrumb (only 1 level, useless)
+- ❌ **REMOVE** 🇮🇩 emoji from logo (confusing)
+- ✅ **STANDARDIZE** active states across all menu items (red indicator bar)
 
-**Hero Section:**
+#### **AI Chat:**
+- ✅ **DISABLE** input field while AI is generating response (prevent flooding)
+- ✅ **ADD** clearer typing indicator for long responses
+- ✅ **SEPARATE** large menu buttons from tab structure visually
+- ✅ **ADD** container/border to distinguish tabs from main menu
+- ✅ **IMPLEMENT** tab menu that only shows on first chat open
 
-* **Headline:** "Gerbang Karir & Residensial Australia untuk Indonesia."  
-* **Subtext:** Brief explanation of the platform's value.  
-* **Call to Action:** "Mulai Perjalanan Anda" (Start Your Journey).
+#### **General UI:**
+- ✅ **STANDARDIZE** colors for same element types across all features
+- ✅ **FIX** form text visibility (white text on white background)
+- ✅ **FIX** SVG icon paths (chevron-down, not slash)
 
-**Educational Components (Crucial):**
+### **2.2 MUST KEEP Good Practices**
 
-* **The 3-Step Journey:** A horizontal visual stepper showing:  
-  1. Persiapan (Preparation)  
-  2. Keberangkatan (Departure)  
-  3. Menetap (Settling In)  
-* **Glossary Tooltips:** Create subtle UI elements (underline with question mark or info icon) for terms like "WHV", "SDUWHV", "PR". Hovering should reveal a clean definition card.
+- Skeleton loaders for all dynamic components
+- Privacy notice before chat starts (DON'T share TFN/Passport)
+- One-click suggestion buttons
+- Progress bars with numeric indicators
+- Status badges (Saved, Verified)
+- Live update on form changes
+- Clear error messages
 
-**AI Assistant (Ollie 2.0):**
+---
 
-google ai studio api: AIzaSyCNI-frnjR5oBJjSCREteLXOhysAg8ahG8
+## **Phase 3: Detailed Feature Specifications**
 
-* **Interface:** A chat interface containerized within the page (not a full-screen overlay initially).  
-* **Greeting UI:** A welcoming message bubble: "Selamat datang di IndOz. Saya Ollie. Apakah Anda sedang mempersiapkan WHV atau merencanakan PR?"
+### **3.1 Navigation Structure (Public System)**
 
-### **Page 2: Premium Dashboard (IndOz+)**
+**Top Bar Requirements:**
+```
+Layout: Fixed top bar, sticky on scroll
 
-**Overview Hub:**
+Components (Left to Right):
+1. Logo: "IndOz" wordmark (modern, no flags)
+   - Click → Reset to home view
+   - Persistent anchor for navigation
 
-* **Status Cards:**  
-  * Current Visa Status.  
-  * PR Points Score (e.g., "65 Points").  
-  * Document Readiness (e.g., "5/8 Documents Ready").
+2. Main Menu Items (FLATTENED, no dropdown):
+   - "AI Chat" (default active)
+   - "Cari Lowongan" (Jobs)
+   - "Cek Resume"
+   - "Panduan Lengkap" (Guides)
 
-**Features to Design:**
+3. Action Button (Right):
+   - "Masuk" / "Login" button (prominent)
 
-1. **Document Vault:**  
-   * A list of required documents.  
-   * Upload buttons for each slot.  
-   * **Gamification:** A progress bar that turns green when 8/8 documents are uploaded. "Ready for War" badge appears.  
-2. **88-Day Logbook:**  
-   * A structured data table (Date, Employer, Hours, Location).  
-   * Input fields must be legible and easy to tap on mobile.  
-3. **PR Points Simulator:**  
-   * A form where all inputs start empty.  
-   * **Strategy Card Output:** Instead of just a number, display a card outlining specific advice (e.g., "Increase English Score to Superior").
+Active State Design:
+- Red indicator bar (4px height) below active item
+- Bold text for active menu
+- Consistent across all menu items
 
-## **4\. UI Polish & Accessibility**
+Mobile:
+- Hamburger menu that stacks gracefully
+- Full-screen overlay for mobile menu
+```
 
-* **Contrast:** Ensure all forms (especially white backgrounds) have borders or distinct background colors so input fields are visible. No white-text-on-white-background.  
-* **Feedback:** Design modal states for form submissions. If a user clicks submit with empty fields, show inline red error text, not a generic alert.  
-* **Icons:** Use consistent icon sets (Lucide or FontAwesome). Ensure SVG paths are clean.
+### **3.2 AI Chat Feature (CORE FEATURE)**
 
-## **5\. Deliverables**
+**Google AI Studio Integration:**
+```
+API Key: AIzaSyCNI-frnjR5oBJjSCREteLXOhysAg8ahG8
+Model: Use Gemini Pro or similar for chat
 
-Generate the React code for the **Landing Page** first, implementing the "3-Step Journey" and the "Flattened Navigation" to establish the design language.
+Base URL: https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent
+```
+
+**AI Chat Interface Structure:**
+
+#### **A. Initial State (First Time User Opens Chat)**
+
+When a user opens AI Chat for the FIRST time, display:
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  AI CHAT                                                │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  ┌───────────────────────────────────────────────────┐ │
+│  │  Profile Section                                  │ │
+│  │  ┌─────┐  Ollie                                 │ │
+│  │  │ 👤  │  5 year survivor in Aussie            │ │
+│  │  └─────┘  ● Online                             │ │
+│  └───────────────────────────────────────────────────┘ │
+│                                                         │
+│  ┌───────────────────────────────────────────────────┐ │
+│  │  Welcome Message                                  │ │
+│  │                                                   │ │
+│  │  Selamat datang di IndOz! Saya Ollie,            │ │
+│  │  asisten virtual yang akan membantu perjalanan   │ │
+│  │  WHV dan rencana PR ke Australia.                │ │
+│  │                                                   │ │
+│  │  Pilih topik di bawah untuk memulai:             │ │
+│  └───────────────────────────────────────────────────┘ │
+│                                                         │
+│  ┌───────────────────────────────────────────────────┐ │
+│  │  TAB MENU CONTAINER                               │ │
+│  │  ┌──────────┬──────────────┬──────────┐          │ │
+│  │  │Persiapan │Kerja & 88 Days│Menetap   │          │ │
+│  │  └──────────┴──────────────┴──────────┘          │ │
+│  │                                                   │ │
+│  │  [Tab Content - Chat Menu Options]               │ │
+│  │                                                   │ │
+│  │  When "Persiapan" is active:                     │ │
+│  │  ┌────────────────────────────────────────────┐  │ │
+│  │  │ [Tips IELTS 4.5 kilat?]                    │  │ │
+│  │  │ [Syarat visa WHV Indonesia]                │  │ │
+│  │  │ [Cari lowongan fruit picking?]             │  │ │
+│  │  │ [Biaya hidup di Australia]                 │  │ │
+│  │  │ [Asuransi wajib WHV]                       │  │ │
+│  │  └────────────────────────────────────────────┘  │ │
+│  │                                                   │ │
+│  │  When "Kerja & 88 Days" is active:               │ │
+│  │  ┌────────────────────────────────────────────┐  │ │
+│  │  │ [Cari kerja di farm]                       │  │ │
+│  │  │ [Hitung 88 days saya]                      │  │ │
+│  │  │ [Tips negosiasi gaji]                      │  │ │
+│  │  │ [Document untuk kerja]                     │  │ │
+│  │  │ [Cara claim tax back]                      │  │ │
+│  │  └────────────────────────────────────────────┘  │ │
+│  │                                                   │ │
+│  │  When "Menetap" is active:                       │ │
+│  │  ┌────────────────────────────────────────────┐  │ │
+│  │  │ [Syarat dapat PR]                          │  │ │
+│  │  │ [Kalkulator poin PR]                       │  │ │
+│  │  │ [Strategi skill assessment]                │  │ │
+│  │  │ [Visa 189 vs 190]                          │  │ │
+│  │  │ [State sponsorship options]                │  │ │
+│  │  └────────────────────────────────────────────┘  │ │
+│  └───────────────────────────────────────────────────┘ │
+│                                                         │
+│  ┌───────────────────────────────────────────────────┐ │
+│  │  ⚠️ PRIVACY NOTICE                                │ │
+│  │  JANGAN share nomor TFN atau Passport Anda       │ │
+│  │  dalam percakapan ini.                           │ │
+│  └───────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────┘
+```
+
+#### **B. Active Chat State (After User Selects a Topic)**
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  AI CHAT                              [Clear Chat]      │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  ┌───────────────────────────────────────────────────┐ │
+│  │  Ollie ● Online                                   │ │
+│  │  5 year survivor in Aussie                        │ │
+│  └───────────────────────────────────────────────────┘ │
+│                                                         │
+│  Chat History Container:                               │
+│  ┌─────────────────────────────────────────────────┐  │
+│  │                                                 │  │
+│  │  ┌───────────────────────────────────────────┐  │  │
+│  │  │ Ollie: [AI Response bubble]              │  │  │
+│  │  │                                           │  │  │
+│  │  │ [AI generated content here...]            │  │  │
+│  │  │                                           │  │  │
+│  │  │                                           │  │  │
+│  │  └───────────────────────────────────────────┘  │  │
+│  │                                                 │  │
+│  │  ┌───────────────────────────────────────────┐  │  │
+│  │  │            [User Response bubble]         │  │  │
+│  │  │                                           │  │  │
+│  │  │ [User message or suggestion clicked]      │  │  │
+│  │  │                                           │  │  │
+│  │  └───────────────────────────────────────────┘  │  │
+│  │                                                 │  │
+│  └─────────────────────────────────────────────────┘  │
+│                                                         │
+│  ┌─────────────────────────────────────────────────┐  │
+│  │ [Type your message...]              [Send →]    │  │
+│  └─────────────────────────────────────────────────┘  │
+│                                                         │
+│  ┌─────────────────────────────────────────────────┐  │
+│  │ Suggestions:                                    │  │
+│  │ [Tell me more] [Related topic] [New question]   │  │
+│  └─────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────┘
+```
+
+**AI Chat Behavior Requirements:**
+
+1. **Tab Menu Behavior:**
+   - Only shows on FIRST chat open (not on subsequent visits)
+   - Store in localStorage: `indoz_chat_first_open = true`
+   - User can click tabs to switch between categories
+   - Each tab shows 5 suggested chat topics
+   - Clicking any topic starts the chat
+
+2. **Chat Behavior:**
+   - Disable input field while AI is generating (prevent spam)
+   - Show typing indicator (animated dots) for long responses
+   - Messages should have clear visual distinction:
+     - AI: Left aligned, colored background (light gray/blue)
+     - User: Right aligned, colored background (Indo Red or Oz Gold)
+   - Auto-scroll to latest message
+   - "Clear Chat" button resets to initial state
+
+3. **Privacy Notice:**
+   - Always visible at bottom (even during chat)
+   - Red/amber border for attention
+   - Warning icon ⚠️
+
+4. **AI Tone:**
+   - Professional but friendly
+   - Clear and accessible Indonesian
+   - Avoid excessive slang ("gue/lu" is okay but not excessive)
+   - Credible and knowledgeable
+
+### **3.3 Onboarding Welcome Modal**
+
+**Show on first visit to the app:**
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    Selamat Datang di IndOz!             │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  Gerbang Karir & Residensial Australia untuk Indonesia │
+│                                                         │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │                                                 │   │
+│  │  IndOz membantu Anda:                           │   │
+│  │                                                 │   │
+│  │  ✈️  Mempersiapkan Working Holiday Visa (WHV)   │   │
+│  │  💼  Mencari lowongan kerja di Australia        │   │
+│  │  📋  Tracking 88 days untuk extension visa      │   │
+│  │  🏠  Merencanakan Permanent Residency (PR)      │   │
+│  │                                                 │   │
+│  └─────────────────────────────────────────────────┘   │
+│                                                         │
+│  Istilah Penting:                                      │
+│  • WHV = Working Holiday Visa (visa kerja liburan)     │
+│  • SDUWHV = Subclass 417 WHV (jenis visa WHV)         │
+│  • 88 Days = Syarat kerja 3 bulan untuk extension     │
+│  • PR = Permanent Residency (izin tinggal permanen)   │
+│                                                         │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │  App ini digunakan untuk:                       │   │
+│  │  • Planning persiapan sebelum berangkat         │   │
+│  │  • Tracking progress saat sudah di Australia    │   │
+│  └─────────────────────────────────────────────────┘   │
+│                                                         │
+│                [Mulai Sekarang]                         │
+└─────────────────────────────────────────────────────────┘
+```
+
+**Implementation:**
+- Check localStorage: `indoz_onboarding_completed`
+- Show modal if not exists
+- Set to `true` when user clicks "Mulai Sekarang"
+
+### **3.4 Cari Lowongan (Job Search)**
+
+**UI Structure:**
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  CARI LOWONGAN KERJA                                    │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  Search Bar:                                            │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │ 🔍  [Job title, keyword, or company]    [Cari]  │   │
+│  └─────────────────────────────────────────────────┘   │
+│                                                         │
+│  Filters:                                               │
+│  ┌──────────┬──────────┬──────────┬──────────────┐     │
+│  │Location  │Job Type  │88 Day    │[Search]      │     │
+│  │          │          │Focus [✓] │              │     │
+│  └──────────┴──────────┴──────────┴──────────────┘     │
+│                                                         │
+│  Results: "Menampilkan 24 lowongan"                     │
+│                                                         │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │ ┌─────────────────────────────────────────┐     │   │
+│  │ │ Fruit Picker - Sunny Coast Farms        │     │   │
+│  │ │ 📍 Maroochydore, QLD  💰 $28-32/hr     │     │   │
+│  │ │                                          │     │   │
+│  │ │ Looking for experienced fruit pickers   │     │   │
+│  │ │ for upcoming season...                   │     │   │
+│  │ │                                          │     │   │
+│  │ │ [88 Days Eligible] • Seek • 1d ago      │     │   │
+│  │ └─────────────────────────────────────────┘     │   │
+│  │                            [Apply →]             │   │
+│  ├─────────────────────────────────────────────────┤   │
+│  │ [Job Card 2...]                                 │   │
+│  ├─────────────────────────────────────────────────┤   │
+│  │ [Job Card 3...]                                 │   │
+│  └─────────────────────────────────────────────────┘   │
+│                                                         │
+│                    [Load More]                          │
+└─────────────────────────────────────────────────────────┘
+```
+
+**Requirements:**
+- Toggle "88 Day Focus" highlights eligible jobs
+- Skeleton loader while searching (show card outline)
+- Save search button (for repeated searches)
+- Badge: "88 Days Eligible" for qualifying jobs
+
+### **3.5 Cek Resume**
+
+**UI Structure:**
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  CEK RESUME                                             │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  Analisis resume Anda untuk pasar kerja Australia       │
+│                                                         │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │                                                  │   │
+│  │    📄 Upload Resume Anda                         │   │
+│  │                                                  │   │
+│  │    [Drag & drop or click to upload]             │   │
+│  │                                                  │   │
+│  │    Format: PDF • Max 4MB                         │   │
+│  │                                                  │   │
+│  │                   [Upload File]                  │   │
+│  │                                                  │   │
+│  └─────────────────────────────────────────────────┘   │
+│                                                         │
+│                        ATAU                             │
+│                                                         │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │                                                  │   │
+│  │    📋 Paste Resume Text                          │   │
+│  │                                                  │   │
+│  │    [Paste resume content here...]                │   │
+│  │                                                  │   │
+│  │                   [Analisa]                      │   │
+│  │                                                  │   │
+│  └─────────────────────────────────────────────────┘   │
+│                                                         │
+│            [Isi Contoh Resume]                           │
+└─────────────────────────────────────────────────────────┘
+```
+
+**Requirements:**
+- "Isi Contoh Resume" fills with sample data
+- Upload validates PDF and 4MB limit
+- Show loading state during analysis
+- Display results with:
+  - ATS Score (0-100%)
+  - Strengths list
+  - Improvements needed
+  - Australia-specific suggestions
+
+### **3.6 Panduan Lengkap (Complete Guide)**
+
+**UI Structure:**
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  PANDUAN LENKAP                                    ✕   │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │ [Persiapan] [Tiba] [Hidup] [Masa Depan]        │   │
+│  │    ──────                                        │   │
+│  └─────────────────────────────────────────────────┘   │
+│                                                         │
+│  [Sticky Table of Contents]                            │
+│  1. Syarat WHV                                         │
+│  2. Biaya yang Diperlukan                              │
+│  3. Dokumen yang Harus Disiapkan                       │
+│  4. Timeline Aplikasi                                   │
+│  ...                                                   │
+│                                                         │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │  Content Section...                              │   │
+│  │                                                  │   │
+│  │  # Syarat WHV                                    │   │
+│  │                                                  │   │
+│  │  Warga usia 18-30 tahun...                       │   │
+│  │                                                  │   │
+│  │  Lihat: Official Checklist 462                   │   │
+│  │                                                  │   │
+│  └─────────────────────────────────────────────────┘   │
+│                                                         │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │  Butuh bantuan lebih lanjut?                    │   │
+│  │                                                  │   │
+│  │  [Konsultasi Gratis]                             │   │
+│  │                                                  │   │
+│  │  Form:                                           │   │
+│  │  ┌──────────────────────────────────────┐       │   │
+│  │  │ Nama:                    [visible]  │       │   │
+│  │  │ Email:                   [visible]  │       │   │
+│  │  │ Kebutuhan: [dropdown ▼]  [visible]  │       │   │
+│  │  │ No HP:                   [visible]  │       │   │
+│  │  │                                  [Kirim]│       │   │
+│  │  └──────────────────────────────────────┘       │   │
+│  └─────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────┘
+```
+
+**Requirements:**
+- 4 tabs: Persiapan, Tiba, Hidup, Masa Depan
+- Active tab: bold text + underline
+- Sticky table of contents on left (desktop)
+- External links: blue, underlined
+- Consultation form with proper contrast (fix white text issue)
+
+### **3.7 Premium System (IndOz+)**
+
+**Separate from public system - different layout:**
+
+**Landing Page:**
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  IndOz+ [BETA]                                         │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  Unlock Premium Features:                               │
+│                                                         │
+│  ┌────────────┬────────────┬────────────┬──────────┐  │
+│  │📋 Documents│⏱️ 88 Days  │🧮 PR Calc  │🚀 Strategy│  │
+│  │   Vault    │   Logbook  │            │          │  │
+│  └────────────┴────────────┴────────────┴──────────┘  │
+│                                                         │
+│  Access Code:                                           │
+│  ┌───────────────────┐     [Get Access Code]          │
+│  │[Enter code...]    │                                  │
+│  └────────────────────┘     (hint: check your email)   │
+│                                                         │
+└─────────────────────────────────────────────────────────┘
+```
+
+**Dashboard (After Login):**
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  IndOz+ Dashboard                           [Logout]    │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │  STATUS OVERVIEW                                 │   │
+│  ├─────────────────────────────────────────────────┤   │
+│  │                                                  │   │
+│  │  ┌─────────────┬─────────────┬──────────────┐  │   │
+│  │  │Visa Status  │PR Points    │Documents     │  │   │
+│  │  │             │             │              │  │   │
+│  │  │ WHV Active  │ 65 pts      │ 5/8 Ready    │  │   │
+│  │  └─────────────┴─────────────┴──────────────┘  │   │
+│  │                                                  │   │
+│  └─────────────────────────────────────────────────┘   │
+│                                                         │
+│  ┌─────────────┬─────────────┬─────────────┬─────────┐ │
+│  │📋 Documents │⏱️ 88 Days  │🧮 PR Calc   │🚀Strategy│ │
+│  │   Vault     │   Logbook  │             │         │ │
+│  │             │            │             │         │ │
+│  │[Open →]     │[Open →]    │[Open →]     │[Open →] │ │
+│  └─────────────┴─────────────┴─────────────┴─────────┘ │
+│                                                         │
+└─────────────────────────────────────────────────────────┘
+```
+
+**Documents Vault:**
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  📋 DOKUMEN VAULT                              ← Back   │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  Progress: ████████████████░░ 5/8 Documents Ready       │
+│                                                         │
+│  Section: Persyaratan Dasar                             │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │ ✅ Paspor [Verified]                 [View]     │   │
+│  │ ✅ IELTS Certificate [Verified]        [View]    │   │
+│  │ ✅ SKCK Polda [Verified]             [View]     │   │
+│  │ ✅ Surat Keterangan Sehat [Verified]  [View]    │   │
+│  └─────────────────────────────────────────────────┘   │
+│                                                         │
+│  Section: Dokumen Pendukung                             │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │ ✅ CV/Resume [Saved]                 [View]     │   │
+│  │ ⬜ Reference Letter [Upload]             [↑]     │   │
+│  │ ⬜ Bank Statement [Upload]              [↑]     │   │
+│  │ ⬜ Work Contract [Upload]              [↑]     │   │
+│  └─────────────────────────────────────────────────┘   │
+│                                                         │
+│  Legend:                                                │
+│  ✅ Verified = Dokumen telah dicek                     │
+│  ⬜ Saved = Terupload, belum dicek                     │
+│  ⬜ Empty = Belum diupload                             │
+└─────────────────────────────────────────────────────────┘
+```
+
+**Requirements:**
+- Progress bar turns green + checkmark when 8/8
+- Celebration feedback on completion
+- Upload with validation (max size, auto-compress)
+- Clear legend for status types
+
+**88 Days Logbook:**
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  ⏱️  88 DAYS LOGBOOK                           ← Back   │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  Progress: 3 / 88 Hari                                  │
+│  ████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    │
+│                                                         │
+│  ⚡ Quick Add: [+1 Day] [+1 Week]                       │
+│                                                         │
+│  Recent Entries:                                        │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │ Date       │ Employer    │ Hours │ Location     │   │
+│  ├─────────────────────────────────────────────────┤   │
+│  │ 5 Feb 2024 │ Sunny Farm  │ 8     │ Maroochydore │   │
+│  │ 4 Feb 2024 │ Sunny Farm  │ 10    │ Maroochydore │   │
+│  │ 3 Feb 2024 │ Sunny Farm  │ 8     │ Maroochydore │   │
+│  └─────────────────────────────────────────────────┘   │
+│                                                         │
+│  [+ Add New Entry]                                      │
+│                                                         │
+│  💡 Catat hari kerja untuk memenuhi syarat 88 days WHV │
+└─────────────────────────────────────────────────────────┘
+```
+
+**Requirements:**
+- Bulk entry feature (add multiple days at once)
+- Validate: no future dates
+- Clear error messages for invalid entries
+- Keyboard shortcuts: Ctrl+N (new entry), Ctrl+S (save)
+- Remove dark mode toggle (inappropriate location)
+
+**PR Points Calculator:**
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  🧮 PR POINTS CALCULATOR                       ← Back   │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  Visa Subclass:                                         │
+│  ┌─────────────────────┬─────────────────────┐         │
+│  │ 189 Skilled         │ 190 Skilled         │         │
+│  │   Independent       │   Nominated         │         │
+│  └─────────────────────┴─────────────────────┘         │
+│                                                         │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │ Age: [25-32 ▼]               English: [Superior ▼]│   │
+│  │ Education: [Bachelor ▼]      Experience: [8+ ▼]    │   │
+│  │ Australian Study: [Yes ▼]                         │   │
+│  │ NAATI: [Yes ▼]         Regional: [Yes ▼]          │   │
+│  │ Partner Skills: [10 pts ▼]                       │   │
+│  └─────────────────────────────────────────────────┘   │
+│                                                         │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │  Estimasi Poin Anda:                             │   │
+│  │                                                  │   │
+│  │     ## 85 Poin                                   │   │
+│  │                                                  │   │
+│  │  Status: ✅ Eligible, tapi butuh strategi        │   │
+│  └─────────────────────────────────────────────────┘   │
+│                                                         │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │  📋 Strategi & Langkah Selanjutnya:              │   │
+│  │                                                  │   │
+│  │  1. Tingkatkan English ke Superior (+10 pts)    │   │
+│  │  2. Pertimbangkan regional study (+5 pts)       │   │
+│  │  3. NAATI accreditation bisa tambah 5 pts       │   │
+│  │                                                  │   │
+│  │  ⚠️ Tantangan:                                   │   │
+│  │  - Competition tinggi untuk visa 189            │   │
+│  │  - Cut-off point bulan ini: 90 pts              │   │
+│  │                                                  │   │
+│  │  💡 Rekomendasi: Fokus ke visa 190 dengan       │   │
+│  │     state sponsorship untuk peluang lebih baik  │   │
+│  └─────────────────────────────────────────────────┘   │
+│                                                         │
+│  PR = Permanent Residency (izin tinggal permanen)       │
+│  189 = Skilled Independent Visa                         │
+│  190 = Skilled Nominated Visa                           │
+└─────────────────────────────────────────────────────────┘
+```
+
+**Requirements:**
+- All fields start BLANK (no default values)
+- Live update on dropdown change
+- Show strategy card with specific recommendations
+- Display challenges for current score
+- Inline tooltips for PR, 189, 190
+
+**Future Strategy:**
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  🚀 STRATEGI KEMBALI KE AUSTRALIA              ← Back   │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  Category: Populer                                      │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │ 🎓 Student Visa (500)                           │   │
+│  │                                                  │   │
+│  │ Kuliah di Australia untuk pathway ke PR         │   │
+│  │                                                  │   │
+│  │ • Duration: 2 years                             │   │
+│  │ • Cost: ~AUD 30,000/year                        │   │
+│  │ • PR Pathway: Graduate → 485 → 189/190          │   │
+│  │                                                  │   │
+│  │ Pros: Work rights (40hr/fortnight),             │   │
+│  │      Partner can accompany                       │   │
+│  │ Cons: Expensive, no government benefits         │   │
+│  │                                                  │   │
+│  │ [Learn More →]                                   │   │
+│  └─────────────────────────────────────────────────┘   │
+│                                                         │
+│  Category: Hard Mode                                    │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │ 💼 Employer Sponsored (482)                     │   │
+│  │ [Similar detailed card...]                       │   │
+│  └─────────────────────────────────────────────────┘   │
+│                                                         │
+│  Category: Niche                                       │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │ 🌾 Regional Work                                │   │
+│  │ [Similar detailed card...]                       │   │
+│  └─────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────┘
+```
+
+**Requirements:**
+- Detailed information for each strategy
+- Include: Duration, Cost, PR Pathway, Pros, Cons
+- Multiple categories with clear labels
+
+---
+
+## **Phase 4: Implementation Instructions**
+
+### **4.1 Step-by-Step Build Order**
+
+**Step 1: Foundation (Day 1)**
+1. Set up project structure with Vite + React
+2. Configure Tailwind CSS with custom colors (Indo Red, Oz Gold)
+3. Create CSS variables file
+4. Set up routing (React Router)
+5. Build base layout with Top Bar navigation
+6. Implement onboarding modal (localStorage)
+
+**Step 2: AI Chat Core (Day 1-2)**
+1. Create AI Chat page component
+2. Integrate Google AI Studio API
+3. Build profile section (Ollie avatar, online status)
+4. Implement tab menu (Persiapan, Kerja & 88 Days, Menetap)
+5. Add suggestion buttons for each tab
+6. Create privacy notice component
+7. Handle first-time user state (localStorage)
+8. Build active chat interface
+9. Add typing indicator
+10. Disable input while generating
+
+**Step 3: Public Features (Day 2-3)**
+1. Cari Lowongan page:
+   - Search bar with filters
+   - Skeleton loader
+   - Job cards with "88 Days Eligible" badge
+   - Save search functionality
+
+2. Cek Resume page:
+   - Upload UI (drag & drop)
+   - Paste text area
+   - "Isi Contoh Resume" button
+   - Analysis results display
+
+3. Panduan Lengkap page:
+   - Tab navigation (Persiapan, Tiba, Hidup, Masa Depan)
+   - Sticky table of contents
+   - Consultation form (fix contrast issues)
+
+**Step 4: Premium System (Day 3-4)**
+1. Premium landing page with access code
+2. Premium dashboard (separate layout)
+3. Documents Vault with progress tracking
+4. 88 Days Logbook with quick-add and bulk entry
+5. PR Calculator with strategy card output
+6. Future Strategy with detailed cards
+
+**Step 5: Polish & Testing (Day 4-5)**
+1. Fix all issues from evaluation:
+   - Remove user-select: none
+   - Remove oncontextmenu block
+   - Fix form contrast issues
+   - Fix SVG icons
+   - Remove breadcrumb
+   - Flatten navigation
+
+2. Add glossary tooltips (WHV, SDUWHV, 88 days, PR)
+3. Ensure consistent styling across all features
+4. Test all interactions
+5. Verify responsive design
+6. Accessibility check
+
+### **4.2 Code Organization**
+
+```
+src/
+├── components/
+│   ├── common/
+│   │   ├── Button.jsx
+│   │   ├── Card.jsx
+│   │   ├── Input.jsx
+│   │   ├── Modal.jsx
+│   │   ├── Tooltip.jsx
+│   │   └── Skeleton.jsx
+│   ├── layout/
+│   │   ├── TopBar.jsx
+│   │   ├── Navigation.jsx
+│   │   └── Footer.jsx
+│   ├── ai-chat/
+│   │   ├── AIChatContainer.jsx
+│   │   ├── AIProfile.jsx
+│   │   ├── ChatTabMenu.jsx
+│   │   ├── ChatHistory.jsx
+│   │   ├── ChatInput.jsx
+│   │   ├── PrivacyNotice.jsx
+│   │   └── suggestions/
+│   │       ├── PersiapanSuggestions.jsx
+│   │       ├── KerjaSuggestions.jsx
+│   │       └── MenetapSuggestions.jsx
+│   ├── jobs/
+│   │   ├── JobSearch.jsx
+│   │   ├── JobFilters.jsx
+│   │   ├── JobCard.jsx
+│   │   └── JobSkeleton.jsx
+│   ├── resume/
+│   │   ├── ResumeChecker.jsx
+│   │   ├── UploadArea.jsx
+│   │   └── AnalysisResults.jsx
+│   ├── guides/
+│   │   ├── GuideTabs.jsx
+│   │   ├── TableOfContents.jsx
+│   │   └── ConsultationForm.jsx
+│   └── premium/
+│       ├── Dashboard.jsx
+│       ├── DocumentsVault.jsx
+│       ├── Logbook.jsx
+│       ├── PRCalculator.jsx
+│       └── FutureStrategy.jsx
+├── services/
+│   ├── googleAI.js
+│   ├── jobsAPI.js
+│   ├── resumeAPI.js
+│   └── storage.js
+├── utils/
+│   ├── cn.js (className merge utility)
+│   └── validation.js
+├── styles/
+│   └── index.css (with CSS variables)
+├── hooks/
+│   ├── useLocalStorage.js
+│   ├── useAIChat.js
+│   └── useFirstVisit.js
+├── App.jsx
+└── main.jsx
+```
+
+### **4.3 Critical Implementation Notes**
+
+**AI Chat Integration:**
+```javascript
+// services/googleAI.js
+const API_KEY = 'AIzaSyCNI-frnjR5oBJjSCREteLXOhysAg8ahG8';
+const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
+
+export async function generateAIResponse(message, conversationHistory) {
+  const response = await fetch(`${API_URL}?key=${API_KEY}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      contents: [
+        {
+          role: 'user',
+          parts: [{ text: message }]
+        }
+      ],
+      // Add system prompt for Ollie's persona
+      systemInstruction: `You are Ollie, a 5-year WHV survivor in Australia helping
+          Indonesians with WHV and PR planning. Be professional, friendly, and knowledgeable.
+          Use clear Indonesian. Avoid excessive slang. Provide helpful, actionable advice.`
+    })
+  });
+
+  if (!response.ok) {
+    throw new Error('AI service unavailable');
+  }
+
+  const data = await response.json();
+  return data.candidates[0].content.parts[0].text;
+}
+```
+
+**Tab Menu Implementation:**
+```javascript
+// Only show on first visit
+const showTabMenu = !localStorage.getItem('indoz_chat_first_open');
+```
+
+**Input Protection:**
+```javascript
+// Disable input while generating
+const [isGenerating, setIsGenerating] = useState(false);
+
+<input disabled={isGenerating} />
+```
+
+---
+
+## **Phase 5: Quality Checklist**
+
+Before finalizing, verify:
+
+### **5.1 All Evaluation Issues Addressed**
+- [ ] Removed `user-select: none` restriction
+- [ ] Removed `oncontextmenu="return false;"`
+- [ ] Added onboarding modal
+- [ ] Added glossary tooltips
+- [ ] Explained use case (planning vs tracking)
+- [ ] Flattened navigation (no dropdown)
+- [ ] Removed breadcrumb
+- [ ] Removed 🇮🇩 from logo
+- [ ] Standardized active states
+- [ ] Disabled input while AI generates
+- [ ] Added clear typing indicator
+- [ ] Separated tab menu visually from main menu
+- [ ] Added container to tabs
+- [ ] Fixed form contrast issues
+- [ ] Fixed SVG icons
+- [ ] Standardized colors across features
+
+### **5.2 All Good Practices Maintained**
+- [ ] Skeleton loaders on all dynamic components
+- [ ] Privacy notice visible
+- [ ] One-click suggestion buttons
+- [ ] Progress bars with numeric indicators
+- [ ] Status badges
+- [ ] Live updates
+- [ ] Clear error messages
+
+### **5.3 Feature Completeness**
+- [ ] AI Chat with Google AI integration
+- [ ] Tab menu (Persiapan, Kerja & 88 Days, Menetap)
+- [ ] Cari Lowongan with 88 Day Focus toggle
+- [ ] Cek Resume with upload/paste options
+- [ ] Panduan Lengkap with 4 tabs and TOC
+- [ ] Premium landing page with access code
+- [ ] Premium dashboard separate from public
+- [ ] Documents Vault with progress tracking
+- [ ] 88 Days Logbook with quick-add and bulk entry
+- [ ] PR Calculator with strategy output
+- [ ] Future Strategy with detailed cards
+
+### **5.4 Technical Quality**
+- [ ] No console errors
+- [ ] Responsive on mobile
+- [ ] Accessible (contrast, ARIA labels)
+- [ ] Fast load time
+- [ ] Clean code organization
+- [ ] Proper error handling
+
+---
+
+## **Phase 6: Final Deliverables**
+
+Generate the complete React application with:
+
+1. **All components** as specified
+2. **Full Google AI integration** working
+3. **All evaluation issues** fixed
+4. **Responsive design** for all screen sizes
+5. **Professional, consistent styling**
+6. **Clean, maintainable code**
+
+**Start with Step 1 (Foundation) and proceed sequentially through each step.**
+
+---
+
+## **Summary of Key Requirements**
+
+✅ **AI Chat with Google AI Studio** (API key provided)
+✅ **Tab menu system** (Persiapan, Kerja & 88 Days, Menetap)
+✅ **Tab menu only shows on first chat open**
+✅ **All issues from evaluation addressed**
+✅ **All good practices maintained**
+✅ **Step-by-step implementation**
+
+---
+
+**Reference all screenshots in `docs/` folder for visual guidance.**
+**Read `docs/final-evaluation.md` for detailed requirements.**
