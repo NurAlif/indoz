@@ -6,24 +6,24 @@ import remarkGfm from 'remark-gfm';
 
 const ChatHistory = ({ messages = [], isTyping = false }) => {
   return (
-    <div className="min-h-[400px] max-h-[600px] overflow-y-auto space-y-4 p-4">
+    <div className="min-h-[300px] max-h-[calc(100vh-280px)] overflow-y-auto space-y-3 p-3">
       {messages.map((message, index) => (
         <div
           key={index}
           className={cn(
-            "flex gap-3",
+            "flex gap-2",
             message.role === 'user' ? 'justify-end' : 'justify-start'
           )}
         >
           {message.role === 'assistant' && (
-            <div className="flex-shrink-0 w-8 h-8 bg-indo-red rounded-full flex items-center justify-center">
-              <Bot size={16} className="text-white" />
+            <div className="flex-shrink-0 w-6 h-6 bg-indo-red rounded-full flex items-center justify-center">
+              <Bot size={14} className="text-white" />
             </div>
           )}
 
           <div
             className={cn(
-              "max-w-[80%] rounded-2xl px-4 py-3 prose prose-sm max-w-none",
+              "max-w-[85%] rounded-xl px-3 py-2 prose prose-sm max-w-none",
               message.role === 'user'
                 ? "bg-indo-red text-white prose-invert"
                 : "bg-gray-100 text-gray-900"
@@ -57,23 +57,23 @@ const ChatHistory = ({ messages = [], isTyping = false }) => {
           </div>
 
           {message.role === 'user' && (
-            <div className="flex-shrink-0 w-8 h-8 bg-oz-gold rounded-full flex items-center justify-center">
-              <User size={16} className="text-white" />
+            <div className="flex-shrink-0 w-6 h-6 bg-oz-gold rounded-full flex items-center justify-center">
+              <User size={14} className="text-white" />
             </div>
           )}
         </div>
       ))}
 
       {isTyping && (
-        <div className="flex gap-3 justify-start">
-          <div className="flex-shrink-0 w-8 h-8 bg-indo-red rounded-full flex items-center justify-center">
-            <Bot size={16} className="text-white" />
+        <div className="flex gap-2 justify-start">
+          <div className="flex-shrink-0 w-6 h-6 bg-indo-red rounded-full flex items-center justify-center">
+            <Bot size={14} className="text-white" />
           </div>
-          <div className="bg-gray-100 rounded-2xl px-4 py-3">
+          <div className="bg-gray-100 rounded-xl px-3 py-2">
             <div className="flex gap-1">
-              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+              <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+              <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+              <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
             </div>
           </div>
         </div>

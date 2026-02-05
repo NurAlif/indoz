@@ -8,7 +8,7 @@ const TABS = [
   { id: 'menetap', label: 'Menetap' },
 ];
 
-const ChatTabMenu = ({ onSuggestionClick }) => {
+const ChatTabMenu = ({ onSuggestionClick, disabled = false }) => {
   const [activeTab, setActiveTab] = useState('persiapan');
 
   return (
@@ -38,8 +38,14 @@ const ChatTabMenu = ({ onSuggestionClick }) => {
           {CHAT_SUGGESTIONS[activeTab].map((suggestion) => (
             <button
               key={suggestion.id}
-              onClick={() => onSuggestionClick(suggestion.query)}
-              className="w-full px-4 py-3 text-left bg-gray-50 hover:bg-indo-red/5 hover:text-indo-red rounded-lg text-sm transition-colors"
+              onClick={() => !disabled && onSuggestionClick(suggestion.query)}
+              disabled={disabled}
+              className={cn(
+                "w-full px-4 py-3 text-left rounded-lg text-sm transition-colors",
+                disabled
+                  ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                  : "bg-gray-50 hover:bg-indo-red/5 hover:text-indo-red cursor-pointer"
+              )}
             >
               {suggestion.text}
             </button>
