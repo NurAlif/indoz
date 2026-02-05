@@ -3,10 +3,10 @@ import { LogOut, User, Trophy, Target, TrendingUp, Crown } from 'lucide-react';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 // Import premium feature components
-import DocumentsVault from './DocumentsVault';
+import DocumentsVault from './DocumentsVault/DocumentsVault';
 import Logbook from './Logbook';
-import PRCalculator from './PRCalculator';
-import FutureStrategy from './FutureStrategy';
+import PRCalculator from './PRCalculator/PRCalculator';
+import FutureStrategy from './FutureStrategy/FutureStrategy';
 
 const PremiumDashboard = ({ onLogout = () => {} }) => {
   const [activeFeature, setActiveFeature] = useState(null);
