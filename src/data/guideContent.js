@@ -1,8 +1,8 @@
 export const GUIDE_TABS = [
-  { id: 'persiapan', label: 'Persiapan' },
-  { id: 'tiba', label: 'Tiba' },
-  { id: 'hidup', label: 'Hidup' },
-  { id: 'masadepan', label: 'Masa Depan' },
+  { id: 'persiapan', label: 'Persiapan', icon: 'clipboard' },
+  { id: 'tiba', label: 'Tiba', icon: 'plane' },
+  { id: 'hidup', label: 'Hidup', icon: 'home' },
+  { id: 'masadepan', label: 'Masa Depan', icon: 'sparkles' },
 ];
 
 export const GUIDE_CONTENT = {

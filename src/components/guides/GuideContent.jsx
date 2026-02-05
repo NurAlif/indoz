@@ -765,7 +765,7 @@ const GuideContent = ({ sections = [], onSectionChange }) => {
         const element = sectionElements[i];
         if (element) {
           const rect = element.getBoundingClientRect();
-          if (rect.top <= 150) {
+          if (rect.top <= 200) {
             if (onSectionChange) {
               onSectionChange(sections[i].id);
             }
@@ -793,7 +793,7 @@ const GuideContent = ({ sections = [], onSectionChange }) => {
               id={section.id}
               className="mb-16 scroll-mt-24"
             >
-              <h1 className="text-3xl font-bold text-gray-900 mb-6">
+              <h1 className="text-xl font-bold text-gray-900 mb-6">
                 {section.title}
               </h1>
 

@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Search, Filter, ChevronDown, ChevronUp, Briefcase, Building, Hash } from 'lucide-react';
 import { cn } from '../../utils/cn';
+import GlossaryTooltip from '../common/GlossaryTooltip';
 
 const LOCATIONS = [
   'All Locations',
@@ -130,6 +131,11 @@ const JobFilters = ({
 
   return (
     <div className="bg-white border border-gray-200 rounded-xl p-6 mb-6">
+      {/* Description */}
+      <p className="text-gray-600 text-sm mb-4">
+        Temukan pekerjaan yang sesuai untuk <GlossaryTooltip term="WHV" /> Anda
+      </p>
+
       {/* Search Bar with Suggestions */}
       <div className="mb-4 relative" ref={searchRef}>
         <div className="relative">

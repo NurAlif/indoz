@@ -8,6 +8,7 @@ const NAV_ITEMS = [
   { name: 'Cari Lowongan', path: '/jobs' },
   { name: 'Cek Resume', path: '/resume' },
   { name: 'Panduan Lengkap', path: '/guides' },
+  { name: '⚡ IndOz+ (Beta)', path: '/premium', isPremium: true },
 ];
 
 const TopBar = () => {
@@ -36,6 +37,19 @@ const TopBar = () => {
           <nav className="hidden md:flex items-center gap-1">
             {NAV_ITEMS.map((item) => {
               const isActive = location.pathname === item.path || (item.path === '/chat' && location.pathname === '/');
+
+              if (item.isPremium) {
+                return (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    className="ml-4 px-4 py-2 rounded-full bg-yellow-100 text-yellow-700 font-bold text-sm hover:bg-yellow-200 transition-colors flex items-center gap-1"
+                  >
+                    {item.name}
+                  </Link>
+                );
+              }
+
               return (
                 <Link
                   key={item.path}
@@ -80,6 +94,19 @@ const TopBar = () => {
           <div className="px-4 py-4 space-y-2">
             {NAV_ITEMS.map((item) => {
               const isActive = location.pathname === item.path || (item.path === '/chat' && location.pathname === '/');
+
+              if (item.isPremium) {
+                return (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    className="block px-4 py-2 rounded-lg text-sm font-bold bg-yellow-50 text-yellow-700 hover:bg-yellow-100 transition-colors"
+                  >
+                    {item.name}
+                  </Link>
+                );
+              }
+
               return (
                 <Link
                   key={item.path}

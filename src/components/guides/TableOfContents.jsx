@@ -2,22 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { cn } from '../../utils/cn';
 
 const TableOfContents = ({ sections = [], activeSection = '' }) => {
-  const [isSticky, setIsSticky] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsSticky(window.scrollY > 100);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   const handleClick = (e, sectionId) => {
     e.preventDefault();
     const element = document.getElementById(sectionId);
     if (element) {
-      const offset = 100; // Account for fixed header
+      const offset = 180; // Account for fixed header + tabs
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
 
@@ -33,13 +22,8 @@ const TableOfContents = ({ sections = [], activeSection = '' }) => {
   }
 
   return (
-    <div
-      className={cn(
-        "hidden lg:block w-64 flex-shrink-0 transition-all",
-        isSticky ? "sticky top-24" : ""
-      )}
-    >
-      <div className="bg-white border border-gray-200 rounded-xl p-4">
+    <div className="hidden lg:block w-64 flex-shrink-0 relative">
+      <div className="sticky top-32 bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
         <h4 className="text-sm font-semibold text-gray-900 mb-3">Daftar Isi</h4>
         <nav className="space-y-2">
           {sections.map((section) => (
