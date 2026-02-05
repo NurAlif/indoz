@@ -11,15 +11,15 @@ const GuideCard = ({
     footer
 }) => {
     const colorClasses = {
-        info: 'border-info/30 bg-info/5 text-info',
-        success: 'border-success/30 bg-success/5 text-success',
-        warning: 'border-warning/30 bg-warning/5 text-warning',
-        danger: 'border-error/30 bg-error/5 text-error',
-        error: 'border-error/30 bg-error/5 text-error',
-        purple: 'border-purple-300 bg-purple-50 text-purple-700',
-        blue: 'border-blue-300 bg-blue-50 text-blue-700',
-        'indo-red': 'border-indo-red/30 bg-indo-red/5 text-indo-red',
-        'oz-gold': 'border-oz-gold/30 bg-oz-gold/5 text-oz-gold',
+        info: 'border-info/30 text-info',
+        success: 'border-success/30 text-success',
+        warning: 'border-warning/30 text-warning',
+        danger: 'border-error/30 text-error',
+        error: 'border-error/30 text-error',
+        purple: 'border-purple-300 text-purple-700',
+        blue: 'border-blue-300 text-blue-700',
+        'indo-red': 'border-indo-red/30 text-indo-red',
+        'oz-gold': 'border-oz-gold/30 text-oz-gold',
     };
 
     const titleColors = {

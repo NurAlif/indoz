@@ -99,7 +99,7 @@ const AIChatContainer = () => {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50 text-gray-900 font-sans pt-16">
+    <div className="h-screen flex flex-col bg-gray-50 text-gray-900 font-sans overflow-hidden pt-16">
       {/* TopBar */}
       <TopBar />
 

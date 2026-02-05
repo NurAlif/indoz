@@ -32,10 +32,10 @@ const GlossaryTooltip = ({ term, definition: customDefinition, className = '' })
       <Info size={14} className="text-indo-red" />
 
       {isVisible && (
-        <div className="absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 w-64 text-sm text-white bg-gray-900 rounded-lg shadow-lg">
+        <div className="absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 w-64 text-sm text-gray-900 bg-white border border-gray-200 rounded-lg shadow-xl ring-1 ring-black/5 animate-in fade-in zoom-in-95">
           {definition}
           {/* Arrow */}
-          <div className="absolute w-2 h-2 bg-gray-900 transform rotate-45 left-1/2 -translate-x-1/2 -bottom-1" />
+          <div className="absolute w-2 h-2 bg-white border-r border-b border-gray-200 transform rotate-45 left-1/2 -translate-x-1/2 -bottom-1 shadow-sm" />
         </div>
       )}
     </span>

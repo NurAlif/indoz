@@ -185,7 +185,6 @@ const renderBiayaHidup = () => (
       <GuideCard
         title="🏙️ Sydney/Melbourne (Mahal)"
         color="danger"
-        className="from-red-50 to-orange-50 bg-gradient-to-br"
         footer={
           <div className="font-bold text-error flex justify-between">
             <span>Total Estimasi:</span>
@@ -205,7 +204,6 @@ const renderBiayaHidup = () => (
       <GuideCard
         title="🌾 Regional (Lebih Murah)"
         color="success"
-        className="from-green-50 to-emerald-50 bg-gradient-to-br"
         footer={
           <div className="space-y-2">
             <div className="font-bold text-success flex justify-between">
@@ -278,7 +276,6 @@ const renderAkomodasi = () => (
         icon="🏨"
         title="Hostel/Backpacker"
         color="blue"
-        className="from-blue-50 to-indigo-50 bg-gradient-to-br"
         footer={<p className="text-xs font-bold text-blue-700">Rp 300rb - 600rb / malam</p>}
         items={[
           <span>Paling populer untuk pemegang <GlossaryTooltip term="WHV" /></span>,
@@ -290,7 +287,6 @@ const renderAkomodasi = () => (
         icon="🏠"
         title="Share House"
         color="success"
-        className="from-green-50 to-emerald-50 bg-gradient-to-br"
         footer={<p className="text-xs font-bold text-green-700">Rp 3jt - 6jt / bulan</p>}
         items={[
           "Lebih murah untuk jangka panjang",
@@ -302,7 +298,6 @@ const renderAkomodasi = () => (
         icon="🏢"
         title="Rental Sendiri"
         color="purple"
-        className="from-purple-50 to-pink-50 bg-gradient-to-br"
         footer={<p className="text-xs font-bold text-purple-700">Rp 8jt+ / bulan</p>}
         items={[
           "Lebih privasi tapi biaya sangat mahal",
@@ -530,7 +525,6 @@ const renderMencariKerja = () => (
         <GuideCard
           title="☕ Hospitality"
           color="warning"
-          className="from-amber-50 to-orange-50 bg-gradient-to-br"
           footer={<p className="text-[10px] text-amber-700 italic">Cafe, Restaurant, Hotel, Barista</p>}
           items={[
             "Waitstaff, Kitchen Hand, Barista",
@@ -541,7 +535,6 @@ const renderMencariKerja = () => (
         <GuideCard
           title="🌾 Farm Work"
           color="success"
-          className="from-green-50 to-emerald-50 bg-gradient-to-br"
           footer={<p className="text-[10px] text-green-700 font-bold italic">Eligible for <GlossaryTooltip term="88 Days" /> ✓</p>}
           items={[
             "Fruit Picking, Packing, Farm Hand",
@@ -552,7 +545,6 @@ const renderMencariKerja = () => (
         <GuideCard
           title="🛍️ Retail & Service"
           color="blue"
-          className="from-blue-50 to-indigo-50 bg-gradient-to-br"
           footer={<p className="text-[10px] text-blue-700 italic">Sales, Warehouse, Cleaning</p>}
           items={[
             "Sales Assistant, Cashier, Packer",
@@ -577,7 +569,6 @@ const renderExtensionWHV = () => (
       icon="✅"
       title="Syarat Utama Extension"
       color="success"
-      className="from-green-50 to-emerald-50 bg-gradient-to-br"
     >
       <ul className="divide-y divide-green-100">
         <ChecklistItem checked text={<span>Selesaikan <GlossaryTooltip term="88 Days" /> regional work</span>} />
@@ -629,7 +620,7 @@ const renderPathwayPR = () => (
       <GuideCard
         title="189 - Skilled Independent"
         color="info"
-        className="from-blue-50 to-indigo-50 bg-gradient-to-br shadow-sm"
+        className="shadow-sm"
         footer={<p className="text-[10px] text-error font-bold">Persaingan sangat ketat & poin tinggi</p>}
       >
         <ul className="space-y-2 text-sm text-gray-700">
@@ -643,7 +634,7 @@ const renderPathwayPR = () => (
       <GuideCard
         title="190 - Skilled Nominated"
         color="success"
-        className="from-green-50 to-emerald-50 bg-gradient-to-br shadow-sm"
+        className="shadow-sm"
         footer={<p className="text-[10px] text-success font-bold italic">Jalur paling populer & realistis ✓</p>}
       >
         <ul className="space-y-2 text-sm text-gray-700">
@@ -657,7 +648,7 @@ const renderPathwayPR = () => (
       <GuideCard
         title="491 - Skilled Work Regional"
         color="purple"
-        className="from-purple-50 to-pink-50 bg-gradient-to-br shadow-sm"
+        className="shadow-sm"
         footer={<p className="text-[10px] text-purple-700 font-bold">Visa 5 thn → Jalur ke <GlossaryTooltip term="PR" /> (191)</p>}
       >
         <ul className="space-y-2 text-sm text-gray-700">
@@ -671,7 +662,7 @@ const renderPathwayPR = () => (
       <GuideCard
         title="500 - Student Visa"
         color="warning"
-        className="from-amber-50 to-orange-50 bg-gradient-to-br shadow-sm"
+        className="shadow-sm"
         footer={<p className="text-[10px] text-amber-700 font-bold uppercase">Membutuhkan modal besar</p>}
       >
         <ul className="space-y-2 text-sm text-gray-700">

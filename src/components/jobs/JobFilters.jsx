@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Search, Filter, ChevronDown, ChevronUp } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { Search, Filter, ChevronDown, ChevronUp, Briefcase, Building, Hash } from 'lucide-react';
 import { cn } from '../../utils/cn';
 
 const LOCATIONS = [
@@ -22,13 +22,69 @@ const JOB_TYPES = [
   { value: 'Contract', label: 'Contract' },
 ];
 
+// Popular search suggestions
+const SEARCH_SUGGESTIONS = {
+  jobTitles: [
+    'Accountant',
+    'Chef',
+    'Waiter',
+    'Barista',
+    'Retail Assistant',
+    'Farm Worker',
+    'Housekeeper',
+    'Receptionist',
+    'Driver',
+    'Warehouse Worker',
+  ],
+  keywords: [
+    'Hospitality',
+    'Retail',
+    'Farm Work',
+    'Customer Service',
+    'Warehouse',
+    'Cleaning',
+    'Sales',
+    'Administration',
+    'Healthcare',
+    'Construction',
+  ],
+  companies: [
+    'Woolworths',
+    'Coles',
+    'McDonalds',
+    'KFC',
+    'Starbucks',
+    'Bunnings',
+    'Domino\'s',
+    'Subway',
+    'Amazon',
+    'TJ Maxx',
+  ],
+};
+
 const JobFilters = ({
   filters = {},
   onFilterChange = () => {},
   onSearch = () => {},
   isLoading = false,
 }) => {
-  const [showAdvancedSearch, setShowAdvancedSearch] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [searchValue, setSearchValue] = useState(filters.keyword || '');
+  const searchRef = useRef(null);
+
+  // Close suggestions when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setShowSuggestions(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const handleLocationChange = (e) => {
     onFilterChange({ ...filters, location: e.target.value });
@@ -42,32 +98,40 @@ const JobFilters = ({
     onFilterChange({ ...filters, is88DaysEligible: !filters.is88DaysEligible });
   };
 
-  const handleJobTitleChange = (e) => {
-    onFilterChange({ ...filters, jobTitle: e.target.value });
+  const handleSearchInputChange = (e) => {
+    const value = e.target.value;
+    setSearchValue(value);
+    onFilterChange({ ...filters, keyword: value });
+    setShowSuggestions(true);
   };
 
-  const handleKeywordChange = (e) => {
-    onFilterChange({ ...filters, keyword: e.target.value });
+  const handleSearchKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      onSearch();
+      setShowSuggestions(false);
+    }
   };
 
-  const handleCompanyChange = (e) => {
-    onFilterChange({ ...filters, company: e.target.value });
+  const handleSuggestionClick = (suggestion) => {
+    setSearchValue(suggestion);
+    onFilterChange({ ...filters, keyword: suggestion });
+    setShowSuggestions(false);
+    onSearch();
   };
 
-  const toggleAdvancedSearch = () => {
-    setShowAdvancedSearch(!showAdvancedSearch);
+  const handleSearchClick = () => {
+    onSearch();
+    setShowSuggestions(false);
   };
 
-  const hasAdvancedFilters = () => {
-    return (filters.jobTitle && filters.jobTitle.trim()) ||
-           (filters.company && filters.company.trim());
+  const handleFocus = () => {
+    setShowSuggestions(true);
   };
 
   return (
     <div className="bg-white border border-gray-200 rounded-xl p-6 mb-6">
-      {/* Search Bar */}
-      <div className="mb-4">
-        {/* Main Search Input */}
+      {/* Search Bar with Suggestions */}
+      <div className="mb-4 relative" ref={searchRef}>
         <div className="relative">
           <Search
             size={20}
@@ -75,113 +139,99 @@ const JobFilters = ({
           />
           <input
             type="text"
-            value={filters.keyword || ''}
-            onChange={(e) => onFilterChange({ ...filters, keyword: e.target.value })}
-            onKeyPress={(e) => e.key === 'Enter' && onSearch()}
-            placeholder="Cari dengan keyword..."
+            value={searchValue}
+            onChange={handleSearchInputChange}
+            onKeyPress={handleSearchKeyPress}
+            onFocus={handleFocus}
+            placeholder="Cari job title, keyword, atau company..."
             className={cn(
               "w-full pl-12 pr-32 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indo-red focus:border-transparent transition-all",
-              showAdvancedSearch || hasAdvancedFilters()
-                ? "border-indo-red/50 rounded-b-none border-b-0"
+              showSuggestions
+                ? "border-indo-red rounded-b-none border-b-0"
                 : "border-gray-300"
             )}
           />
-          <div className="absolute right-2 top-1/2 -translate-y-1/2 flex gap-2">
-            <button
-              type="button"
-              onClick={toggleAdvancedSearch}
-              className={cn(
-                "px-3 py-2 rounded-lg font-medium transition-colors flex items-center gap-1",
-                showAdvancedSearch || hasAdvancedFilters()
-                  ? "bg-indo-red/10 text-indo-red"
-                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-              )}
-            >
-              {showAdvancedSearch ? (
-                <ChevronUp size={16} />
-              ) : (
-                <ChevronDown size={16} />
-              )}
-              <Filter size={16} />
-            </button>
-            <button
-              onClick={onSearch}
-              disabled={isLoading}
-              className={cn(
-                "px-6 py-2 rounded-lg font-medium transition-colors",
-                isLoading
-                  ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                  : "bg-indo-red text-white hover:bg-red-700"
-              )}
-            >
-              {isLoading ? 'Mencari...' : 'Cari'}
-            </button>
-          </div>
+          <button
+            onClick={handleSearchClick}
+            disabled={isLoading}
+            className={cn(
+              "absolute right-2 top-1/2 -translate-y-1/2 px-6 py-2 rounded-lg font-medium transition-colors",
+              isLoading
+                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                : "bg-indo-red text-white hover:bg-red-700"
+            )}
+          >
+            {isLoading ? 'Mencari...' : 'Cari'}
+          </button>
         </div>
 
-        {/* Advanced Search Dropdown - 3 Columns */}
-        {(showAdvancedSearch || hasAdvancedFilters()) && (
-          <div className="border border-indo-red/50 border-t-0 rounded-b-lg bg-gray-50 p-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {/* Job Title */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Job Title
-                </label>
-                <input
-                  type="text"
-                  value={filters.jobTitle || ''}
-                  onChange={handleJobTitleChange}
-                  onKeyPress={(e) => e.key === 'Enter' && onSearch()}
-                  placeholder="Contoh: Accountant, Chef..."
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indo-red focus:border-transparent bg-white"
-                />
+        {/* Search Suggestions Dropdown */}
+        {showSuggestions && (
+          <div className="absolute w-full border border-indo-red border-t-0 rounded-b-lg bg-white shadow-lg z-50">
+            <div className="grid grid-cols-3 divide-x divide-gray-200">
+              {/* Left Column - Job Titles */}
+              <div className="p-3">
+                <div className="flex items-center gap-2 mb-3 px-2">
+                  <Briefcase size={16} className="text-indo-red" />
+                  <span className="text-sm font-semibold text-gray-700">Job Titles</span>
+                </div>
+                <div className="space-y-1">
+                  {SEARCH_SUGGESTIONS.jobTitles.map((title) => (
+                    <button
+                      key={title}
+                      onClick={() => handleSuggestionClick(title)}
+                      className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-indo-red/5 rounded-lg transition-colors"
+                    >
+                      {title}
+                    </button>
+                  ))}
+                </div>
               </div>
 
-              {/* Keyword */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Keyword
-                </label>
-                <input
-                  type="text"
-                  value={filters.keyword || ''}
-                  onChange={handleKeywordChange}
-                  onKeyPress={(e) => e.key === 'Enter' && onSearch()}
-                  placeholder="Contoh: hospitality, retail..."
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indo-red focus:border-transparent bg-white"
-                />
+              {/* Middle Column - Companies */}
+              <div className="p-3">
+                <div className="flex items-center gap-2 mb-3 px-2">
+                  <Building size={16} className="text-indo-red" />
+                  <span className="text-sm font-semibold text-gray-700">Companies</span>
+                </div>
+                <div className="space-y-1">
+                  {SEARCH_SUGGESTIONS.companies.map((company) => (
+                    <button
+                      key={company}
+                      onClick={() => handleSuggestionClick(company)}
+                      className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-indo-red/5 rounded-lg transition-colors"
+                    >
+                      {company}
+                    </button>
+                  ))}
+                </div>
               </div>
 
-              {/* Company */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Company
-                </label>
-                <input
-                  type="text"
-                  value={filters.company || ''}
-                  onChange={handleCompanyChange}
-                  onKeyPress={(e) => e.key === 'Enter' && onSearch()}
-                  placeholder="Contoh: Woolworths, Coles..."
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indo-red focus:border-transparent bg-white"
-                />
+              {/* Right Column - Keywords */}
+              <div className="p-3">
+                <div className="flex items-center gap-2 mb-3 px-2">
+                  <Hash size={16} className="text-indo-red" />
+                  <span className="text-sm font-semibold text-gray-700">Keywords</span>
+                </div>
+                <div className="space-y-1">
+                  {SEARCH_SUGGESTIONS.keywords.map((keyword) => (
+                    <button
+                      key={keyword}
+                      onClick={() => handleSuggestionClick(keyword)}
+                      className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-indo-red/5 rounded-lg transition-colors"
+                    >
+                      {keyword}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
 
-            {/* Quick Actions */}
-            <div className="mt-4 flex items-center justify-between">
-              <p className="text-xs text-gray-500">
-                Gunakan filter di atas untuk pencarian lebih spesifik
+            {/* Footer hint */}
+            <div className="border-t border-gray-200 px-3 py-2 bg-gray-50">
+              <p className="text-xs text-gray-500 text-center">
+                Klik salah satu untuk langsung mencari
               </p>
-              {(filters.jobTitle || filters.company) && (
-                <button
-                  onClick={() => onFilterChange({ ...filters, jobTitle: '', company: '', keyword: '' })}
-                  className="text-sm text-indo-red hover:text-red-700 font-medium"
-                >
-                  Reset Semua
-                </button>
-              )}
             </div>
           </div>
         )}
