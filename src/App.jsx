@@ -1,9 +1,10 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import TopBar from './components/layout/TopBar';
 import Footer from './components/layout/Footer';
+import AIChatContainer from './components/ai-chat/AIChatContainer';
 
 // Placeholder pages - other agents will build these
-const AIChat = () => <div className="pt-20 px-4">AI Chat - Agent 04 will build this</div>;
+const AIChat = () => <AIChatContainer />;
 const JobSearch = () => <div className="pt-20 px-4">Cari Lowongan - Agent 05 will build this</div>;
 const ResumeChecker = () => <div className="pt-20 px-4">Cek Resume - Agent 06 will build this</div>;
 const Guides = () => <div className="pt-20 px-4">Panduan Lengkap - Agent 07 will build this</div>;
