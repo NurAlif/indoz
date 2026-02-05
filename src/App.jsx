@@ -28,7 +28,7 @@ function AppContent() {
         <Routes>
           <Route path="/" element={<AIChat />} />
           <Route path="/chat" element={<AIChat />} />
-          <Route path="/jobs" element={<div className="pt-16"><JobSearchContainer /></div>} />
+          <Route path="/jobs" element={<div className="h-[calc(100vh-4rem)] overflow-y-auto"><JobSearchContainer /></div>} />
           <Route
             path="/resume"
             element={

@@ -200,7 +200,13 @@ const AIChatContainer = () => {
                 </button>
               </div>
 
-              <p className="text-center text-xs text-gray-400">Ollie can make mistakes. Please verify important visa information.</p>
+              <div className="flex flex-col gap-1">
+                <p className="text-center text-xs text-gray-400">Ollie can make mistakes. Please verify important visa information.</p>
+                <div className="flex items-center justify-center gap-1.5 text-xs text-amber-600 bg-amber-50 px-3 py-1.5 rounded-lg border border-amber-200">
+                  <ShieldCheck size={14} />
+                  <span className="font-medium">Jangan masukkan informasi sensitif (password, data bank, nomor passport)</span>
+                </div>
+              </div>
             </div>
           </div>
         </main>

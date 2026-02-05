@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Save, Briefcase, Clock } from 'lucide-react';
+import { Briefcase } from 'lucide-react';
 import { searchJobs } from '../../services/jobsAPI';
 import JobFilters from './JobFilters';
 import JobCard from './JobCard';
 import JobSkeleton from './JobSkeleton';
-import SaveSearchModal from './SaveSearchModal';
-import SavedSearches from './SavedSearches';
 import Button from '../common/Button';
 
 const JobSearchContainer = () => {
   const [filters, setFilters] = useState({});
   const [jobs, setJobs] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [showSaveModal, setShowSaveModal] = useState(false);
-  const [showSavedSearches, setShowSavedSearches] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
 
   const handleSearch = async () => {
@@ -31,12 +27,6 @@ const JobSearchContainer = () => {
     }
   };
 
-  const handleLoadSavedSearch = (savedFilters) => {
-    setFilters(savedFilters);
-    handleSearch();
-    setShowSavedSearches(false);
-  };
-
   return (
     <div className="max-w-6xl mx-auto py-8 px-4">
       {/* Header */}
@@ -49,38 +39,9 @@ const JobSearchContainer = () => {
         </div>
 
         <div className="flex gap-2">
-          {hasSearched && (
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setShowSavedSearches(!showSavedSearches)}
-            >
-              <Clock size={16} className="mr-2" />
-              Tersimpan
-            </Button>
-          )}
-          {hasSearched && (
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={() => setShowSaveModal(true)}
-            >
-              <Save size={16} className="mr-2" />
-              Simpan Pencarian
-            </Button>
-          )}
+
         </div>
       </div>
-
-      {/* Saved Searches Panel */}
-      {showSavedSearches && (
-        <div className="mb-6 bg-white border border-gray-200 rounded-xl p-4">
-          <SavedSearches
-            onLoadSearch={handleLoadSavedSearch}
-            onDeleteSearch={() => {}}
-          />
-        </div>
-      )}
 
       {/* Filters */}
       <JobFilters
@@ -149,14 +110,6 @@ const JobSearchContainer = () => {
           </p>
         </div>
       )}
-
-      {/* Save Search Modal */}
-      <SaveSearchModal
-        isOpen={showSaveModal}
-        onClose={() => setShowSaveModal(false)}
-        filters={filters}
-        onSave={() => {}}
-      />
     </div>
   );
 };
