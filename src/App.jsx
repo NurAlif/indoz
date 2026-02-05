@@ -6,7 +6,15 @@ import JobSearchContainer from './components/jobs/JobSearchContainer';
 // Placeholder pages - other agents will build these
 const AIChat = () => <div className="pt-20 px-4">AI Chat - Agent 04 will build this</div>;
 const ResumeChecker = () => <div className="pt-20 px-4">Cek Resume - Agent 06 will build this</div>;
+import ResumeCheckerContainer from './components/resume/ResumeCheckerContainer';
+import GuidesContainer from './components/guides/GuidesContainer';
+
+// Placeholder pages - other agents will build these
+const AIChat = () => <div className="pt-20 px-4">AI Chat - Agent 04 will build this</div>;
+const JobSearch = () => <div className="pt-20 px-4">Cari Lowongan - Agent 05 will build this</div>;
 const Guides = () => <div className="pt-20 px-4">Panduan Lengkap - Agent 07 will build this</div>;
+const ResumeChecker = () => <div className="pt-20 px-4">Cek Resume - Agent 06 will build this</div>;
+const Guides = () => <div className="pt-20"><GuidesContainer /></div>;
 const Login = () => <div className="pt-20 px-4">Login Page</div>;
 
 function App() {
@@ -21,6 +29,15 @@ function App() {
             <Route path="/chat" element={<AIChat />} />
             <Route path="/jobs" element={<div className="pt-16"><JobSearchContainer /></div>} />
             <Route path="/resume" element={<ResumeChecker />} />
+            <Route path="/jobs" element={<JobSearch />} />
+            <Route
+              path="/resume"
+              element={
+                <div className="pt-20">
+                  <ResumeCheckerContainer />
+                </div>
+              }
+            />
             <Route path="/guides" element={<Guides />} />
             <Route path="/login" element={<Login />} />
           </Routes>
