@@ -6,7 +6,7 @@ import { useLocalStorage } from '../../hooks/useLocalStorage';
 import DocumentsVault from './DocumentsVault';
 import Logbook from './Logbook';
 import PRCalculator from './PRCalculator/PRCalculator';
-import FutureStrategy from './FutureStrategy';
+import FutureStrategy from './FutureStrategy/FutureStrategy';
 
 const PremiumDashboard = ({ onLogout = () => {} }) => {
   const [activeFeature, setActiveFeature] = useState(null);
