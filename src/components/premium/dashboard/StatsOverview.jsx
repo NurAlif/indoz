@@ -2,7 +2,7 @@ import React from 'react';
 import { Calculator, TrendingUp, Timer, CheckCircle, Star } from 'lucide-react';
 import { cn } from '../../../utils/cn';
 
-const StatsOverview = ({ prPoints = 85, prTarget = 100, logbookDays = 54, logbookTarget = 88, docsReady = 8, docsTotal = 8 }) => {
+const StatsOverview = ({ prPoints = 85, prTarget = 100, logbookDays = 54, logbookTarget = 88, docsReady = 8, docsTotal = 8, onNavigate }) => {
   const prPercentage = Math.min((prPoints / prTarget) * 100, 100);
   const logbookPercentage = Math.min((logbookDays / logbookTarget) * 100, 100);
   const logbookRemaining = Math.max(logbookTarget - logbookDays, 0);
@@ -10,7 +10,10 @@ const StatsOverview = ({ prPoints = 85, prTarget = 100, logbookDays = 54, logboo
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       {/* PR Points Card */}
-      <div className="group relative overflow-hidden rounded-xl bg-white p-6 shadow-sm border border-gray-200 transition-all hover:shadow-lg hover:-translate-y-1">
+      <div
+        onClick={() => onNavigate && onNavigate('pr-calc')}
+        className="group relative overflow-hidden rounded-xl bg-white p-6 shadow-sm border border-gray-200 transition-all hover:shadow-lg hover:-translate-y-1 cursor-pointer"
+      >
         <div className="absolute top-0 right-0 h-24 w-24 translate-x-8 -translate-y-2 rounded-full bg-oz-gold/10 blur-2xl transition-all group-hover:bg-oz-gold/20"></div>
         <div className="flex items-center justify-between mb-4">
           <div className="flex w-10 h-10 items-center justify-center rounded-lg bg-oz-gold/10 text-oz-gold">
@@ -31,7 +34,10 @@ const StatsOverview = ({ prPoints = 85, prTarget = 100, logbookDays = 54, logboo
       </div>
 
       {/* 88 Days Card */}
-      <div className="group relative overflow-hidden rounded-xl bg-white p-6 shadow-sm border border-gray-200 transition-all hover:shadow-lg hover:-translate-y-1">
+      <div
+        onClick={() => onNavigate && onNavigate('logbook')}
+        className="group relative overflow-hidden rounded-xl bg-white p-6 shadow-sm border border-gray-200 transition-all hover:shadow-lg hover:-translate-y-1 cursor-pointer"
+      >
         <div className="absolute top-0 right-0 h-24 w-24 translate-x-8 -translate-y-2 rounded-full bg-indo-red/10 blur-2xl transition-all group-hover:bg-indo-red/20"></div>
         <div className="flex items-center justify-between mb-4">
           <div className="flex w-10 h-10 items-center justify-center rounded-lg bg-indo-red/10 text-indo-red">
@@ -53,7 +59,10 @@ const StatsOverview = ({ prPoints = 85, prTarget = 100, logbookDays = 54, logboo
       </div>
 
       {/* Docs Card */}
-      <div className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-oz-gold to-yellow-600 p-6 shadow-md text-white transition-all hover:shadow-lg hover:-translate-y-1">
+      <div
+        onClick={() => onNavigate && onNavigate('documents')}
+        className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-oz-gold to-yellow-600 p-6 shadow-md text-white transition-all hover:shadow-lg hover:-translate-y-1 cursor-pointer"
+      >
         <div className="absolute bottom-0 right-0 h-32 w-32 translate-x-8 translate-y-8 rounded-full bg-white/20 blur-2xl"></div>
         <div className="flex items-center justify-between mb-4 relative z-10">
           <div className="flex w-10 h-10 items-center justify-center rounded-lg bg-white/20 text-white backdrop-blur-sm">
