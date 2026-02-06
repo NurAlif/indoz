@@ -18,7 +18,7 @@ const PremiumLayout = ({ children, activeTab, onTabChange, onLogout }) => {
       {sidebarOpen && (
         <div className="fixed inset-0 z-50 lg:hidden flex">
           <div className="fixed inset-0 bg-black/50 transition-opacity" onClick={() => setSidebarOpen(false)} />
-          <div className="relative bg-white h-full w-80 shadow-xl animate-in slide-in-from-left duration-300">
+          <div className="relative bg-white h-full w-80 max-w-[85vw] shadow-xl animate-in slide-in-from-left duration-300">
             <PremiumSidebar
               activeTab={activeTab}
               onTabChange={(tab) => { onTabChange(tab); setSidebarOpen(false); }}
@@ -34,7 +34,7 @@ const PremiumLayout = ({ children, activeTab, onTabChange, onLogout }) => {
         <PremiumHeader toggleSidebar={() => setSidebarOpen(true)} />
 
         {/* Scrollable Content */}
-        <div className="flex-1 overflow-y-auto bg-gray-50 p-6 lg:p-10 scroll-smooth">
+        <div className="flex-1 overflow-y-auto bg-gray-50 p-4 lg:p-10 scroll-smooth">
           <div className="mx-auto max-w-screen-2xl flex flex-col gap-8 pb-10">
             {children}
           </div>

@@ -31,9 +31,9 @@ const Logbook = () => {
   }, []);
 
   return (
-    <div className="p-8 max-w-5xl mx-auto">
+    <div className="p-4 md:p-8 max-w-5xl mx-auto">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Logbook 88 Hari</h1>
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Logbook 88 Hari</h1>
         <p className="text-gray-600">
           Catat hari kerja untuk memenuhi syarat 88 days WHV. Gunakan logbook ini untuk tracking saat bekerja di Australia.
         </p>

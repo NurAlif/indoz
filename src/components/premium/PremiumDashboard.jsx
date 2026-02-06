@@ -33,10 +33,10 @@ const PremiumDashboard = ({ onLogout }) => {
             {/* Welcome Section */}
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
               <div className="flex flex-col gap-2">
-                <h1 className="text-4xl font-black tracking-tight text-gray-900">
+                <h1 className="text-2xl md:text-4xl font-black tracking-tight text-gray-900">
                   Selamat datang kembali, <span className="text-transparent bg-clip-text bg-gradient-to-r from-indo-red to-orange-500">Budi</span>
                 </h1>
-                <p className="text-lg text-gray-500">
+                <p className="text-base md:text-lg text-gray-500">
                   Perjalanan migrasi Anda ke Australia bergerak cepat.
                 </p>
               </div>
