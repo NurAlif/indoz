@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { cn } from '../../utils/cn';
+import FeedbackModal from '../common/FeedbackModal';
 
 const NAV_ITEMS = [
   { name: 'AI Chat', path: '/chat' },
@@ -14,6 +15,7 @@ const NAV_ITEMS = [
 const TopBar = () => {
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+  const [showFeedback, setShowFeedback] = React.useState(false);
 
   // Close mobile menu on route change
   React.useEffect(() => {
@@ -22,6 +24,7 @@ const TopBar = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-40 bg-white border-b border-gray-200">
+      <FeedbackModal isOpen={showFeedback} onClose={() => setShowFeedback(false)} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -70,11 +73,14 @@ const TopBar = () => {
             })}
           </nav>
 
-          {/* Login Button */}
+          {/* Feedback Button */}
           <div className="hidden md:block">
-            <Link to="/login" className="btn-primary">
-              Masuk
-            </Link>
+            <button
+              onClick={() => setShowFeedback(true)}
+              className="btn-primary"
+            >
+              Feedback
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -122,12 +128,15 @@ const TopBar = () => {
                 </Link>
               );
             })}
-            <Link
-              to="/login"
+            <button
+              onClick={() => {
+                setShowFeedback(true);
+                setIsMobileMenuOpen(false);
+              }}
               className="block w-full px-4 py-2 text-center text-sm font-medium bg-indo-red text-white rounded-lg hover:bg-red-700 transition-colors"
             >
-              Masuk
-            </Link>
+              Feedback
+            </button>
           </div>
         </div>
       )}
