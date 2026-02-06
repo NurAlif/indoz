@@ -23,7 +23,7 @@ const AIChatContainer = ({ embedded = false }) => {
   // Initial static AI message
   const initialAI = {
     role: 'assistant',
-    content: `Halo! I'm Ollie 2.0. 👋\n\nHow can I help you with your move to Australia today? I can assist with:\n• Visa requirements (WHV, SDUWHV)\n• Finding a job in hospitality or farm work\n• Accommodation tips`
+    content: `Halo! Aku Ollie 2.0. 👋\n\nApa yang bisa aku bantu untuk kepindahanmu ke Australia hari ini? Aku bisa bantu soal:\n• Syarat Visa (WHV, SDUWHV)\n• Cari kerja di hospitality atau farm\n• Tips akomodasi`
   };
 
   const [messages, setMessages] = useState([]);
@@ -202,7 +202,7 @@ const AIChatContainer = ({ embedded = false }) => {
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={handleKeyPress}
                   className="flex-1 max-h-32 min-h-[44px] py-2.5 bg-transparent border-none focus:ring-0 text-gray-900 placeholder:text-gray-400 resize-none text-base"
-                  placeholder="Type your message to Ollie..."
+                  placeholder="Ketik pesanmu ke Ollie..."
                   rows={1}
                   disabled={isGenerating}
                 />
@@ -222,7 +222,7 @@ const AIChatContainer = ({ embedded = false }) => {
               </div>
 
               <div className="flex flex-col gap-1">
-                <p className="text-center text-xs text-gray-400">Ollie can make mistakes. Please verify important visa information.</p>
+                <p className="text-center text-xs text-gray-400">Ollie bisa saja membuat kesalahan. Mohon verifikasi informasi visa yang penting.</p>
                 <div className="flex items-center justify-center gap-1.5 text-xs text-amber-600 bg-amber-50 px-3 py-1.5 rounded-lg border border-amber-200">
                   <ShieldCheck size={14} />
                   <span className="font-medium">Jangan masukkan informasi sensitif (password, data bank, nomor passport)</span>

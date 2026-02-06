@@ -16,7 +16,7 @@ const FloatingChatWidget = () => {
   // Initial Ollie greeting
   const initialAI = {
     role: 'assistant',
-    content: `Halo! I'm Ollie. 👋\n\nButuh bantuan seputar WHV, kerjaan, atau hidup di Australia? Tanya aku di sini!`
+    content: `Halo! Aku Ollie. 👋\n\nButuh bantuan seputar WHV, kerjaan, atau hidup di Australia? Tanya aku di sini!`
   };
 
   const displayMessages = messages.length === 0 ? [initialAI] : [initialAI, ...messages];
@@ -104,8 +104,8 @@ const FloatingChatWidget = () => {
               <span className="absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full ring-2 ring-indo-red bg-green-400"></span>
             </div>
             <div>
-              <h3 className="font-bold text-sm">Ollie Assistant</h3>
-              <p className="text-[10px] text-white/80">Online • Reply Instantly</p>
+              <h3 className="font-bold text-sm">Asisten Ollie</h3>
+              <p className="text-[10px] text-white/80">Online • Balas Instan</p>
             </div>
           </div>
           <button
@@ -129,7 +129,7 @@ const FloatingChatWidget = () => {
         {contextData && (
           <div className="bg-blue-50 px-4 py-2 border-t border-blue-100 flex items-center justify-between shrink-0">
             <div className="flex items-center gap-2 overflow-hidden">
-              <span className="text-blue-500 text-xs font-bold uppercase tracking-wider shrink-0">Topic:</span>
+              <span className="text-blue-500 text-xs font-bold uppercase tracking-wider shrink-0">Topik:</span>
               <span className="text-sm text-blue-800 font-medium truncate">{contextData.title}</span>
             </div>
             <button
@@ -150,7 +150,7 @@ const FloatingChatWidget = () => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder={contextData ? `Tanyakan tentang ${contextData.title}...` : "Tanya Ollie..."}
+              placeholder={contextData ? `Tanyakan tentang ${contextData.title}...` : "Ketik pesanmu..."}
               className="flex-1 bg-gray-100 text-gray-900 placeholder:text-gray-500 rounded-full px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indo-red/20 transition-all"
               disabled={isGenerating}
             />
@@ -168,7 +168,7 @@ const FloatingChatWidget = () => {
             </button>
           </div>
           <div className="text-center mt-2">
-            <p className="text-[10px] text-gray-400">Powered by IndOz AI</p>
+            <p className="text-[10px] text-gray-400">Ditenagai oleh IndOz AI</p>
           </div>
         </div>
       </div>

@@ -5,7 +5,7 @@ const JobMatchesWidget = () => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <h3 className="text-lg font-bold text-gray-900">Premium Job Matches</h3>
+        <h3 className="text-lg font-bold text-gray-900">Lowongan Premium Cocok</h3>
         <div className="flex gap-2">
           <button className="p-1 rounded hover:bg-gray-100 text-gray-600">
             <ChevronLeft size={20} />
@@ -29,7 +29,7 @@ const JobMatchesWidget = () => {
                 <p className="text-xs text-gray-500">Logistics AU • Melbourne</p>
               </div>
             </div>
-            <span className="rounded bg-indo-red/10 px-2 py-1 text-[10px] font-bold uppercase text-indo-red">New</span>
+            <span className="rounded bg-indo-red/10 px-2 py-1 text-[10px] font-bold uppercase text-indo-red">Baru</span>
           </div>
           <div className="flex flex-wrap gap-2 mt-2">
             <span className="rounded bg-gray-100 px-2 py-1 text-[10px] font-medium text-gray-600">Full Time</span>

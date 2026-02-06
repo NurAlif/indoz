@@ -23,7 +23,7 @@ const StatsOverview = ({ prPoints = 85, prTarget = 100, logbookDays = 54, logboo
             <TrendingUp size={14} /> +5 pts
           </span>
         </div>
-        <h3 className="text-sm font-medium text-gray-500">PR Points Score</h3>
+        <h3 className="text-sm font-medium text-gray-500">Skor Poin PR</h3>
         <div className="mt-2 flex items-baseline gap-2">
           <span className="text-3xl font-bold text-gray-900">{prPoints}</span>
           <span className="text-sm text-gray-400">/ {prTarget} Target</span>
@@ -45,16 +45,16 @@ const StatsOverview = ({ prPoints = 85, prTarget = 100, logbookDays = 54, logboo
           </div>
           <span className="text-xs font-medium text-gray-400">WHV 417/462</span>
         </div>
-        <h3 className="text-sm font-medium text-gray-500">Days Completed</h3>
+        <h3 className="text-sm font-medium text-gray-500">Hari Selesai</h3>
         <div className="mt-2 flex items-baseline gap-2">
           <span className="text-3xl font-bold text-gray-900">{logbookDays}</span>
-          <span className="text-sm text-gray-400">/ {logbookTarget} Days</span>
+          <span className="text-sm text-gray-400">/ {logbookTarget} Hari</span>
         </div>
         <div className="mt-4 flex flex-col gap-1">
           <div className="h-1.5 w-full rounded-full bg-gray-100 overflow-hidden">
             <div className="h-full rounded-full bg-indo-red transition-all duration-1000" style={{ width: `${logbookPercentage}%` }}></div>
           </div>
-          <p className="text-xs text-indo-red font-medium text-right mt-1">{logbookRemaining} days remaining</p>
+          <p className="text-xs text-indo-red font-medium text-right mt-1">{logbookRemaining} hari tersisa</p>
         </div>
       </div>
 
@@ -71,12 +71,12 @@ const StatsOverview = ({ prPoints = 85, prTarget = 100, logbookDays = 54, logboo
           <Star className="text-white/60" size={20} />
         </div>
         <div className="relative z-10">
-          <h3 className="text-sm font-medium text-white/80">Document Vault</h3>
+          <h3 className="text-sm font-medium text-white/80">Brankas Dokumen</h3>
           <div className="mt-2 flex items-baseline gap-2">
             <span className="text-3xl font-bold text-white">{docsReady}/{docsTotal}</span>
-            <span className="text-sm text-white/80">Ready</span>
+            <span className="text-sm text-white/80">Siap</span>
           </div>
-          <p className="mt-4 text-xs font-medium text-white/90 bg-white/20 inline-block px-2 py-1 rounded">Ready for Visa Application</p>
+          <p className="mt-4 text-xs font-medium text-white/90 bg-white/20 inline-block px-2 py-1 rounded">Siap untuk Aplikasi Visa</p>
         </div>
       </div>
     </div>

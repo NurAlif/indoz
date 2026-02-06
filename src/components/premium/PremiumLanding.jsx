@@ -6,27 +6,27 @@ import TopBar from '../layout/TopBar';
 const PREMIUM_FEATURES = [
   {
     icon: <Calculator className="w-8 h-8 text-oz-gold" />,
-    title: 'PR Points Calculator',
-    description: 'Stop guessing. Calculate your eligibility points accurately with our smart tool tailored for WHV holders aiming for PR.',
-    benefits: ['Real-time points tracking', 'Strategic planning', 'Eligibility alerts']
+    title: 'Kalkulator Poin PR',
+    description: 'Berhenti menebak. Hitung poin eligibilitas Anda secara akurat dengan alat pintar kami yang dirancang khusus untuk pemegang WHV yang mengincar PR.',
+    benefits: ['Pelacakan poin real-time', 'Perencanaan strategis', 'Notifikasi eligibilitas']
   },
   {
     icon: <Clock className="w-8 h-8 text-oz-gold" />,
-    title: '88 Days Logbook',
-    description: 'Ensure your second and third-year visa approvals. Log your farm work days with precision and generate compliance reports.',
-    benefits: ['GPS verification support', 'Payslip organization', 'Days countdown']
+    title: 'Logbook 88 Hari',
+    description: 'Pastikan persetujuan visa tahun kedua dan ketiga Anda. Catat hari kerja pertanian dengan presisi dan buat laporan kepatuhan.',
+    benefits: ['Dukungan verifikasi GPS', 'Pengorganisasian slip gaji', 'Hitung mundur hari']
   },
   {
     icon: <Shield className="w-8 h-8 text-oz-gold" />,
-    title: 'Documents Vault',
-    description: 'Your secure digital fortress. Keep all your visa documents, certifications, and ID proofs organized and ready for application day.',
-    benefits: ['Encrypted storage', 'Expiry notifications', 'Easy export']
+    title: 'Brankas Dokumen',
+    description: 'Benteng digital aman Anda. Simpan semua dokumen visa, sertifikasi, dan bukti ID Anda terorganisir dan siap untuk hari aplikasi.',
+    benefits: ['Penyimpanan terenkripsi', 'Notifikasi kedaluwarsa', 'Ekspor mudah']
   },
   {
     icon: <Zap className="w-8 h-8 text-oz-gold" />,
-    title: 'Future Strategy',
-    description: 'AI-powered insights to help you plan your migration pathway beyond the Working Holiday Visa.',
-    benefits: ['Migration trends', 'Visa options explorer', 'Personalized roadmap']
+    title: 'Strategi Masa Depan',
+    description: 'Wawasan bertenaga AI untuk membantu merencanakan jalur migrasi Anda setelah Working Holiday Visa.',
+    benefits: ['Tren migrasi', 'Penjelajah opsi visa', 'Peta jalan personal']
   }
 ];
 
@@ -40,7 +40,7 @@ const PremiumLanding = ({ onUnlock = () => { } }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!accessCode.trim()) {
-      setError('Please enter an access code');
+      setError('Silakan masukkan kode akses');
       return;
     }
     setIsSubmitting(true);
@@ -54,14 +54,14 @@ const PremiumLanding = ({ onUnlock = () => { } }) => {
       // Return immediately - navigation will happen via onUnlock
       return;
     } else {
-      setError('Invalid access code. Please check and try again.');
+      setError('Kode akses tidak valid. Silakan periksa dan coba lagi.');
     }
     setIsSubmitting(false);
   };
 
   const handlePurchase = () => {
     // Demo alert
-    alert('Demo Access: Use code BETA2025 to unlock premium features.');
+    alert('Akses Demo: Gunakan kode BETA2025 untuk membuka fitur premium.');
   };
 
   const scrollToUnlock = () => {
@@ -81,15 +81,15 @@ const PremiumLanding = ({ onUnlock = () => { } }) => {
         <div className="max-w-6xl mx-auto relative z-10 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-oz-gold/20 border border-oz-gold/30 rounded-full mb-6 backdrop-blur-sm">
             <Crown size={16} className="text-oz-gold" />
-            <span className="text-oz-gold font-medium text-sm tracking-wide">PREMIUM MEMBERSHIP</span>
+            <span className="text-oz-gold font-medium text-sm tracking-wide">KEANGGOTAAN PREMIUM</span>
           </div>
 
           <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight leading-tight">
-            Unlock Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-oz-gold to-yellow-200">Australian Dream</span>
+            Wujudkan <span className="text-transparent bg-clip-text bg-gradient-to-r from-oz-gold to-yellow-200">Mimpi Australiamu</span>
           </h1>
 
           <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed">
-            The all-in-one toolkit designed to streamline your Working Holiday Visa journey and fast-track your path to Permanent Residency.
+            Toolkit lengkap yang dirancang untuk memperlancar perjalanan Working Holiday Visa Anda dan mempercepat jalan menuju Permanent Residency.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -97,22 +97,22 @@ const PremiumLanding = ({ onUnlock = () => { } }) => {
               onClick={handlePurchase}
               className="px-8 py-4 bg-indo-red hover:bg-red-700 text-white text-lg font-bold rounded-xl transition-all shadow-lg shadow-indo-red/25 hover:shadow-indo-red/40 hover:-translate-y-1 flex items-center gap-2"
             >
-              Get Premium Access <ArrowRight size={20} />
+              Dapatkan Akses Premium <ArrowRight size={20} />
             </button>
             <button
               onClick={scrollToUnlock}
               className="px-8 py-4 bg-white/10 hover:bg-white/20 text-white text-lg font-medium rounded-xl backdrop-blur-sm transition-all border border-white/10"
             >
-              Have a code? Unlock
+              Punya kode? Buka Akses
             </button>
           </div>
 
           <div className="mt-12 flex items-center justify-center gap-8 text-sm text-gray-400">
             <div className="flex items-center gap-2">
-              <Check size={16} className="text-success" /> No credit card required (Beta)
+              <Check size={16} className="text-success" /> Tanpa kartu kredit (Beta)
             </div>
             <div className="flex items-center gap-2">
-              <Check size={16} className="text-success" /> Instant activation
+              <Check size={16} className="text-success" /> Aktivasi instan
             </div>
           </div>
         </div>
@@ -121,9 +121,9 @@ const PremiumLanding = ({ onUnlock = () => { } }) => {
       {/* Value Proposition Grid */}
       <div className="max-w-7xl mx-auto px-6 py-20">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Everything you need to succeed</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">Semua yang Anda butuhkan untuk sukses</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            IndOz+ Premium gives you the competitive edge in your migration journey with professional-grade tools.
+            IndOz+ Premium memberi Anda keunggulan kompetitif dalam perjalanan migrasi Anda dengan alat kelas profesional.
           </p>
         </div>
 
@@ -157,19 +157,19 @@ const PremiumLanding = ({ onUnlock = () => { } }) => {
           <div className="inline-block p-3 bg-oz-gold/20 rounded-full mb-6">
             <Star className="text-oz-gold w-8 h-8" fill="currentColor" />
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Join the IndOz+ Community</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Gabung Komunitas IndOz+</h2>
           <p className="text-lg text-gray-300 mb-8 max-w-xl mx-auto">
-            Get access to all premium features and future updates. Start your journey with the right tools today.
+            Dapatkan akses ke semua fitur premium dan pembaruan masa depan. Mulai perjalanan Anda dengan alat yang tepat hari ini.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={handlePurchase}
               className="px-8 py-3 bg-oz-gold hover:bg-yellow-600 text-gray-900 font-bold rounded-lg transition-colors text-lg"
             >
-              Get Started Now
+              Mulai Sekarang
             </button>
           </div>
-          <p className="mt-6 text-sm text-gray-400">Limited time beta access available.</p>
+          <p className="mt-6 text-sm text-gray-400">Akses beta waktu terbatas tersedia.</p>
         </div>
       </div>
 
@@ -182,8 +182,8 @@ const PremiumLanding = ({ onUnlock = () => { } }) => {
                 <Lock className="text-indo-red w-6 h-6" />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-gray-900">Member Access</h3>
-                <p className="text-gray-600 text-sm">Already have a code? Enter it below.</p>
+                <h3 className="text-xl font-bold text-gray-900">Akses Member</h3>
+                <p className="text-gray-600 text-sm">Sudah punya kode? Masukkan di bawah ini.</p>
               </div>
             </div>
 
@@ -193,7 +193,7 @@ const PremiumLanding = ({ onUnlock = () => { } }) => {
                   type="text"
                   value={accessCode}
                   onChange={(e) => setAccessCode(e.target.value)}
-                  placeholder="Enter your access code (e.g., BETA2025)"
+                  placeholder="Masukkan kode akses Anda (contoh: BETA2025)"
                   className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indo-red focus:border-transparent font-mono uppercase"
                 />
                 <button
@@ -201,7 +201,7 @@ const PremiumLanding = ({ onUnlock = () => { } }) => {
                   disabled={isSubmitting}
                   className="px-6 py-3 bg-gray-900 text-white font-semibold rounded-lg hover:bg-gray-800 transition-colors disabled:opacity-50 flex items-center justify-center gap-2 whitespace-nowrap"
                 >
-                  {isSubmitting ? 'Verifying...' : 'Unlock Access'}
+                  {isSubmitting ? 'Memverifikasi...' : 'Buka Akses'}
                   {!isSubmitting && <ChevronRight size={18} />}
                 </button>
               </div>
@@ -211,9 +211,9 @@ const PremiumLanding = ({ onUnlock = () => { } }) => {
             </form>
           </div>
           <div className="bg-gray-50 px-8 py-4 border-t border-gray-100 flex justify-between items-center text-sm">
-            <span className="text-gray-500">Need help?</span>
+            <span className="text-gray-500">Butuh bantuan?</span>
             <button onClick={handlePurchase} className="text-indo-red font-medium hover:underline">
-              Request Access Code
+              Minta Kode Akses
             </button>
           </div>
         </div>

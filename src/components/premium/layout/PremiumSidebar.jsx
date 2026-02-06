@@ -16,12 +16,12 @@ import { cn } from '../../../utils/cn';
 
 const PremiumSidebar = ({ activeTab, onTabChange, onLogout, className }) => {
   const navItems = [
-    { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, isPremium: false },
-    { id: 'aichat', label: 'AI Chat Pro', icon: MessageSquare, isPremium: true },
-    { id: 'documents', label: 'Document Vault', icon: FileText, isPremium: true },
-    { id: 'logbook', label: '88-Day Logbook', icon: Scroll, isPremium: true },
-    { id: 'pr-calc', label: 'PR Points Simulator', icon: Calculator, isPremium: true },
-    { id: 'jobs', label: 'Job Matches', icon: Briefcase, isPremium: false },
+    { id: 'dashboard', label: 'Dasbor', icon: LayoutDashboard, isPremium: false },
+    { id: 'aichat', label: 'Chat AI Pro', icon: MessageSquare, isPremium: true },
+    { id: 'documents', label: 'Brankas Dokumen', icon: FileText, isPremium: true },
+    { id: 'logbook', label: 'Logbook 88 Hari', icon: Scroll, isPremium: true },
+    { id: 'pr-calc', label: 'Simulator Poin PR', icon: Calculator, isPremium: true },
+    { id: 'jobs', label: 'Lowongan Cocok', icon: Briefcase, isPremium: false },
     { id: 'resume', label: 'Cek Resume', icon: FileSearch, isPremium: false },
     { id: 'guides', label: 'Panduan', icon: BookOpen, isPremium: false },
   ];
@@ -67,7 +67,7 @@ const PremiumSidebar = ({ activeTab, onTabChange, onLogout, className }) => {
             </div>
             <div className="flex flex-col">
               <h1 className="text-lg font-bold text-gray-900">IndOz+</h1>
-              <p className="text-oz-gold text-xs font-semibold uppercase tracking-wider">Premium Member</p>
+              <p className="text-oz-gold text-xs font-semibold uppercase tracking-wider">Member Premium</p>
             </div>
           </div>
 
@@ -84,7 +84,7 @@ const PremiumSidebar = ({ activeTab, onTabChange, onLogout, className }) => {
             className="flex items-center gap-3 px-4 py-2 text-gray-600 hover:text-indo-red transition-colors w-full text-left"
           >
             <LogOut size={20} />
-            <p className="text-sm font-medium">Log Out</p>
+            <p className="text-sm font-medium">Keluar</p>
           </button>
         </div>
       </div>

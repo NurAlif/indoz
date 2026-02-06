@@ -10,12 +10,12 @@ const RecentActivity = ({ onNavigate }) => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <h3 className="text-lg font-bold text-gray-900">Recent Farm Work</h3>
+        <h3 className="text-lg font-bold text-gray-900">Pekerjaan Farm Terbaru</h3>
         <button
           onClick={() => onNavigate && onNavigate('logbook')}
           className="text-sm font-medium text-indo-red hover:text-red-700 transition-colors"
         >
-          View Full Logbook
+          Lihat Logbook Lengkap
         </button>
       </div>
       <div className="rounded-xl border border-gray-200 bg-white overflow-hidden shadow-sm">
@@ -23,10 +23,10 @@ const RecentActivity = ({ onNavigate }) => {
           <table className="w-full text-left text-sm">
             <thead className="bg-gray-50 text-gray-900 border-b border-gray-200">
               <tr>
-                <th className="px-6 py-3 font-semibold">Employer</th>
-                <th className="px-6 py-3 font-semibold">Location</th>
-                <th className="px-6 py-3 font-semibold">Date</th>
-                <th className="px-6 py-3 font-semibold text-right">Hours</th>
+                <th className="px-6 py-3 font-semibold">Pemberi Kerja</th>
+                <th className="px-6 py-3 font-semibold">Lokasi</th>
+                <th className="px-6 py-3 font-semibold">Tanggal</th>
+                <th className="px-6 py-3 font-semibold text-right">Jam</th>
                 <th className="px-6 py-3 font-semibold text-center">Status</th>
               </tr>
             </thead>

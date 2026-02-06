@@ -91,7 +91,7 @@ const UploadModal = ({ isOpen, onClose, onUpload, documentTitle }) => {
     <Modal
       isOpen={isOpen}
       onClose={handleClose}
-      title={`Upload ${documentTitle}`}
+      title={`Unggah ${documentTitle}`}
       size="md"
     >
       <div className="space-y-6">
@@ -121,10 +121,10 @@ const UploadModal = ({ isOpen, onClose, onUpload, documentTitle }) => {
               <Upload className="text-gray-600" size={24} />
             </div>
             <p className="text-lg font-medium text-gray-900 mb-1">
-              Click to upload or drag and drop
+              Klik untuk mengunggah atau tarik dan lepas file
             </p>
             <p className="text-sm text-gray-500">
-              PDF, JPG, PNG (Max 4MB)
+              PDF, JPG, PNG (Maks 4MB)
             </p>
             {error && (
               <div className="flex items-center justify-center gap-2 mt-4 text-error text-sm font-medium">
@@ -170,7 +170,7 @@ const UploadModal = ({ isOpen, onClose, onUpload, documentTitle }) => {
             {uploading ? (
               <div className="space-y-2">
                 <div className="flex justify-between text-xs text-gray-600">
-                  <span>Uploading...</span>
+                  <span>Mengunggah...</span>
                   <span>{progress}%</span>
                 </div>
                 <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
@@ -182,7 +182,7 @@ const UploadModal = ({ isOpen, onClose, onUpload, documentTitle }) => {
               </div>
             ) : (
               <div className="flex items-center gap-2 text-xs text-success font-medium">
-                 Ready to upload
+                 Siap diunggah
               </div>
             )}
           </div>
@@ -195,14 +195,14 @@ const UploadModal = ({ isOpen, onClose, onUpload, documentTitle }) => {
             disabled={uploading}
             className="px-4 py-2 text-gray-600 font-medium hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-50"
           >
-            Cancel
+            Batal
           </button>
           <button
             onClick={handleUpload}
             disabled={!file || uploading}
             className="px-4 py-2 bg-indo-red text-white font-medium rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
           >
-            {uploading ? 'Uploading...' : 'Upload File'}
+            {uploading ? 'Mengunggah...' : 'Unggah File'}
           </button>
         </div>
       </div>
