@@ -70,68 +70,71 @@ const TopBar = () => {
             })}
           </nav>
 
-          {/* Login Button */}
+          {/* Feedback Button */}
           <div className="hidden md:block">
             <Link to="/premium" className="btn-primary">
               Masuk
             </Link>
-          </div>
+          </div >
 
           {/* Mobile Menu Button */}
-          <button
+          < button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden p-2 text-gray-600 hover:text-gray-900"
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-      </div>
+            aria - label="Toggle menu"
+  >
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button >
+      </div >
+    </div >
 
-      {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden border-t border-gray-200 bg-white">
-          <div className="px-4 py-4 space-y-2">
-            {NAV_ITEMS.map((item) => {
-              const isActive = location.pathname === item.path;
+  {/* Mobile Menu */ }
+  {
+    isMobileMenuOpen && (
+      <div className="md:hidden border-t border-gray-200 bg-white">
+        <div className="px-4 py-4 space-y-2">
+          {NAV_ITEMS.map((item) => {
+            const isActive = location.pathname === item.path;
 
-              if (item.isPremium) {
-                return (
-                  <Link
-                    key={item.path}
-                    to={item.path}
-                    className="block px-4 py-2 rounded-lg text-sm font-bold bg-yellow-50 text-yellow-700 hover:bg-yellow-100 transition-colors"
-                  >
-                    {item.name}
-                  </Link>
-                );
-              }
-
+            if (item.isPremium) {
               return (
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={cn(
-                    "block px-4 py-2 rounded-lg text-sm font-medium transition-colors",
-                    isActive
-                      ? "bg-indo-red/10 text-indo-red"
-                      : "text-gray-600 hover:bg-gray-100"
-                  )}
+                  className="block px-4 py-2 rounded-lg text-sm font-bold bg-yellow-50 text-yellow-700 hover:bg-yellow-100 transition-colors"
                 >
                   {item.name}
                 </Link>
               );
-            })}
-            <Link
-              to="/premium"
-              className="block w-full px-4 py-2 text-center text-sm font-medium bg-indo-red text-white rounded-lg hover:bg-red-700 transition-colors"
-            >
-              Masuk
-            </Link>
-          </div>
-        </div>
-      )}
-    </header>
+            }
+
+            return (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={cn(
+                  "block px-4 py-2 rounded-lg text-sm font-medium transition-colors",
+                  isActive
+                    ? "bg-indo-red/10 text-indo-red"
+                    : "text-gray-600 hover:bg-gray-100"
+                )}
+              >
+                {item.name}
+              </Link>
+            );
+          })}
+          <Link
+            to="/premium"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="block w-full px-4 py-2 text-center text-sm font-medium bg-indo-red text-white rounded-lg hover:bg-red-700 transition-colors"
+          >
+            Masuk
+          </Link>
+        </div >
+      </div >
+    )
+  }
+    </header >
   );
 };
 
