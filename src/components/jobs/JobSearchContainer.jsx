@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Briefcase } from 'lucide-react';
 import { searchJobs } from '../../services/jobsAPI';
+import { usePremium } from '../../hooks/usePremium';
 import JobFilters from './JobFilters';
 import JobCard from './JobCard';
 import JobSkeleton from './JobSkeleton';
 import Button from '../common/Button';
 
 const JobSearchContainer = () => {
+  const isPremium = usePremium();
   const [filters, setFilters] = useState({});
   const [jobs, setJobs] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -28,7 +30,7 @@ const JobSearchContainer = () => {
   };
 
   return (
-    <div className="w-full max-w-full mx-auto py-8 px-4">
+    <div className={`mx-auto py-8 px-4 ${isPremium ? 'w-full max-w-full' : 'max-w-6xl'}`}>
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>

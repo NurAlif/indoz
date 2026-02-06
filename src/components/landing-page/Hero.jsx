@@ -30,12 +30,16 @@ export default function Hero() {
                 to="/chat"
                 className="inline-flex items-center justify-center rounded-lg bg-red-600 px-6 py-3.5 text-base font-bold text-white shadow-md hover:bg-red-700 transition-all focus:ring-2 focus:ring-red-600 focus:ring-offset-2"
               >
-                Mulai Perjalanan Anda
+                Konsultasikan dengan Ollie Chat
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
-              <button className="inline-flex items-center justify-center rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent px-6 py-3.5 text-base font-semibold text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">
-                <PlayCircle className="mr-2 h-5 w-5" />
-                Tonton Video Panduan
+              <button className="relative inline-flex items-center justify-center rounded-lg px-6 py-3.5 text-base font-bold text-white bg-gradient-to-r from-yellow-500 via-yellow-400 to-amber-500 shadow-lg hover:shadow-xl hover:from-yellow-600 hover:via-yellow-500 hover:to-amber-600 transition-all duration-300 border border-yellow-300/30 group overflow-hidden">
+                <span className="absolute inset-0 bg-gradient-to-r from-yellow-400/0 via-yellow-300/30 to-yellow-400/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></span>
+                <PlayCircle className="mr-2 h-5 w-5 flex-shrink-0" />
+                <span className="relative">Pelajari IndoZ Premium</span>
+                <svg className="absolute -top-1 -right-1 w-4 h-4 text-yellow-200" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 0L14.59 8.41L23 12L14.59 15.59L12 24L9.41 15.59L1 12L9.41 8.41L12 0Z"/>
+                </svg>
               </button>
             </div>
           </div>

@@ -5,6 +5,9 @@ import { useOnboarding } from './hooks/useOnboarding';
 import OnboardingModal from './components/onboarding/OnboardingModal';
 import AIChatContainer from './components/ai-chat/AIChatContainer';
 import PremiumRoute from './components/premium/PremiumRoute';
+import PremiumLanding from './components/premium/PremiumLanding';
+import PremiumDashboard from './components/premium/PremiumDashboard';
+import ProtectedPremiumDashboard from './components/premium/ProtectedPremiumDashboard';
 import FloatingChatWidget from './components/common/FloatingChatWidget';
 import { ChatProvider, useChat } from './context/ChatContext';
 
@@ -21,14 +24,15 @@ function AppContent() {
   const { isOpen, handleClose } = useOnboarding();
   const { isAIChatPage } = useChat();
   const location = useLocation();
+  const isPremiumDashboard = location.pathname.startsWith('/premium/dashboard');
   const isPremium = location.pathname.startsWith('/premium');
   const isChat = location.pathname === '/chat';
 
   return (
     <>
-      {!isChat && <TopBar />}
+      {!isChat && !isPremiumDashboard && <TopBar />}
 
-      <main className={!isPremium ? "flex-grow" : "flex-grow min-h-screen bg-gray-50"}>
+      <main className={!isPremiumDashboard ? "flex-grow" : "flex-grow min-h-screen bg-gray-50"}>
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/chat" element={<AIChat />} />
@@ -44,10 +48,11 @@ function AppContent() {
           <Route path="/guides" element={<Guides />} />
           <Route path="/login" element={<Login />} />
           <Route path="/premium" element={<PremiumRoute />} />
+          <Route path="/premium/dashboard" element={<ProtectedPremiumDashboard />} />
         </Routes>
       </main>
 
-      {!isChat && <Footer />}
+      {!isChat && !isPremiumDashboard && <Footer />}
 
       {!isPremium && <OnboardingModal isOpen={isOpen} onClose={handleClose} />}
       {!isAIChatPage && <FloatingChatWidget />}

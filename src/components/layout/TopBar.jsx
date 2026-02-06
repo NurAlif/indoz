@@ -72,7 +72,7 @@ const TopBar = () => {
 
           {/* Masuk Button */}
           <div className="hidden md:block">
-            <Link to="/premium" className="btn-primary">
+            <Link to="/premium/dashboard" className="btn-primary">
               Masuk
             </Link>
           </div>
@@ -123,7 +123,7 @@ const TopBar = () => {
               );
             })}
             <Link
-              to="/premium"
+              to="/premium/dashboard"
               onClick={() => setIsMobileMenuOpen(false)}
               className="block w-full px-4 py-2 text-center text-sm font-medium bg-indo-red text-white rounded-lg hover:bg-red-700 transition-colors"
             >
