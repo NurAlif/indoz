@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { cn } from '../../utils/cn';
+import FeedbackModal from '../feedback/FeedbackModal';
 
 const NAV_ITEMS = [
   { name: 'AI Chat', path: '/chat' },
@@ -14,6 +15,7 @@ const NAV_ITEMS = [
 const TopBar = () => {
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+  const [isFeedbackOpen, setIsFeedbackOpen] = React.useState(false);
 
   // Close mobile menu on route change
   React.useEffect(() => {
@@ -70,11 +72,14 @@ const TopBar = () => {
             })}
           </nav>
 
-          {/* Login Button */}
+          {/* Feedback Button */}
           <div className="hidden md:block">
-            <Link to="/login" className="btn-primary">
-              Masuk
-            </Link>
+            <button
+              onClick={() => setIsFeedbackOpen(true)}
+              className="btn-primary"
+            >
+              Feedback
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -122,15 +127,20 @@ const TopBar = () => {
                 </Link>
               );
             })}
-            <Link
-              to="/login"
+            <button
+              onClick={() => {
+                setIsFeedbackOpen(true);
+                setIsMobileMenuOpen(false);
+              }}
               className="block w-full px-4 py-2 text-center text-sm font-medium bg-indo-red text-white rounded-lg hover:bg-red-700 transition-colors"
             >
-              Masuk
-            </Link>
+              Feedback
+            </button>
           </div>
         </div>
       )}
+
+      <FeedbackModal isOpen={isFeedbackOpen} onClose={() => setIsFeedbackOpen(false)} />
     </header>
   );
 };
