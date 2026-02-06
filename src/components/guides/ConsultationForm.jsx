@@ -5,7 +5,7 @@ import Button from '../common/Button';
 import { isValidEmail, isValidPhone } from '../../utils/validation';
 import { cn } from '../../utils/cn';
 
-const ConsultationForm = () => {
+const ConsultationForm = ({ className }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -72,31 +72,22 @@ const ConsultationForm = () => {
 
   if (isSubmitted) {
     return (
-      <div className="bg-white border border-gray-200 rounded-xl p-6">
-        <div className="text-center py-8">
-          <div className="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Send className="text-success" size={32} />
-          </div>
-          <h3 className="text-xl font-semibold text-gray-900 mb-2">
-            Terima Kasih!
-          </h3>
-          <p className="text-gray-600">
-            Permintaan konsultasi Anda telah terkirim. Kami akan menghubungi Anda segera.
-          </p>
+      <div className={cn("text-center py-8", className)}>
+        <div className="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-4">
+          <Send className="text-success" size={32} />
         </div>
+        <h3 className="text-xl font-semibold text-gray-900 mb-2">
+          Terima Kasih!
+        </h3>
+        <p className="text-gray-600">
+          Permintaan konsultasi Anda telah terkirim. Kami akan menghubungi Anda segera.
+        </p>
       </div>
     );
   }
 
   return (
-    <div className="bg-white border border-gray-200 rounded-xl p-6">
-      <h3 className="text-xl font-semibold text-gray-900 mb-2">
-        Butuh Bantuan Lebih Lanjut?
-      </h3>
-      <p className="text-gray-600 text-sm mb-6">
-        Konsultasi gratis dengan ahli imigrasi Australia
-      </p>
-
+    <div className={className}>
       <form onSubmit={handleSubmit} className="space-y-4">
         <Input
           label="Nama"
