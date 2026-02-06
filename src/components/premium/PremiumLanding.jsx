@@ -68,7 +68,7 @@ const PremiumLanding = ({ onUnlock = () => {} }) => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="relative overflow-hidden bg-gray-900 text-white pb-20 pt-10 px-6">
+      <div className="relative overflow-hidden bg-gray-900 text-white pb-20 pt-20 px-6">
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:16px_16px]"></div>
         <div className="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-indo-red/30 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-96 h-96 bg-oz-gold/20 rounded-full blur-3xl"></div>

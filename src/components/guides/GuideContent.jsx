@@ -3,6 +3,7 @@ import Markdown from 'react-markdown';
 import { cn } from '../../utils/cn';
 import { GuideCard, GuideTimeline } from './shared';
 import GlossaryTooltip from '../common/GlossaryTooltip';
+import { User, Heart, Shield, Wallet } from 'lucide-react';
 
 const ChecklistItem = ({ checked, text }) => (
   <li className="flex items-start gap-3 py-2">
@@ -24,7 +25,7 @@ const renderSyaratWHV = () => (
     </p>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       <GuideCard
-        icon="👤"
+        icon={<User className="w-8 h-8" />}
         title="Usia"
         color="info"
         items={[
@@ -33,7 +34,7 @@ const renderSyaratWHV = () => (
         ]}
       />
       <GuideCard
-        icon="🏥"
+        icon={<Heart className="w-8 h-8" />}
         title="Kesehatan"
         color="success"
         items={[
@@ -42,7 +43,7 @@ const renderSyaratWHV = () => (
         ]}
       />
       <GuideCard
-        icon="🛡️"
+        icon={<Shield className="w-8 h-8" />}
         title="Karakter"
         color="warning"
         items={[
@@ -51,7 +52,7 @@ const renderSyaratWHV = () => (
         ]}
       />
       <GuideCard
-        icon="💰"
+        icon={<Wallet className="w-8 h-8" />}
         title="Dana"
         color="purple"
         items={[

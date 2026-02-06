@@ -23,7 +23,7 @@ const TableOfContents = ({ sections = [], activeSection = '' }) => {
 
   return (
     <div className="hidden lg:block w-64 flex-shrink-0 relative">
-      <div className="sticky top-32 bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
+      <div className="sticky top-24 bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
         <h4 className="text-sm font-semibold text-gray-900 mb-3">Daftar Isi</h4>
         <nav className="space-y-2">
           {sections.map((section) => (

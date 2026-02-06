@@ -14,8 +14,10 @@ import ChatHistory from './ChatHistory';
 import ChatTabMenu from './ChatTabMenu';
 import { cn } from '../../utils/cn';
 import TopBar from '../layout/TopBar';
+import { useAIChatPage } from '../../context/ChatContext';
 
 const AIChatContainer = ({ embedded = false }) => {
+  useAIChatPage(); // Mark this as an AI Chat page
   // Check if user is premium
   const isPremium = localStorage.getItem('indoz_premium_code')?.length > 0;
   // Initial static AI message

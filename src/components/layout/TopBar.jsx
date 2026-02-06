@@ -36,7 +36,7 @@ const TopBar = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-1">
             {NAV_ITEMS.map((item) => {
-              const isActive = location.pathname === item.path || (item.path === '/chat' && location.pathname === '/');
+              const isActive = location.pathname === item.path;
 
               if (item.isPremium) {
                 return (
@@ -72,7 +72,7 @@ const TopBar = () => {
 
           {/* Login Button */}
           <div className="hidden md:block">
-            <Link to="/login" className="btn-primary">
+            <Link to="/premium" className="btn-primary">
               Masuk
             </Link>
           </div>
@@ -93,7 +93,7 @@ const TopBar = () => {
         <div className="md:hidden border-t border-gray-200 bg-white">
           <div className="px-4 py-4 space-y-2">
             {NAV_ITEMS.map((item) => {
-              const isActive = location.pathname === item.path || (item.path === '/chat' && location.pathname === '/');
+              const isActive = location.pathname === item.path;
 
               if (item.isPremium) {
                 return (
@@ -123,7 +123,7 @@ const TopBar = () => {
               );
             })}
             <Link
-              to="/login"
+              to="/premium"
               className="block w-full px-4 py-2 text-center text-sm font-medium bg-indo-red text-white rounded-lg hover:bg-red-700 transition-colors"
             >
               Masuk

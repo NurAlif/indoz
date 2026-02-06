@@ -1,10 +1,11 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const ChatContext = createContext();
 
 export const ChatProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [contextData, setContextData] = useState(null);
+  const [isAIChatPage, setIsAIChatPage] = useState(false);
 
   const toggleChat = () => setIsOpen(prev => !prev);
 
@@ -25,7 +26,9 @@ export const ChatProvider = ({ children }) => {
       setContextData,
       toggleChat,
       openChatWithContext,
-      clearContext
+      clearContext,
+      isAIChatPage,
+      setIsAIChatPage
     }}>
       {children}
     </ChatContext.Provider>
@@ -38,4 +41,13 @@ export const useChat = () => {
     throw new Error('useChat must be used within a ChatProvider');
   }
   return context;
+};
+
+export const useAIChatPage = () => {
+  const { isAIChatPage, setIsAIChatPage } = useChat();
+
+  React.useEffect(() => {
+    setIsAIChatPage(true);
+    return () => setIsAIChatPage(false);
+  }, [setIsAIChatPage]);
 };

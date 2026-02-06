@@ -97,10 +97,10 @@ const FloatingChatWidget = () => {
         <div className="bg-indo-red px-4 py-3 flex items-center justify-between text-white shrink-0">
           <div className="flex items-center gap-3">
             <div className="relative">
-               <div
-                  className="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-8 h-8 border border-white/20"
-                  style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuC5JWg3wVK1W01zF04ccC60xKNoj40pEGgog9eUFL8NDDnNsOvJVjiaXGXv8um7-4knjRO4UAj6_kPnol3_f8PD8X716oo58hDDlZe1Le1MwYEJClpYT0B5azlJofpGz9oR8Imbz2IL7WprMSlE8HIVGzLuxj0egKkhFIE-lyreG5q-8R_i26Cu5kWjKA7sIjcszBDqmdqQV0FNgJ-DGDMQ6YV3l_FW0iGnv_zwPKhWaB5nYsK-D0DRQfg-tGO7YkJ0yrvHrnpgKeg3")' }}
-                ></div>
+              <div
+                className="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-8 h-8 border border-white/20"
+                style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuC5JWg3wVK1W01zF04ccC60xKNoj40pEGgog9eUFL8NDDnNsOvJVjiaXGXv8um7-4knjRO4UAj6_kPnol3_f8PD8X716oo58hDDlZe1Le1MwYEJClpYT0B5azlJofpGz9oR8Imbz2IL7WprMSlE8HIVGzLuxj0egKkhFIE-lyreG5q-8R_i26Cu5kWjKA7sIjcszBDqmdqQV0FNgJ-DGDMQ6YV3l_FW0iGnv_zwPKhWaB5nYsK-D0DRQfg-tGO7YkJ0yrvHrnpgKeg3")' }}
+              ></div>
               <span className="absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full ring-2 ring-indo-red bg-green-400"></span>
             </div>
             <div>
@@ -118,11 +118,11 @@ const FloatingChatWidget = () => {
 
         {/* Messages Area */}
         <div className="flex-1 overflow-y-auto p-4 bg-gray-50 flex flex-col gap-4">
-           {/* Reuse ChatHistory but we might need to style the container to ensure it fits */}
-           <div className="text-sm">
-             <ChatHistory messages={displayMessages} isTyping={isGenerating} />
-           </div>
-           <div ref={chatEndRef} />
+          {/* Reuse ChatHistory but we might need to style the container to ensure it fits */}
+          <div className="text-sm">
+            <ChatHistory messages={displayMessages} isTyping={isGenerating} />
+          </div>
+          <div ref={chatEndRef} />
         </div>
 
         {/* Context Banner */}
@@ -173,16 +173,28 @@ const FloatingChatWidget = () => {
         </div>
       </div>
 
-      {/* Floating Toggle Button */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className={cn(
-          "h-14 w-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-4 focus:ring-indo-red/20 z-50",
-          isOpen ? "bg-gray-200 text-gray-600 rotate-90" : "bg-indo-red text-white hover:bg-red-700"
-        )}
-      >
-        {isOpen ? <X size={28} /> : <MessageCircle size={28} />}
-      </button>
+      {/* Floating Toggle Button with Label */}
+
+      {!isOpen && (
+        <button
+          onClick={() => setIsOpen(true)}
+          className="group flex items-center gap-0 z-50 transition-all duration-300 hover:scale-105 focus:outline-none"
+        >
+          {/* Label - Only visible when closed */}
+          <span className="bg-white text-indo-red text-sm font-bold uppercase tracking-wide py-3 pl-6 pr-5 rounded-l-full shadow-lg border-y border-l border-gray-100 h-14 flex items-center group-hover:bg-gray-50 transition-colors">
+            Tanya Ollie?
+          </span>
+
+          {/* Button Circle */}
+          <div
+            className="h-14 w-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 relative shrink-0 bg-indo-red text-white -ml-3 border-4 border-white z-10"
+          >
+            <MessageCircle size={28} />
+            {/* Online Indicator */}
+            <span className="absolute top-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-full animate-pulse"></span>
+          </div>
+        </button>
+      )}
     </div>
   );
 };

@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Download } from 'lucide-react';
 import PremiumLayout from './layout/PremiumLayout';
 import StatsOverview from './dashboard/StatsOverview';
 import RecentActivity from './dashboard/RecentActivity';
 import JobMatchesWidget from './dashboard/JobMatchesWidget';
 import SidebarWidgets from './dashboard/SidebarWidgets';
+import { useChat } from '../../context/ChatContext';
 
 // Feature components
 import DocumentsVault from './DocumentsVault/DocumentsVault';
@@ -17,6 +18,12 @@ import GuidesContainer from '../guides/GuidesContainer';
 
 const PremiumDashboard = ({ onLogout }) => {
   const [activeTab, setActiveTab] = useState('dashboard');
+  const { setIsAIChatPage } = useChat();
+
+  useEffect(() => {
+    // Only mark as AI Chat page when on aichat tab
+    setIsAIChatPage(activeTab === 'aichat');
+  }, [activeTab, setIsAIChatPage]);
 
   const renderContent = () => {
     switch (activeTab) {

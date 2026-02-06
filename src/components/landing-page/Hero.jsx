@@ -1,8 +1,9 @@
 import { ArrowRight, PlayCircle, CheckCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28">
+    <section className="relative overflow-hidden pt-20 pb-20 lg:pt-24 lg:pb-28">
       <div className="mx-auto max-w-[1280px] px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-8 items-center">
           {/* Hero Content */}
@@ -11,9 +12,9 @@ export default function Hero() {
               <span className="flex h-2 w-2 rounded-full bg-[#FFD700]"></span>
               <span className="text-xs font-semibold uppercase tracking-wide text-gray-600 dark:text-gray-300">Resmi & Terpercaya</span>
             </div>
-            <h1 className="text-4xl font-extrabold tracking-tight text-text-dark dark:text-white sm:text-5xl lg:text-6xl mb-6 leading-tight">
+            <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-5xl lg:text-6xl mb-6 leading-tight">
               Gerbang Karir & <br/>
-              <span className="text-primary relative inline-block">
+              <span className="text-red-600 relative inline-block">
                 Residensial Australia
                 <svg className="absolute -bottom-2 left-0 w-full h-3 text-[#FFD700] opacity-50" preserveAspectRatio="none" viewBox="0 0 100 10">
                   <path d="M0 5 Q 50 10 100 5" fill="none" stroke="currentColor" strokeWidth="3"></path>
@@ -25,13 +26,16 @@ export default function Hero() {
               Platform terpercaya untuk memandu setiap langkah perjalanan karir dan kehidupan baru Anda, mulai dari persiapan dokumen hingga menetap dengan nyaman.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3.5 text-base font-bold text-white shadow-md hover:bg-primary/90 transition-all focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-background-dark">
-                Konsultasikan dengan Ollie Chat
+              <Link
+                to="/chat"
+                className="inline-flex items-center justify-center rounded-lg bg-red-600 px-6 py-3.5 text-base font-bold text-white shadow-md hover:bg-red-700 transition-all focus:ring-2 focus:ring-red-600 focus:ring-offset-2"
+              >
+                Mulai Perjalanan Anda
                 <ArrowRight className="ml-2 h-5 w-5" />
-              </button>
-              <button className="inline-flex items-center justify-center rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent px-6 py-3.5 text-base font-semibold text-text-dark dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">
+              </Link>
+              <button className="inline-flex items-center justify-center rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent px-6 py-3.5 text-base font-semibold text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">
                 <PlayCircle className="mr-2 h-5 w-5" />
-                Pelajari IndoZ Premium
+                Tonton Video Panduan
               </button>
             </div>
           </div>

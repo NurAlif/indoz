@@ -66,7 +66,7 @@ const GuideCard = ({
                 return "";
             }).filter(Boolean).join('; ');
         } else if (children) {
-             contentForAI = "Check guide card content";
+            contentForAI = "Check guide card content";
         }
 
         openChatWithContext({
@@ -82,19 +82,21 @@ const GuideCard = ({
             className
         )}>
             {/* Ask Ollie Button */}
-            <button
-                onClick={handleAskOllie}
-                className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 bg-white/90 hover:bg-white text-indo-red border border-indo-red/20 shadow-sm px-2.5 py-1.5 rounded-full flex items-center gap-1.5 z-10 hover:scale-105"
-            >
-                <MessageCircle size={14} />
-                <span className="text-[10px] font-bold uppercase tracking-wider">Tanya Ollie</span>
-            </button>
+            <div className="absolute top-1 right-1 z-10 animate-bounce-subtle">
+                <button
+                    onClick={handleAskOllie}
+                    className="opacity-0 group-hover:opacity-100 transition-all duration-300 bg-white/90 hover:bg-white text-indo-red border border-indo-red/20 shadow-sm px-2 py-1 rounded-full flex items-center gap-1 hover:scale-105"
+                >
+                    <MessageCircle size={12} />
+                    <span className="text-[9px] font-bold uppercase tracking-wider">Tanya Ollie</span>
+                </button>
+            </div>
 
             {/* Header */}
             {(icon || title) && (
                 <div className="flex items-center gap-3 mb-4">
                     {icon && <span className="text-3xl filter drop-shadow-sm">{icon}</span>}
-                    {title && <h3 className={cn("text-xl font-bold", titleColors[color])}>{title}</h3>}
+                    {title && <h3 className={cn("text-xl font-bold break-words", titleColors[color])}>{title}</h3>}
                 </div>
             )}
 

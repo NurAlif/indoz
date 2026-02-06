@@ -6,7 +6,7 @@ import OnboardingModal from './components/onboarding/OnboardingModal';
 import AIChatContainer from './components/ai-chat/AIChatContainer';
 import PremiumRoute from './components/premium/PremiumRoute';
 import FloatingChatWidget from './components/common/FloatingChatWidget';
-import { ChatProvider } from './context/ChatContext';
+import { ChatProvider, useChat } from './context/ChatContext';
 
 // Placeholder pages - other agents will build these
 const AIChat = () => <AIChatContainer />;
@@ -15,20 +15,22 @@ import ResumeCheckerContainer from './components/resume/ResumeCheckerContainer';
 import GuidesContainer from './components/guides/GuidesContainer';
 const Guides = () => <div className="pt-20"><GuidesContainer /></div>;
 const Login = () => <div className="pt-20 px-4">Login Page</div>;
+import LandingPage from './components/landing-page/LandingPage';
 
 function AppContent() {
   const { isOpen, handleClose } = useOnboarding();
+  const { isAIChatPage } = useChat();
   const location = useLocation();
   const isPremium = location.pathname.startsWith('/premium');
-  const isChat = location.pathname === '/' || location.pathname === '/chat';
+  const isChat = location.pathname === '/chat';
 
   return (
     <>
-      {!isPremium && !isChat && <TopBar />}
+      {!isChat && <TopBar />}
 
       <main className={!isPremium ? "flex-grow" : "flex-grow min-h-screen bg-gray-50"}>
         <Routes>
-          <Route path="/" element={<AIChat />} />
+          <Route path="/" element={<LandingPage />} />
           <Route path="/chat" element={<AIChat />} />
           <Route path="/jobs" element={<div className="h-[calc(100vh-4rem)] overflow-y-auto"><JobSearchContainer /></div>} />
           <Route
@@ -45,10 +47,10 @@ function AppContent() {
         </Routes>
       </main>
 
-      {!isPremium && !isChat && <Footer />}
+      {!isChat && <Footer />}
 
       {!isPremium && <OnboardingModal isOpen={isOpen} onClose={handleClose} />}
-      {!isChat && !isPremium && <FloatingChatWidget />}
+      {!isAIChatPage && <FloatingChatWidget />}
     </>
   );
 }
