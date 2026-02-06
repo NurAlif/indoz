@@ -34,16 +34,16 @@ const PremiumDashboard = ({ onLogout }) => {
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
               <div className="flex flex-col gap-2">
                 <h1 className="text-4xl font-black tracking-tight text-gray-900">
-                  Welcome back, <span className="text-transparent bg-clip-text bg-gradient-to-r from-indo-red to-orange-500">Budi</span>
+                  Selamat datang kembali, <span className="text-transparent bg-clip-text bg-gradient-to-r from-indo-red to-orange-500">Budi</span>
                 </h1>
                 <p className="text-lg text-gray-500">
-                  Your migration journey to Australia is moving fast.
+                  Perjalanan migrasi Anda ke Australia bergerak cepat.
                 </p>
               </div>
               <div className="flex gap-3">
                 <button className="flex items-center gap-2 rounded-lg bg-white px-5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm border border-gray-200 hover:bg-gray-50">
                   <Download size={16} />
-                  Export Report
+                  Ekspor Laporan
                 </button>
               </div>
             </div>

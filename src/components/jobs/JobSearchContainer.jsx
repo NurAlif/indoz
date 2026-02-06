@@ -79,7 +79,7 @@ const JobSearchContainer = () => {
               {jobs.length >= 10 && (
                 <div className="mt-6 text-center">
                   <Button variant="outline" size="lg">
-                    Load More
+                    Muat Lebih Banyak
                   </Button>
                 </div>
               )}

@@ -6,7 +6,7 @@ import FeedbackModal from '../common/FeedbackModal';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 const NAV_ITEMS = [
-  { name: 'AI Chat', path: '/chat' },
+  { name: 'Chat AI', path: '/chat' },
   { name: 'Cari Lowongan', path: '/jobs' },
   { name: 'Cek Resume', path: '/resume' },
   { name: 'Panduan Lengkap', path: '/guides' },

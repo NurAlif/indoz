@@ -2,20 +2,20 @@ import React from 'react';
 
 const RecentActivity = ({ onNavigate }) => {
   const activities = [
-    { employer: 'Sunny Ridge Strawberry Farm', location: 'Main Ridge, VIC', date: 'Oct 24, 2023', hours: 8.5, status: 'Verified' },
-    { employer: 'Costa Berries', location: 'Corindi, NSW', date: 'Oct 23, 2023', hours: 7.0, status: 'Pending' },
-    { employer: 'Costa Berries', location: 'Corindi, NSW', date: 'Oct 22, 2023', hours: 9.0, status: 'Verified' },
+    { employer: 'Sunny Ridge Strawberry Farm', location: 'Main Ridge, VIC', date: '24 Okt 2023', hours: 8.5, status: 'Terverifikasi' },
+    { employer: 'Costa Berries', location: 'Corindi, NSW', date: '23 Okt 2023', hours: 7.0, status: 'Menunggu' },
+    { employer: 'Costa Berries', location: 'Corindi, NSW', date: '22 Okt 2023', hours: 9.0, status: 'Terverifikasi' },
   ];
 
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <h3 className="text-lg font-bold text-gray-900">Recent Farm Work</h3>
+        <h3 className="text-lg font-bold text-gray-900">Pekerjaan Farm Terbaru</h3>
         <button
           onClick={() => onNavigate && onNavigate('logbook')}
           className="text-sm font-medium text-indo-red hover:text-red-700 transition-colors"
         >
-          View Full Logbook
+          Lihat Logbook Lengkap
         </button>
       </div>
       <div className="rounded-xl border border-gray-200 bg-white overflow-hidden shadow-sm">
@@ -23,10 +23,10 @@ const RecentActivity = ({ onNavigate }) => {
           <table className="w-full text-left text-sm">
             <thead className="bg-gray-50 text-gray-900 border-b border-gray-200">
               <tr>
-                <th className="px-6 py-3 font-semibold">Employer</th>
-                <th className="px-6 py-3 font-semibold">Location</th>
-                <th className="px-6 py-3 font-semibold">Date</th>
-                <th className="px-6 py-3 font-semibold text-right">Hours</th>
+                <th className="px-6 py-3 font-semibold">Pemberi Kerja</th>
+                <th className="px-6 py-3 font-semibold">Lokasi</th>
+                <th className="px-6 py-3 font-semibold">Tanggal</th>
+                <th className="px-6 py-3 font-semibold text-right">Jam</th>
                 <th className="px-6 py-3 font-semibold text-center">Status</th>
               </tr>
             </thead>
@@ -38,7 +38,7 @@ const RecentActivity = ({ onNavigate }) => {
                   <td className="px-6 py-4 text-gray-500">{activity.date}</td>
                   <td className="px-6 py-4 text-gray-500 text-right">{activity.hours}</td>
                   <td className="px-6 py-4 text-center">
-                    <span className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ${activity.status === 'Verified'
+                    <span className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ${activity.status === 'Terverifikasi'
                         ? 'bg-green-100 text-green-700'
                         : 'bg-yellow-100 text-yellow-700'
                       }`}>

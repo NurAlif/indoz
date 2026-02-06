@@ -4,7 +4,7 @@ import { cn } from '../../utils/cn';
 import GlossaryTooltip from '../common/GlossaryTooltip';
 
 const LOCATIONS = [
-  'All Locations',
+  'Semua Lokasi',
   'Sydney, NSW',
   'Melbourne, VIC',
   'Brisbane, QLD',
@@ -16,7 +16,7 @@ const LOCATIONS = [
 ];
 
 const JOB_TYPES = [
-  { value: '', label: 'All Types' },
+  { value: '', label: 'Semua Tipe' },
   { value: 'Full-time', label: 'Full-time' },
   { value: 'Part-time', label: 'Part-time' },
   { value: 'Casual', label: 'Casual' },
@@ -179,7 +179,7 @@ const JobFilters = ({
               <div className="p-3">
                 <div className="flex items-center gap-2 mb-3 px-2">
                   <Briefcase size={16} className="text-indo-red" />
-                  <span className="text-sm font-semibold text-gray-700">Job Titles</span>
+                  <span className="text-sm font-semibold text-gray-700">Posisi</span>
                 </div>
                 <div className="space-y-1">
                   {SEARCH_SUGGESTIONS.jobTitles.map((title) => (
@@ -198,7 +198,7 @@ const JobFilters = ({
               <div className="p-3">
                 <div className="flex items-center gap-2 mb-3 px-2">
                   <Building size={16} className="text-indo-red" />
-                  <span className="text-sm font-semibold text-gray-700">Companies</span>
+                  <span className="text-sm font-semibold text-gray-700">Perusahaan</span>
                 </div>
                 <div className="space-y-1">
                   {SEARCH_SUGGESTIONS.companies.map((company) => (
@@ -217,7 +217,7 @@ const JobFilters = ({
               <div className="p-3">
                 <div className="flex items-center gap-2 mb-3 px-2">
                   <Hash size={16} className="text-indo-red" />
-                  <span className="text-sm font-semibold text-gray-700">Keywords</span>
+                  <span className="text-sm font-semibold text-gray-700">Kata Kunci</span>
                 </div>
                 <div className="space-y-1">
                   {SEARCH_SUGGESTIONS.keywords.map((keyword) => (
@@ -248,15 +248,15 @@ const JobFilters = ({
         {/* Location Filter */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Location
+            Lokasi
           </label>
           <select
-            value={filters.location || 'All Locations'}
+            value={filters.location || 'Semua Lokasi'}
             onChange={handleLocationChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indo-red focus:border-transparent"
           >
             {LOCATIONS.map((location) => (
-              <option key={location} value={location === 'All Locations' ? '' : location}>
+              <option key={location} value={location === 'Semua Lokasi' ? '' : location}>
                 {location}
               </option>
             ))}
@@ -266,7 +266,7 @@ const JobFilters = ({
         {/* Job Type Filter */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Job Type
+            Tipe Pekerjaan
           </label>
           <select
             value={filters.jobType || ''}
@@ -284,7 +284,7 @@ const JobFilters = ({
         {/* 88 Days Focus Toggle */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            WHV Requirements
+            Persyaratan WHV
           </label>
           <button
             onClick={handle88DaysToggle}
@@ -297,7 +297,7 @@ const JobFilters = ({
           >
             <span className="flex items-center justify-center gap-2">
               {filters.is88DaysEligible && <span>✓</span>}
-              88 Day Focus
+              Fokus 88 Hari
             </span>
           </button>
         </div>

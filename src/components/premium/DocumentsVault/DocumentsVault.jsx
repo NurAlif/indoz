@@ -71,18 +71,18 @@ const DocumentsVault = () => {
     <div className="max-w-4xl mx-auto p-4 md:p-8">
       {/* Header */}
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Documents Vault</h1>
-        <p className="text-gray-500">Manage and track your visa documents</p>
+        <h1 className="text-2xl font-bold text-gray-900">Brankas Dokumen</h1>
+        <p className="text-gray-500">Kelola dan pantau dokumen visa Anda</p>
       </div>
 
       {/* Explanation Box */}
       <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-8 flex gap-3">
         <Info className="text-blue-600 flex-shrink-0" size={24} />
         <div>
-          <h3 className="font-semibold text-blue-900 mb-1">Why use Documents Vault?</h3>
+          <h3 className="font-semibold text-blue-900 mb-1">Mengapa menggunakan Brankas Dokumen?</h3>
           <p className="text-sm text-blue-800">
-            Keep all your essential visa and job documents in one secure place.
-            Track your progress as you prepare for your journey. We'll let you know when you're ready to apply!
+            Simpan semua dokumen penting visa dan pekerjaan di satu tempat aman.
+            Pantau kemajuan Anda saat mempersiapkan perjalanan Anda. Kami akan memberi tahu Anda jika Anda siap untuk mendaftar!
           </p>
         </div>
       </div>
@@ -93,12 +93,12 @@ const DocumentsVault = () => {
           <div>
             <span className="text-3xl font-bold text-gray-900">{progressCount}</span>
             <span className="text-gray-500 text-lg">/{totalCount}</span>
-            <span className="ml-2 text-gray-600 font-medium">Documents Ready</span>
+            <span className="ml-2 text-gray-600 font-medium">Dokumen Siap</span>
           </div>
           {isComplete && (
             <div className="flex items-center gap-2 text-success font-bold animate-bounce">
               <CheckCircle size={24} />
-              All Set!
+              Siap!
             </div>
           )}
         </div>
@@ -118,8 +118,8 @@ const DocumentsVault = () => {
 
         {isComplete && (
           <div className="mt-4 bg-green-50 text-green-800 p-4 rounded-lg text-center border border-green-200 animate-in fade-in slide-in-from-top-4 duration-700">
-            <p className="font-semibold text-lg">🎉 Congratulations! You have all documents ready!</p>
-            <p className="text-sm">You are now fully prepared for your application process.</p>
+            <p className="font-semibold text-lg">🎉 Selamat! Dokumen Anda sudah lengkap!</p>
+            <p className="text-sm">Anda sekarang sepenuhnya siap untuk proses aplikasi.</p>
           </div>
         )}
       </div>
@@ -137,21 +137,21 @@ const DocumentsVault = () => {
 
       {/* Legend */}
       <div className="border-t border-gray-200 pt-6 mt-8">
-        <h3 className="text-sm font-semibold text-gray-900 mb-3">Legend:</h3>
+        <h3 className="text-sm font-semibold text-gray-900 mb-3">Legenda:</h3>
         <div className="flex flex-wrap gap-6">
           <div className="flex items-center gap-2">
             <div className="w-5 h-5 bg-success rounded-full flex items-center justify-center">
               <Check className="text-white" size={14} />
             </div>
-            <span className="text-sm text-gray-600">Verified = Document checked & approved</span>
+            <span className="text-sm text-gray-600">Terverifikasi = Dokumen diperiksa & disetujui</span>
           </div>
           <div className="flex items-center gap-2">
             <FileText className="text-oz-gold" size={20} />
-            <span className="text-sm text-gray-600">Saved = Uploaded, pending verification</span>
+            <span className="text-sm text-gray-600">Disimpan = Diunggah, menunggu verifikasi</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-5 h-5 rounded border-2 border-gray-300" />
-            <span className="text-sm text-gray-600">Empty = Not uploaded yet</span>
+            <span className="text-sm text-gray-600">Kosong = Belum diunggah</span>
           </div>
         </div>
       </div>

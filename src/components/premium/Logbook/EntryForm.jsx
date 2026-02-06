@@ -47,13 +47,13 @@ const EntryForm = ({ onAdd, onOpenBulk }) => {
   return (
     <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 mb-6">
         <div className="flex justify-between items-center mb-4">
-             <h3 className="font-semibold text-gray-900">Add Entry</h3>
+             <h3 className="font-semibold text-gray-900">Tambah Entri</h3>
              <button
                 onClick={onOpenBulk}
                 className="text-sm text-indo-red font-medium hover:underline flex items-center"
              >
                 <Calendar size={16} className="mr-1" />
-                Bulk Entry / Add Multiple Days
+                Entri Sekaligus / Banyak Hari
              </button>
         </div>
 
@@ -72,7 +72,7 @@ const EntryForm = ({ onAdd, onOpenBulk }) => {
                 name="employer"
                 value={entry.employer}
                 onChange={handleChange}
-                placeholder="Employer Name"
+                placeholder="Nama Employer"
                 className="mb-0"
                 />
              </div>
@@ -82,7 +82,7 @@ const EntryForm = ({ onAdd, onOpenBulk }) => {
                 name="hours"
                 value={entry.hours}
                 onChange={handleChange}
-                placeholder="Hours"
+                placeholder="Jam"
                 className="mb-0"
                 />
              </div>
@@ -91,13 +91,13 @@ const EntryForm = ({ onAdd, onOpenBulk }) => {
                 name="location"
                 value={entry.location}
                 onChange={handleChange}
-                placeholder="Location"
+                placeholder="Lokasi"
                 className="mb-0"
                 />
              </div>
              <div className="md:col-span-2">
                 <Button onClick={handleSubmit} variant="primary" className="w-full">
-                    <Plus size={20} className="mr-2" /> Add
+                    <Plus size={20} className="mr-2" /> Tambah
                 </Button>
              </div>
         </div>
