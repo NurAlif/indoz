@@ -4,10 +4,13 @@ import GuideTabs from './GuideTabs';
 import TableOfContents from './TableOfContents';
 import GuideContent from './GuideContent';
 import ConsultationForm from './ConsultationForm';
+import Button from '../common/Button';
+import Modal from '../common/Modal';
 
 const GuidesContainer = () => {
   const [activeTab, setActiveTab] = useState('persiapan');
   const [activeSection, setActiveSection] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const currentContent = GUIDE_CONTENT[activeTab];
 
@@ -52,10 +55,29 @@ const GuidesContainer = () => {
         </div>
       </div>
 
-      {/* Consultation Form */}
-      <div className="mt-12">
-        <ConsultationForm />
+      {/* Consultation CTA */}
+      <div className="mt-12 bg-white border border-gray-200 rounded-xl p-6 text-center shadow-sm">
+        <h3 className="text-xl font-semibold text-gray-900 mb-2">
+          Butuh Bantuan Lebih Lanjut?
+        </h3>
+        <p className="text-gray-600 mb-6">
+          Konsultasi gratis dengan ahli imigrasi Australia
+        </p>
+        <Button onClick={() => setIsModalOpen(true)} className="w-full sm:w-auto">
+          Tanyakan Lebih Lanjut
+        </Button>
       </div>
+
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title="Butuh Bantuan Lebih Lanjut?"
+      >
+        <p className="text-gray-600 text-sm mb-6">
+          Konsultasi gratis dengan ahli imigrasi Australia
+        </p>
+        <ConsultationForm />
+      </Modal>
     </div>
   );
 };

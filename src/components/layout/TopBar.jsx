@@ -11,7 +11,7 @@ const NAV_ITEMS = [
   { name: '⚡ IndOz+ (Beta)', path: '/premium', isPremium: true },
 ];
 
-const TopBar = () => {
+const TopBar = ({ darkMode = false }) => {
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
@@ -21,7 +21,11 @@ const TopBar = () => {
   }, [location.pathname]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 bg-white border-b border-gray-200">
+    <header className={cn(
+      "fixed top-0 left-0 right-0 z-40 border-b transition-colors",
+      darkMode ? "bg-gray-900 border-gray-800" : "bg-white border-gray-200"
+    )}>
+      <FeedbackModal isOpen={showFeedback} onClose={() => setShowFeedback(false)} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -57,8 +61,8 @@ const TopBar = () => {
                   className={cn(
                     "relative px-4 py-5 text-sm font-medium transition-colors",
                     isActive
-                      ? "text-gray-900"
-                      : "text-gray-600 hover:text-gray-900"
+                      ? (darkMode ? "text-white" : "text-gray-900")
+                      : (darkMode ? "text-gray-300 hover:text-white" : "text-gray-600 hover:text-gray-900")
                   )}
                 >
                   {item.name}
@@ -80,7 +84,10 @@ const TopBar = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-gray-600 hover:text-gray-900"
+            className={cn(
+              "md:hidden p-2 transition-colors",
+              darkMode ? "text-gray-300 hover:text-white" : "text-gray-600 hover:text-gray-900"
+            )}
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -90,7 +97,10 @@ const TopBar = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden border-t border-gray-200 bg-white">
+        <div className={cn(
+          "md:hidden border-t transition-colors",
+          darkMode ? "bg-gray-900 border-gray-800" : "bg-white border-gray-200"
+        )}>
           <div className="px-4 py-4 space-y-2">
             {NAV_ITEMS.map((item) => {
               const isActive = location.pathname === item.path;
@@ -114,8 +124,8 @@ const TopBar = () => {
                   className={cn(
                     "block px-4 py-2 rounded-lg text-sm font-medium transition-colors",
                     isActive
-                      ? "bg-indo-red/10 text-indo-red"
-                      : "text-gray-600 hover:bg-gray-100"
+                      ? (darkMode ? "bg-indo-red/20 text-indo-red" : "bg-indo-red/10 text-indo-red")
+                      : (darkMode ? "text-gray-300 hover:bg-gray-800" : "text-gray-600 hover:bg-gray-100")
                   )}
                 >
                   {item.name}

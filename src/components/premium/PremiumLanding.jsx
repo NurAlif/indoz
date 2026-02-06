@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Lock, Crown, Check, Zap, Shield, Clock, Calculator, ArrowRight, Star, ChevronRight } from 'lucide-react';
 import { cn } from '../../utils/cn';
+import TopBar from '../layout/TopBar';
 
 const PREMIUM_FEATURES = [
   {
@@ -31,7 +32,7 @@ const PREMIUM_FEATURES = [
 
 const VALID_ACCESS_CODES = ['BETA2025', 'INDOZ2025', 'PREMIUM'];
 
-const PremiumLanding = ({ onUnlock = () => {} }) => {
+const PremiumLanding = ({ onUnlock = () => { } }) => {
   const [accessCode, setAccessCode] = useState('');
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -67,6 +68,8 @@ const PremiumLanding = ({ onUnlock = () => {} }) => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <TopBar darkMode={true} />
+
       {/* Hero Section */}
       <div className="relative overflow-hidden bg-gray-900 text-white pb-20 pt-20 px-6">
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:16px_16px]"></div>
