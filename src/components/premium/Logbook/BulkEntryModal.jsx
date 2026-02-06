@@ -99,7 +99,7 @@ const BulkEntryModal = ({ isOpen, onClose, onAdd }) => {
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title="Bulk Add Work Days"
+      title="Tambah Banyak Hari Kerja"
     >
       <div className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
@@ -120,17 +120,17 @@ const BulkEntryModal = ({ isOpen, onClose, onAdd }) => {
         </div>
 
         <Input
-            label="Employer / Farm Name"
+            label="Nama Employer / Farm"
             name="employer"
             value={formData.employer}
             onChange={handleChange}
-            placeholder="e.g. Sunny Farms Pty Ltd"
+            placeholder="contoh: Sunny Farms Pty Ltd"
         />
 
         <div className="grid grid-cols-2 gap-4">
              <Input
                 type="number"
-                label="Hours per Day"
+                label="Jam per Hari"
                 name="hours"
                 value={formData.hours}
                 onChange={handleChange}
@@ -138,11 +138,11 @@ const BulkEntryModal = ({ isOpen, onClose, onAdd }) => {
                 max="24"
             />
             <Input
-                label="Location (Optional)"
+                label="Lokasi (Opsional)"
                 name="location"
                 value={formData.location}
                 onChange={handleChange}
-                placeholder="e.g. Mildura, VIC"
+                placeholder="contoh: Mildura, VIC"
             />
         </div>
 
@@ -152,7 +152,7 @@ const BulkEntryModal = ({ isOpen, onClose, onAdd }) => {
 
         <div className="flex justify-end pt-4">
              <Button onClick={handleSubmit} variant="primary">
-                Add {daysCount > 0 ? daysCount : ''} Days
+                Tambah {daysCount > 0 ? daysCount : ''} Hari
              </Button>
         </div>
       </div>

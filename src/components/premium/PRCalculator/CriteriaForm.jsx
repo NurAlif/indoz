@@ -46,9 +46,9 @@ const CriteriaForm = ({ criteria, onChange }) => {
 
       {/* English */}
       <Select
-        label="English Level"
+        label="Level Bahasa Inggris"
         name="english"
-        tooltipTerm="(Levels)"
+        tooltipTerm="(Level)"
         tooltipDef="Competent (IELTS 6 / PTE 50), Proficient (IELTS 7 / PTE 65), Superior (IELTS 8 / PTE 79)"
         options={[
           { value: 'Competent', label: 'Competent (IELTS 6+)' },
@@ -62,10 +62,10 @@ const CriteriaForm = ({ criteria, onChange }) => {
         label="Pendidikan Tertinggi"
         name="education"
         options={[
-          { value: 'Doctorate', label: 'Doctorate (PhD)' },
-          { value: 'Masters', label: 'Masters Degree' },
-          { value: 'Bachelor', label: 'Bachelor Degree (S1)' },
-          { value: 'Diploma', label: 'Diploma / Trade Qualification' },
+          { value: 'Doctorate', label: 'Doktor (PhD)' },
+          { value: 'Masters', label: 'Magister (S2)' },
+          { value: 'Bachelor', label: 'Sarjana (S1)' },
+          { value: 'Diploma', label: 'Diploma / Kualifikasi Kejuruan' },
           { value: 'None', label: 'Lainnya / Tidak ada' },
         ]}
       />

@@ -15,23 +15,23 @@ const StrategyCard = ({ strategy }) => (
     <div className="space-y-4">
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <p className="text-xs text-gray-500 uppercase">Duration</p>
+          <p className="text-xs text-gray-500 uppercase">Durasi</p>
           <p className="font-medium text-gray-900">{strategy.details.duration}</p>
         </div>
         <div>
-          <p className="text-xs text-gray-500 uppercase">Cost</p>
+          <p className="text-xs text-gray-500 uppercase">Biaya</p>
           <p className="font-medium text-gray-900">{strategy.details.cost}</p>
         </div>
       </div>
 
       <div>
-        <p className="text-xs text-gray-500 uppercase mb-1">PR Pathway</p>
+        <p className="text-xs text-gray-500 uppercase mb-1">Jalur PR</p>
         <p className="text-sm text-gray-700">{strategy.details.prPathway}</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="bg-success/5 rounded-lg p-3">
-          <p className="text-xs font-semibold text-success mb-2">Pros</p>
+          <p className="text-xs font-semibold text-success mb-2">Kelebihan</p>
           <ul className="space-y-1">
             {strategy.details.pros.map((pro, i) => (
               <li key={i} className="text-xs text-gray-700">✓ {pro}</li>
@@ -40,7 +40,7 @@ const StrategyCard = ({ strategy }) => (
         </div>
 
         <div className="bg-error/5 rounded-lg p-3">
-          <p className="text-xs font-semibold text-error mb-2">Cons</p>
+          <p className="text-xs font-semibold text-error mb-2">Kekurangan</p>
           <ul className="space-y-1">
             {strategy.details.cons.map((con, i) => (
               <li key={i} className="text-xs text-gray-700">✗ {con}</li>
@@ -52,7 +52,7 @@ const StrategyCard = ({ strategy }) => (
 
     {/* CTA */}
     <button className="mt-4 w-full py-2 bg-indo-red text-white rounded-lg font-medium hover:bg-red-700 transition-colors">
-      Learn More
+      Pelajari Lebih Lanjut
     </button>
   </div>
 );

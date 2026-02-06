@@ -26,10 +26,10 @@ const AnalysisResults = ({ results = {} }) => {
   };
 
   const getScoreLabel = (score) => {
-    if (score >= 80) return 'Excellent';
-    if (score >= 60) return 'Good';
-    if (score >= 40) return 'Fair';
-    return 'Needs Improvement';
+    if (score >= 80) return 'Sangat Baik';
+    if (score >= 60) return 'Baik';
+    if (score >= 40) return 'Cukup';
+    return 'Perlu Perbaikan';
   };
 
   // Helper to inject tooltips into text
@@ -70,7 +70,7 @@ const AnalysisResults = ({ results = {} }) => {
       <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
         <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
           <TrendingUp className="text-indo-red" size={24} />
-          ATS Compatibility Score
+          Skor Kompatibilitas ATS
         </h3>
 
         <div className="flex flex-col sm:flex-row items-center gap-8">
@@ -122,8 +122,8 @@ const AnalysisResults = ({ results = {} }) => {
                   : 'Resume Anda memerlukan beberapa perbaikan penting agar lolos sistem ATS.'}
             </p>
             <div className="mt-4 flex flex-wrap gap-2 justify-center sm:justify-start">
-              <span className="px-3 py-1 bg-gray-100 text-gray-600 text-xs font-semibold rounded-md">Mobile Friendly</span>
-              <span className="px-3 py-1 bg-gray-100 text-gray-600 text-xs font-semibold rounded-md">Clean Formatting</span>
+              <span className="px-3 py-1 bg-gray-100 text-gray-600 text-xs font-semibold rounded-md">Ramah Mobile</span>
+              <span className="px-3 py-1 bg-gray-100 text-gray-600 text-xs font-semibold rounded-md">Format Rapi</span>
             </div>
           </div>
         </div>
@@ -188,7 +188,7 @@ const AnalysisResults = ({ results = {} }) => {
         <div className="px-6 py-4 bg-info/5 border-b border-gray-100 flex items-center gap-3">
           <Info size={20} className="text-info" />
           <h3 className="text-lg font-bold text-gray-900">
-            Saran Khusus Australia (Aussie Optimized)
+            Saran Khusus Australia (Optimasi Aussie)
           </h3>
         </div>
 

@@ -2,9 +2,9 @@ import React from 'react';
 
 const RecentActivity = ({ onNavigate }) => {
   const activities = [
-    { employer: 'Sunny Ridge Strawberry Farm', location: 'Main Ridge, VIC', date: 'Oct 24, 2023', hours: 8.5, status: 'Verified' },
-    { employer: 'Costa Berries', location: 'Corindi, NSW', date: 'Oct 23, 2023', hours: 7.0, status: 'Pending' },
-    { employer: 'Costa Berries', location: 'Corindi, NSW', date: 'Oct 22, 2023', hours: 9.0, status: 'Verified' },
+    { employer: 'Sunny Ridge Strawberry Farm', location: 'Main Ridge, VIC', date: '24 Okt 2023', hours: 8.5, status: 'Terverifikasi' },
+    { employer: 'Costa Berries', location: 'Corindi, NSW', date: '23 Okt 2023', hours: 7.0, status: 'Menunggu' },
+    { employer: 'Costa Berries', location: 'Corindi, NSW', date: '22 Okt 2023', hours: 9.0, status: 'Terverifikasi' },
   ];
 
   return (
@@ -38,7 +38,7 @@ const RecentActivity = ({ onNavigate }) => {
                   <td className="px-6 py-4 text-gray-500">{activity.date}</td>
                   <td className="px-6 py-4 text-gray-500 text-right">{activity.hours}</td>
                   <td className="px-6 py-4 text-center">
-                    <span className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ${activity.status === 'Verified'
+                    <span className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ${activity.status === 'Terverifikasi'
                         ? 'bg-green-100 text-green-700'
                         : 'bg-yellow-100 text-yellow-700'
                       }`}>

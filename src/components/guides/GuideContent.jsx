@@ -68,7 +68,7 @@ const renderBiaya = () => (
   <div className="space-y-6">
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       <GuideCard
-        title="💳 Visa Application"
+        title="💳 Aplikasi Visa"
         color="info"
         items={[
           <span>Biaya aplikasi <GlossaryTooltip term="WHV" />: AUD 510</span>,
@@ -454,11 +454,11 @@ const renderTransport = () => (
         color="warning"
         footer={
           <div className="bg-error/5 rounded-lg p-3 border border-error/10">
-            <h5 className="text-xs font-bold text-error mb-1 uppercase">Hidden Costs</h5>
+            <h5 className="text-xs font-bold text-error mb-1 uppercase">Biaya Tersembunyi</h5>
             <ul className="text-[10px] text-gray-600 space-y-0.5">
-              <li>• Rego & Insuarance: Rp 15jt+/tahun</li>
-              <li>• Petrol: Rp 20k - 25k/liter</li>
-              <li>• Maintenance & Parkir sangat mahal</li>
+              <li>• Rego & Asuransi: Rp 15jt+/tahun</li>
+              <li>• Bensin: Rp 20k - 25k/liter</li>
+              <li>• Perawatan & Parkir sangat mahal</li>
             </ul>
           </div>
         }

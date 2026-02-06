@@ -9,7 +9,7 @@ const ProgressHeader = ({ entries = [] }) => {
   return (
     <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 mb-6">
       <div className="flex justify-between items-center mb-2">
-        <h2 className="font-semibold text-gray-900">Progress</h2>
+        <h2 className="font-semibold text-gray-900">Progres</h2>
         <span className="text-gray-900 font-medium">{totalDays} / {targetDays} Hari</span>
       </div>
       <div className="w-full bg-gray-200 rounded-full h-4 mb-2">
