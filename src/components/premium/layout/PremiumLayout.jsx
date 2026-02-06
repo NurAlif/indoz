@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PremiumSidebar from './PremiumSidebar';
 import PremiumHeader from './PremiumHeader';
 
 const PremiumLayout = ({ children, activeTab, onTabChange, onLogout }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const scrollContainerRef = useRef(null);
+
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTop = 0;
+    }
+  }, [activeTab]);
 
   return (
     <div className="flex h-screen w-full bg-gray-50 overflow-hidden font-sans text-gray-900">
@@ -34,7 +41,10 @@ const PremiumLayout = ({ children, activeTab, onTabChange, onLogout }) => {
         <PremiumHeader toggleSidebar={() => setSidebarOpen(true)} />
 
         {/* Scrollable Content */}
-        <div className="flex-1 overflow-y-auto bg-gray-50 p-4 lg:p-10 scroll-smooth">
+        <div
+          ref={scrollContainerRef}
+          className="flex-1 overflow-y-auto bg-gray-50 p-4 lg:p-10 scroll-smooth"
+        >
           <div className="mx-auto max-w-screen-2xl flex flex-col gap-8 pb-10">
             {children}
           </div>

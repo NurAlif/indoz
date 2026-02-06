@@ -9,6 +9,7 @@ import PremiumLanding from './components/premium/PremiumLanding';
 import PremiumDashboard from './components/premium/PremiumDashboard';
 import ProtectedPremiumDashboard from './components/premium/ProtectedPremiumDashboard';
 import FloatingChatWidget from './components/common/FloatingChatWidget';
+import ScrollToTop from './components/common/ScrollToTop';
 import { ChatProvider, useChat } from './context/ChatContext';
 
 // Placeholder pages - other agents will build these
@@ -63,6 +64,7 @@ function AppContent() {
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <ChatProvider>
         <div className="min-h-screen bg-gray-50 flex flex-col">
           <AppContent />
