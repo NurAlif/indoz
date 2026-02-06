@@ -6,7 +6,7 @@ import ResultsCard from './ResultsCard';
 import StrategyCard from './StrategyCard';
 import GlossaryTooltip from '../../common/GlossaryTooltip';
 
-const PRCalculator = ({ onBack }) => {
+const PRCalculator = () => {
   const [visaSubclass, setVisaSubclass] = useState('189');
   const [criteria, setCriteria] = useState({});
   const [points, setPoints] = useState(0);
@@ -93,7 +93,7 @@ const PRCalculator = ({ onBack }) => {
     } else {
       newStrategies.push('Anda sudah eligible untuk mengajukan EOI.');
       if (visaSubclass === '189') {
-         newChallenges.push('Persaingan Visa 189 sangat ketat. Cut-off poin bisa mencapai 85-95+ tergantung jurusan.');
+        newChallenges.push('Persaingan Visa 189 sangat ketat. Cut-off poin bisa mencapai 85-95+ tergantung jurusan.');
       }
     }
 
@@ -112,9 +112,9 @@ const PRCalculator = ({ onBack }) => {
     }
 
     if (criteria.partnerSkills === 'None' || criteria.partnerSkills === 'Competent English') {
-       if (criteria.partnerSkills !== 'Skilled' && criteria.partnerSkills !== 'Single') {
-          newStrategies.push('Jika punya pasangan, skill assessment pasangan bisa tambah poin maksimal (10 pts).');
-       }
+      if (criteria.partnerSkills !== 'Skilled' && criteria.partnerSkills !== 'Single') {
+        newStrategies.push('Jika punya pasangan, skill assessment pasangan bisa tambah poin maksimal (10 pts).');
+      }
     }
 
     if (visaSubclass === '189' && currentPoints < 85) {
@@ -123,7 +123,7 @@ const PRCalculator = ({ onBack }) => {
 
     // 190 specific
     if (visaSubclass === '190') {
-        newStrategies.push('Cek persyaratan spesifik setiap state untuk Visa 190, karena berbeda-beda.');
+      newStrategies.push('Cek persyaratan spesifik setiap state untuk Visa 190, karena berbeda-beda.');
     }
 
     setStrategies(newStrategies);
@@ -137,8 +137,8 @@ const PRCalculator = ({ onBack }) => {
           PR Points Calculator
         </h1>
         <GlossaryTooltip
-            term="PR"
-            definition="Permanent Residency (Izin Tinggal Tetap). Status yang memungkinkan Anda tinggal, kerja, dan belajar di Australia tanpa batas waktu."
+          term="PR"
+          definition="Permanent Residency (Izin Tinggal Tetap). Status yang memungkinkan Anda tinggal, kerja, dan belajar di Australia tanpa batas waktu."
         />
       </div>
 

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { ArrowRight, PlayCircle, CheckCircle } from 'lucide-react';
 
 export default function Hero() {
@@ -12,14 +13,12 @@ export default function Hero() {
               <span className="text-xs font-semibold uppercase tracking-wide text-gray-600 dark:text-gray-300">Resmi & Terpercaya</span>
             </div>
             <h1 className="text-4xl font-extrabold tracking-tight text-text-dark dark:text-white sm:text-5xl lg:text-6xl mb-6 leading-tight">
-              Gerbang Karir & <br/>
-              <span className="text-primary relative inline-block">
-                Residensial Australia
-                <svg className="absolute -bottom-2 left-0 w-full h-3 text-[#FFD700] opacity-50" preserveAspectRatio="none" viewBox="0 0 100 10">
-                  <path d="M0 5 Q 50 10 100 5" fill="none" stroke="currentColor" strokeWidth="3"></path>
-                </svg>
-              </span>
-              <br/> untuk Indonesia
+              Gerbang <span className="relative inline-block text-red-600">
+                Utama
+                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[#FFD700]"></span>
+              </span> & <br />
+              Residensial Australia
+              <br /> untuk Indonesia
             </h1>
             <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-lg leading-relaxed">
               Platform terpercaya untuk memandu setiap langkah perjalanan karir dan kehidupan baru Anda, mulai dari persiapan dokumen hingga menetap dengan nyaman.
@@ -29,10 +28,10 @@ export default function Hero() {
                 Konsultasikan dengan Ollie Chat
                 <ArrowRight className="ml-2 h-5 w-5" />
               </button>
-              <button className="inline-flex items-center justify-center rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent px-6 py-3.5 text-base font-semibold text-text-dark dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">
+              <Link to="/premium" className="inline-flex items-center justify-center rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent px-6 py-3.5 text-base font-semibold text-text-dark dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">
                 <PlayCircle className="mr-2 h-5 w-5" />
                 Pelajari IndoZ Premium
-              </button>
+              </Link>
             </div>
           </div>
 

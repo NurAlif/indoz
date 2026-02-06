@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { cn } from '../../utils/cn';
+import FeedbackModal from '../common/FeedbackModal';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 const NAV_ITEMS = [
   { name: 'AI Chat', path: '/chat' },
@@ -14,6 +16,10 @@ const NAV_ITEMS = [
 const TopBar = ({ darkMode = false }) => {
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+  const [showFeedback, setShowFeedback] = useState(false);
+  const [accessCode] = useLocalStorage('indoz_premium_code', 'PREMIUM_UNLOCKED');
+  // Always consider "authenticated" if we have the default code or if we just want to show Dashboard
+  const isAuthenticated = true; // We made it free for all, so header should always show Dashboard/Masuk logic appropriately
 
   // Close mobile menu on route change
   React.useEffect(() => {
@@ -76,9 +82,15 @@ const TopBar = ({ darkMode = false }) => {
 
           {/* Masuk Button */}
           <div className="hidden md:block">
-            <Link to="/premium/dashboard" className="btn-primary">
-              Masuk
-            </Link>
+            {isAuthenticated ? (
+              <Link to="/premium/dashboard" className="btn-primary">
+                Dashboard
+              </Link>
+            ) : (
+              <Link to="/premium" className="btn-primary">
+                Masuk
+              </Link>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -132,13 +144,23 @@ const TopBar = ({ darkMode = false }) => {
                 </Link>
               );
             })}
-            <Link
-              to="/premium/dashboard"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="block w-full px-4 py-2 text-center text-sm font-medium bg-indo-red text-white rounded-lg hover:bg-red-700 transition-colors"
-            >
-              Masuk
-            </Link>
+            {isAuthenticated ? (
+              <Link
+                to="/premium/dashboard"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block w-full px-4 py-2 text-center text-sm font-medium bg-indo-red text-white rounded-lg hover:bg-red-700 transition-colors"
+              >
+                Dashboard
+              </Link>
+            ) : (
+              <Link
+                to="/premium"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block w-full px-4 py-2 text-center text-sm font-medium bg-indo-red text-white rounded-lg hover:bg-red-700 transition-colors"
+              >
+                Masuk
+              </Link>
+            )}
           </div>
         </div>
       )}

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { GUIDE_TABS, GUIDE_CONTENT } from '../../data/guideContent';
+import { HelpCircle } from 'lucide-react';
 import GuideTabs from './GuideTabs';
 import TableOfContents from './TableOfContents';
 import GuideContent from './GuideContent';
@@ -63,9 +64,15 @@ const GuidesContainer = () => {
         <p className="text-gray-600 mb-6">
           Konsultasi gratis dengan ahli imigrasi Australia
         </p>
-        <Button onClick={() => setIsModalOpen(true)} className="w-full sm:w-auto">
-          Tanyakan Lebih Lanjut
-        </Button>
+        <div className="flex justify-center">
+          <Button
+            onClick={() => setIsModalOpen(true)}
+            className="w-full sm:w-auto flex items-center justify-center gap-2 group"
+          >
+            <HelpCircle size={18} className="group-hover:rotate-12 transition-transform" />
+            Butuh Bantuan Lebih Lanjut?
+          </Button>
+        </div>
       </div>
 
       <Modal

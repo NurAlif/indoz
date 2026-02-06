@@ -119,7 +119,7 @@ const AIChatContainer = ({ embedded = false }) => {
         )}>
 
           {/* Ollie Header */}
-          <div className="shrink-0 px-6 py-4 flex items-center justify-between bg-white border-b border-gray-100 z-10 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.05)]">
+          <div className="shrink-0 px-6 py-4 flex items-center justify-between bg-gray-50 border-b border-gray-100 z-10 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.05)]">
             <div className="flex items-center gap-4">
               <div className="relative">
                 <div
@@ -175,7 +175,7 @@ const AIChatContainer = ({ embedded = false }) => {
           </div>
 
           {/* Bottom Area: Suggestions & Input */}
-          <div className="shrink-0 p-4 md:px-8 md:pb-8 bg-white border-t border-gray-100 z-10">
+          <div className="shrink-0 p-4 md:px-8 md:pb-8 bg-gray-50 border-t border-gray-100 z-10">
             <div className="max-w-4xl mx-auto flex flex-col gap-3">
               {/* Suggestions */}
               <div className="flex gap-2 overflow-x-auto pb-2 no-scrollbar mask-gradient">

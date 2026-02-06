@@ -55,7 +55,7 @@ const PremiumDashboard = ({ onLogout }) => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {/* Left Column: Detailed Modules */}
               <div className="lg:col-span-2 flex flex-col gap-8">
-                <RecentActivity />
+                <RecentActivity onNavigate={setActiveTab} />
                 <JobMatchesWidget />
               </div>
               {/* Right Column: Sidebar Widgets */}
@@ -72,11 +72,11 @@ const PremiumDashboard = ({ onLogout }) => {
       case 'guides':
         return <GuidesContainer />;
       case 'documents':
-        return <DocumentsVault onBack={() => setActiveTab('dashboard')} />;
+        return <DocumentsVault />;
       case 'logbook':
-        return <Logbook onBack={() => setActiveTab('dashboard')} />;
+        return <Logbook />;
       case 'pr-calc':
-        return <PRCalculator onBack={() => setActiveTab('dashboard')} />;
+        return <PRCalculator />;
       case 'jobs':
         return <JobSearchContainer />;
       default:

@@ -67,7 +67,7 @@ const ChatHistory = ({ messages = [], isTyping = false }) => {
               <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 components={{
-                  p: ({ children }) => <p className="mb-2 last:mb-0"><ProcessChildren>{children}</ProcessChildren></p>,
+                  p: ({ children }) => <div className="mb-2 last:mb-0"><ProcessChildren>{children}</ProcessChildren></div>,
                   ul: ({ children }) => <ul className="list-disc list-inside mb-2 space-y-1"><ProcessChildren>{children}</ProcessChildren></ul>,
                   ol: ({ children }) => <ol className="list-decimal list-inside mb-2 space-y-1"><ProcessChildren>{children}</ProcessChildren></ol>,
                   li: ({ children }) => <li className=""><ProcessChildren>{children}</ProcessChildren></li>,

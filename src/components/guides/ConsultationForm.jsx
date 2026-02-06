@@ -72,16 +72,22 @@ const ConsultationForm = ({ className }) => {
 
   if (isSubmitted) {
     return (
-      <div className={cn("text-center py-8", className)}>
-        <div className="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-4">
-          <Send className="text-success" size={32} />
+      <div className={cn("text-center py-10 animate-in zoom-in duration-300", className)}>
+        <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm">
+          <Send className="text-green-600" size={32} />
         </div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">
+        <h3 className="text-2xl font-bold text-gray-900 mb-2">
           Terima Kasih!
         </h3>
-        <p className="text-gray-600">
-          Permintaan konsultasi Anda telah terkirim. Kami akan menghubungi Anda segera.
+        <p className="text-gray-500 max-w-xs mx-auto mb-8">
+          Permintaan konsultasi Anda telah terkirim. Kami akan menghubungi Anda segera melalui WhatsApp atau Email.
         </p>
+        <button
+          onClick={() => setIsSubmitted(false)}
+          className="w-full py-3 px-4 bg-indo-red hover:bg-red-700 text-white rounded-lg text-base font-bold transition-all shadow-sm hover:shadow-md active:scale-95"
+        >
+          Kirim Lagi
+        </button>
       </div>
     );
   }

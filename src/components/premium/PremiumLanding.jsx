@@ -51,6 +51,8 @@ const PremiumLanding = ({ onUnlock = () => { } }) => {
 
     if (VALID_ACCESS_CODES.includes(accessCode.toUpperCase())) {
       onUnlock(accessCode);
+      // Return immediately - navigation will happen via onUnlock
+      return;
     } else {
       setError('Invalid access code. Please check and try again.');
     }

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, CheckCircle, Info, FileText, Check } from 'lucide-react';
+import { CheckCircle, Info, FileText, Check } from 'lucide-react';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import DocumentSection from './DocumentSection';
 import UploadModal from './UploadModal';
 import { cn } from '../../../utils/cn';
 
-const DocumentsVault = ({ onBack }) => {
+const DocumentsVault = () => {
   const [documents, setDocuments] = useLocalStorage('indoz_documents', []);
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
   const [selectedDoc, setSelectedDoc] = useState(null);
@@ -70,21 +70,9 @@ const DocumentsVault = ({ onBack }) => {
   return (
     <div className="max-w-4xl mx-auto p-4 md:p-8">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-3">
-          {onBack && (
-            <button
-              onClick={onBack}
-              className="p-2 hover:bg-gray-100 rounded-full transition-colors text-gray-600"
-            >
-              <ArrowLeft size={24} />
-            </button>
-          )}
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900">Documents Vault</h1>
-            <p className="text-gray-500">Manage and track your visa documents</p>
-          </div>
-        </div>
+      <div className="mb-6">
+        <h1 className="text-2xl font-bold text-gray-900">Documents Vault</h1>
+        <p className="text-gray-500">Manage and track your visa documents</p>
       </div>
 
       {/* Explanation Box */}
@@ -124,14 +112,14 @@ const DocumentsVault = ({ onBack }) => {
             style={{ width: `${progressPercentage}%` }}
           >
             {/* Shimmer effect */}
-             <div className="absolute inset-0 bg-white/30 w-full animate-[shimmer_2s_infinite] skew-x-12"></div>
+            <div className="absolute inset-0 bg-white/30 w-full animate-[shimmer_2s_infinite] skew-x-12"></div>
           </div>
         </div>
 
         {isComplete && (
           <div className="mt-4 bg-green-50 text-green-800 p-4 rounded-lg text-center border border-green-200 animate-in fade-in slide-in-from-top-4 duration-700">
-             <p className="font-semibold text-lg">🎉 Congratulations! You have all documents ready!</p>
-             <p className="text-sm">You are now fully prepared for your application process.</p>
+            <p className="font-semibold text-lg">🎉 Congratulations! You have all documents ready!</p>
+            <p className="text-sm">You are now fully prepared for your application process.</p>
           </div>
         )}
       </div>
@@ -153,7 +141,7 @@ const DocumentsVault = ({ onBack }) => {
         <div className="flex flex-wrap gap-6">
           <div className="flex items-center gap-2">
             <div className="w-5 h-5 bg-success rounded-full flex items-center justify-center">
-                <Check className="text-white" size={14} />
+              <Check className="text-white" size={14} />
             </div>
             <span className="text-sm text-gray-600">Verified = Document checked & approved</span>
           </div>

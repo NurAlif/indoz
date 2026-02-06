@@ -1,4 +1,4 @@
-import { ArrowRight, PlayCircle, CheckCircle } from 'lucide-react';
+import { ArrowRight, Sparkles, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function Hero() {
@@ -13,14 +13,12 @@ export default function Hero() {
               <span className="text-xs font-semibold uppercase tracking-wide text-gray-600 dark:text-gray-300">Resmi & Terpercaya</span>
             </div>
             <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-5xl lg:text-6xl mb-6 leading-tight">
-              Gerbang Karir & <br/>
               <span className="text-red-600 relative inline-block">
-                Residensial Australia
-                <svg className="absolute -bottom-2 left-0 w-full h-3 text-[#FFD700] opacity-50" preserveAspectRatio="none" viewBox="0 0 100 10">
-                  <path d="M0 5 Q 50 10 100 5" fill="none" stroke="currentColor" strokeWidth="3"></path>
-                </svg>
-              </span>
-              <br/> untuk Indonesia
+                Gerbang Utama
+                <span className="absolute -bottom-1 left-0 w-full h-1 bg-[#FFD700]"></span>
+              </span> & <br />
+              Residensial Australia
+              <br /> untuk Indonesia
             </h1>
             <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-lg leading-relaxed">
               Platform terpercaya untuk memandu setiap langkah perjalanan karir dan kehidupan baru Anda, mulai dari persiapan dokumen hingga menetap dengan nyaman.
@@ -33,14 +31,14 @@ export default function Hero() {
                 Konsultasikan dengan Ollie Chat
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
-              <button className="relative inline-flex items-center justify-center rounded-lg px-6 py-3.5 text-base font-bold text-white bg-gradient-to-r from-yellow-500 via-yellow-400 to-amber-500 shadow-lg hover:shadow-xl hover:from-yellow-600 hover:via-yellow-500 hover:to-amber-600 transition-all duration-300 border border-yellow-300/30 group overflow-hidden">
+              <Link to="/premium" className="relative inline-flex items-center justify-center rounded-lg px-6 py-3.5 text-base font-bold text-white bg-gradient-to-r from-yellow-500 via-yellow-400 to-amber-500 shadow-lg hover:shadow-xl hover:from-yellow-600 hover:via-yellow-500 hover:to-amber-600 transition-all duration-300 border border-yellow-300/30 group overflow-hidden">
                 <span className="absolute inset-0 bg-gradient-to-r from-yellow-400/0 via-yellow-300/30 to-yellow-400/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></span>
-                <PlayCircle className="mr-2 h-5 w-5 flex-shrink-0" />
+                <Sparkles className="mr-2 h-5 w-5 flex-shrink-0" />
                 <span className="relative">Pelajari IndoZ Premium</span>
                 <svg className="absolute -top-1 -right-1 w-4 h-4 text-yellow-200" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 0L14.59 8.41L23 12L14.59 15.59L12 24L9.41 15.59L1 12L9.41 8.41L12 0Z"/>
+                  <path d="M12 0L14.59 8.41L23 12L14.59 15.59L12 24L9.41 15.59L1 12L9.41 8.41L12 0Z" />
                 </svg>
-              </button>
+              </Link>
             </div>
           </div>
 

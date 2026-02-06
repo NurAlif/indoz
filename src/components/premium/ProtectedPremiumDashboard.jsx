@@ -1,32 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import PremiumDashboard from './PremiumDashboard';
+import { useNavigate } from 'react-router-dom';
 
 const ProtectedPremiumDashboard = () => {
-    const [accessCode, setAccessCode] = useLocalStorage('indoz_premium_code', '');
-    const [isAuthorized, setIsAuthorized] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
+    // We still keep this to ensure the "state" is there, but we don't block
+    const [accessCode, setAccessCode] = useLocalStorage('indoz_premium_code', 'PREMIUM_UNLOCKED');
+    const navigate = useNavigate();
 
     useEffect(() => {
-        if (accessCode) {
-            setIsAuthorized(true);
+        if (!accessCode) {
+            setAccessCode('PREMIUM_UNLOCKED');
         }
-        setIsLoading(false);
-    }, [accessCode]);
+    }, [accessCode, setAccessCode]);
 
     const handleLogout = () => {
+        // For "logout", maybe we just go back to home since there's no login anymore?
+        // Or we clear the code and go to home.
         setAccessCode('');
-        setIsAuthorized(false);
+        navigate('/');
     };
-
-    if (isLoading) {
-        return null; // Or a loading spinner
-    }
-
-    if (!isAuthorized) {
-        return <Navigate to="/premium" replace />;
-    }
 
     return <PremiumDashboard onLogout={handleLogout} />;
 };

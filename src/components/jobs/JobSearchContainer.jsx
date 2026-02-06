@@ -1,14 +1,15 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Briefcase } from 'lucide-react';
 import { searchJobs } from '../../services/jobsAPI';
-import { usePremium } from '../../hooks/usePremium';
 import JobFilters from './JobFilters';
 import JobCard from './JobCard';
 import JobSkeleton from './JobSkeleton';
 import Button from '../common/Button';
 
 const JobSearchContainer = () => {
-  const isPremium = usePremium();
+  const location = useLocation();
+  const isOnPremiumRoute = location.pathname.startsWith('/premium');
   const [filters, setFilters] = useState({});
   const [jobs, setJobs] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -30,7 +31,7 @@ const JobSearchContainer = () => {
   };
 
   return (
-    <div className={`mx-auto py-8 px-4 ${isPremium ? 'w-full max-w-full' : 'max-w-6xl'}`}>
+    <div className={`mx-auto py-8 px-4 ${isOnPremiumRoute ? 'w-full max-w-full' : 'max-w-4xl'}`}>
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>

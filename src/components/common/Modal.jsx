@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import { cn } from '../../utils/cn';
 
@@ -38,9 +39,9 @@ const Modal = ({
     }
   };
 
-  return (
+  const modalContent = (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
       onClick={handleBackdropClick}
     >
       <div
@@ -72,6 +73,8 @@ const Modal = ({
       </div>
     </div>
   );
+
+  return createPortal(modalContent, document.body);
 };
 
 export default Modal;

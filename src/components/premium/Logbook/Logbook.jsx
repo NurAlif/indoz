@@ -4,9 +4,8 @@ import ProgressHeader from './ProgressHeader';
 import EntryForm from './EntryForm';
 import LogbookTable from './LogbookTable';
 import BulkEntryModal from './BulkEntryModal';
-import { ArrowLeft } from 'lucide-react';
 
-const Logbook = ({ onBack }) => {
+const Logbook = () => {
   const [entries, setEntries] = useLocalStorage('indoz_logbook_entries', []);
   const [isBulkModalOpen, setIsBulkModalOpen] = useState(false);
 
@@ -33,16 +32,6 @@ const Logbook = ({ onBack }) => {
 
   return (
     <div className="p-8 max-w-5xl mx-auto">
-      {onBack && (
-        <button
-          onClick={onBack}
-          className="mb-6 flex items-center text-gray-600 hover:text-gray-900 transition-colors"
-        >
-          <ArrowLeft size={20} className="mr-2" />
-          Back to Dashboard
-        </button>
-      )}
-
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">88 Days Logbook</h1>
         <p className="text-gray-600">

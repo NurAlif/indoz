@@ -1,13 +1,14 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { AlertCircle, RefreshCw } from 'lucide-react';
 import { analyzeResume, SAMPLE_RESUME } from '../../services/resumeAPI';
-import { usePremium } from '../../hooks/usePremium';
 import UploadArea from './UploadArea';
 import PasteArea from './PasteArea';
 import AnalysisResults from './AnalysisResults';
 
 const ResumeCheckerContainer = () => {
-  const isPremium = usePremium();
+  const location = useLocation();
+  const isOnPremiumRoute = location.pathname.startsWith('/premium');
   const [file, setFile] = useState(null);
   const [resumeText, setResumeText] = useState('');
   const [results, setResults] = useState(null);
@@ -63,7 +64,7 @@ const ResumeCheckerContainer = () => {
   };
 
   return (
-    <div className={`mx-auto py-8 px-4 ${isPremium ? 'w-full max-w-full' : 'max-w-6xl'}`}>
+    <div className={`mx-auto py-8 px-4 ${isOnPremiumRoute ? 'w-full max-w-full' : 'max-w-4xl'}`}>
       {!results ? (
         <div className="bg-white rounded-xl border border-gray-200 p-6">
           <h1 className="text-2xl font-bold text-gray-900 mb-1">Cek Resume</h1>
