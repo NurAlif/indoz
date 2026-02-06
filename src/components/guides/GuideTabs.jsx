@@ -12,7 +12,7 @@ const icons = {
 
 const GuideTabs = ({ activeTab, onTabChange }) => {
   return (
-    <div className="sticky top-0 z-40 bg-white/80 backdrop-blur-md border border-gray-200/50 rounded-xl overflow-hidden overflow-x-auto shadow-md supports-[backdrop-filter]:bg-white/60">
+    <div className="sticky top-16 z-30 bg-white/80 backdrop-blur-md border border-gray-200/50 rounded-xl overflow-hidden overflow-x-auto shadow-md supports-[backdrop-filter]:bg-white/60">
       <div className="flex border-b border-gray-200 min-w-max">
         {GUIDE_TABS.map((tab) => {
           const Icon = icons[tab.icon];

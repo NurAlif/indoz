@@ -46,10 +46,11 @@ const Modal = ({
     >
       <div
         className={cn(
-          "bg-white rounded-xl shadow-xl w-full",
+          "bg-white rounded-xl shadow-xl w-[95%] sm:w-full max-h-[90vh] overflow-y-auto",
           sizes[size],
           className
         )}
+        onClick={(e) => e.stopPropagation()}
       >
         {(title || showCloseButton) && (
           <div className="flex items-center justify-between p-6 border-b border-gray-200">
